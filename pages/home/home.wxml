@@ -1,0 +1,3 @@
+<!--pages/home/home.wxml-->
+<view>pages/home/home.wxml</view>
+<goods-list></goods-list>
