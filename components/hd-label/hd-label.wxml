@@ -1,0 +1,14 @@
+<!--components/hd-label/hd-label.wxml-->
+<!--
+  标签头组件
+  @Category 基础组件
+  @Author Cphayim
+-->
+<view class="m-hd-label pd">
+  <view class="title">{{title}}</view>
+  <view wx:if="{{more}}"
+    bindtap="jumpTo"
+    class="more">{{moreText}}
+    <image src="./icons/arrow.png" class="more-arrow"></image>
+  </view>
+</view>
