@@ -1,3 +1,43 @@
 <!--pages/home/home.wxml-->
-<view>pages/home/home.wxml</view>
-<goods-list></goods-list>
+
+<!-- 
+  首页
+  @Category 业务页
+  @Author Cphayim
+-->
+
+<view class="p-home">
+  <!-- 轮播图 -->
+  <carousel 
+    list="{{bannerList}}" 
+    autoplay="{{true}}" 
+    indicator-dots="{{false}}"
+    indicator-color="{{'rgba(255, 255, 255, .6)'}}" 
+    indicator-active-color="{{'#fff'}}">
+  </carousel>
+  <!-- /轮播图 -->
+
+  <!-- 热卖商城 -->
+  <view class="section">
+    <hd-label 
+      title="{{'热门活动'}}" 
+      more="{{true}}" 
+      more-text="{{'更多'}}">
+    </hd-label>
+    <goods-list 
+      list="{{topGoodsList}}">
+    </goods-list>
+  </view>
+  <!-- /热卖商城 -->
+
+  <!-- 最新资讯 -->
+  <view class="section">
+    <hd-label 
+      title="{{'最新资讯'}}" 
+      more="{{true}}" 
+      more-text="{{'更多'}}">
+    </hd-label>
+    
+  </view>
+  <!-- /最新资讯 -->
+</view>

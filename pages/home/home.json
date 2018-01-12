@@ -5,6 +5,8 @@
   "navigationBarTitleText": "云车商掌上店",
   "navigationBarTextStyle": "black",
   "usingComponents": {
+    "hd-label": "/components/hd-label/hd-label",    
+    "carousel": "/components/carousel/carousel",
     "goods-list": "/components/goods-list/goods-list"
   }
 }
