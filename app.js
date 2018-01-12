@@ -4,6 +4,6 @@ const config = require('./config')
 
 App({
   onLaunch() {
-    qcloud.setLoginUrl(config.service.loginUrl)
+    // qcloud.setLoginUrl(config.service.loginUrl)
   }
 })
