@@ -4,7 +4,7 @@ page{
 }
 .section{
   margin-bottom: 20rpx;
-  box-shadow: 0 0 20rpx #eaeaea;
+  /* box-shadow: 0 0 30rpx #eaeaea; */
   background-color: #fff;
 }
 .pd{
