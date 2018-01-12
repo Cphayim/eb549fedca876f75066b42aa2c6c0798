@@ -1,0 +1,28 @@
+<!--components/carousel/carousel.wxml-->
+
+<!-- 
+  轮播组件
+  @Category 基础组件
+  @Author Cphayim
+-->
+
+<view class='m-carousel'>
+  <swiper class='carousel-swiper'
+    indicator-dots='{{indicatorDots}}' 
+    indicator-color='{{indicatorColor}}'
+    indicator-active-color='{{indicatorActiveColor}}'
+    autoplay='{{autoplay}}' 
+    interval='{{interval}}'
+    current='{{current}}' 
+    duration='{{duration}}'
+    circular='{{circular}}'
+    vertical='{{vertical}}'
+    bindchange='_currentChange'
+    >
+    <block wx:for='{{list}}' wx:key='item.Id'>
+      <swiper-item>
+        <image src='{{item.imgUrl}}' class='image' data-title='{{item.title}}' />
+      </swiper-item>
+    </block>
+  </swiper>
+</view>
