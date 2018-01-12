@@ -4,7 +4,7 @@
 .m-hd-label {
   display: flex;
   align-items: center;
-  border-bottom: 1rpx solid #eaeaea;
+  border-bottom: 1.5rpx solid #dfdfdf;
 }
 
 .title {
