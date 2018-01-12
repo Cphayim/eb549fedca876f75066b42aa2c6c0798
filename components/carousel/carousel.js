@@ -2,6 +2,7 @@
 
 /**
  * 轮播组件
+ * @Catagory 基础组件
  * @Author Cphayim
  */
 
