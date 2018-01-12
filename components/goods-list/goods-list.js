@@ -1,17 +1,27 @@
 // components/goods-list/goods-list.js
+
+/**
+ * 商品列表组件
+ * @Catagory 业务组件
+ * @Author Cphayim
+ */
+
 Component({
   /**
    * 组件的属性列表
    */
   properties: {
-
+    list: {
+      type: Array,
+      value: []
+    }
   },
 
   /**
    * 组件的初始数据
    */
   data: {
-
+    
   },
 
   /**

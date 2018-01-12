@@ -1,1 +1,94 @@
 /* components/goods-list/goods-list.wxss */
+@import '../common.wxss';
+
+.m-goods-list {
+  position: relative;
+  overflow: hidden;
+}
+
+.goods-item {
+  display: flex;
+  border-bottom: 1.5rpx solid #dfdfdf;
+  padding-top: 40rpx;
+  padding-bottom: 40rpx;
+}
+
+.goods-item:last-child {
+  border-bottom: none;
+}
+
+.goods-item .f-l {
+  flex: 0 0 auto;
+  position: relative;
+}
+
+.goods-item .f-r {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  padding-left: 25rpx;
+}
+
+.goods-item .cover {
+  display: block;
+  width: 270rpx;
+  height: 150rpx;
+  border: 1rpx solid #eaeaea;
+  background-color: #eaeaea;
+}
+
+.goods-item .category {
+  position: absolute;
+  top: 0;
+  left: 8rpx;
+  width: 66rpx;
+  height: 52rpx;
+}
+
+.goods-item .title {
+  flex: 1 1 auto;
+  font-size: 28rpx;
+  color: #333;
+}
+
+.goods-item .wrap {
+  display: flex;
+  align-items: flex-end;
+}
+
+.goods-item .price {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  font-size: 32rpx;
+}
+
+.goods-item .btn {
+  width: 130rpx;
+  padding: 10rpx;
+  border-radius: 8rpx;
+  text-align: center;
+  font-size: 28rpx;
+  color: #fff;
+}
+
+.wrap.status-0 .price{
+  color: #999;
+}
+.wrap.status-0 .btn{
+  background-color: #d2d2db;
+}
+
+.wrap.status-1 .price{
+  color: #ff3300;
+}
+.wrap.status-1 .btn{
+  background-color: #ff6633;
+}
+
+.wrap.status-2 .price{
+  color: #ff3300;
+}
+.wrap.status-2 .btn{
+  background-color: #54b4ef;
+}

@@ -1,0 +1,48 @@
+/**
+ * goods-list 组件 wxs
+ * @Author Cphayim
+ */
+
+function getTagImage(tagNum) {
+  tagNum = ~~tagNum;
+  var url = '';
+  switch(tagNum){
+    case 1:
+      url = './icons/timer.png';
+      break;
+    case 2:
+      url = './icons/sales.png';
+      break;
+    case 3:
+      url = './icons/groups.png';
+      break;
+  }
+  return url;
+}
+
+function getStatusClass(status) {
+  return 'status-' + status;
+}
+
+function getStatusBtnName(status){
+  var btnName = ''
+  switch (status) {
+    case 0:
+      btnName = '已结束';
+      break;
+    case 1:
+      btnName = '抢购';
+      break;
+    case 2:
+      btnName = '即将开抢';
+      break;
+  }
+  console.log(status)
+  return btnName;
+}
+
+module.exports = {
+  getTagImage: getTagImage,
+  getStatusClass: getStatusClass,
+  getStatusBtnName: getStatusBtnName
+}

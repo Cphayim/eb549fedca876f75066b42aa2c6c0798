@@ -1,2 +1,44 @@
 <!--components/goods-list/goods-list.wxml-->
-<text>components/goods-list/goods-list.wxml</text>
+
+<!--
+  商品列表组件
+  @Category 业务组件
+  @Author Cphayim
+-->
+
+<!-- 组件通用过滤器 -->
+<wxs src="../filter.wxs" module="filter" />
+<!-- /组件通用过滤器 -->
+<wxs src="./goods-list.wxs" module="m1" />
+
+<view class="m-goods-list">
+  <view 
+    wx:for="{{list}}" 
+    wx:key="Id" 
+    class="goods-item pd"
+    hover-class="hover"
+    hover-hover-start-time="0"
+    hover-stay-time="200">
+    <view class="f-l">
+      <!-- 封面图 -->
+      <image src="{{item.TitleImage}}" class="cover"></image>
+      <!-- /封面图 -->
+      <!-- 类型图标 -->
+      <image src="{{m1.getTagImage(item.Tag)}}" class="category"></image>
+      <!-- /类型图标 -->
+    </view>
+    <view class="f-r">
+      <!-- 标题 -->
+      <view class="title">{{item.Title}}</view>
+      <!-- /标题 -->
+      <view class="wrap {{m1.getStatusClass(item.ArticleStatus)}}">
+        <!-- 价格 -->
+        <view class="price">{{filter.priceFormat(item.ArticlePrice)}}</view>
+        <!-- /价格 -->
+        <!-- 按钮 -->
+        <view class="btn">{{m1.getStatusBtnName(item.ArticleStatus)}}</view>
+        <!-- /按钮 -->
+      </view>
+    </view>
+  </view>
+</view>
