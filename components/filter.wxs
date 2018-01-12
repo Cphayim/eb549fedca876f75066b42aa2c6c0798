@@ -1,0 +1,21 @@
+/**
+ * 通用过滤器
+ * @Author Cphayim
+ */
+
+/**
+ * 格式化价格
+ * @function priceFormat
+ * @param {number} price 价格
+ * @param {number} dec 小数位 [default = 2]
+ * @return {string}
+ */
+function priceFormat(price, dec) {
+  dec = dec === undefined ? 2 : ~~dec;
+  price = parseFloat(price) || 0;
+  return price ? '￥' + price.toFixed(dec) : '免费';
+}
+
+module.exports = {
+  priceFormat: priceFormat
+}
