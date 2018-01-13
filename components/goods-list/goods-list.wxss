@@ -25,6 +25,7 @@
 .goods-item .f-r {
   flex: 1 1 auto;
   display: flex;
+  justify-content: space-between;
   flex-direction: column;
   padding-left: 25rpx;
 }
@@ -46,7 +47,11 @@
 }
 
 .goods-item .title {
-  flex: 1 1 auto;
+  flex: 0 0 auto;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
   font-size: 28rpx;
   color: #333;
 }
