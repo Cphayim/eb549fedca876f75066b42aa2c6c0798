@@ -3,7 +3,7 @@
  * @Auther Cphayim
  */
 
-import { toast } from './layer.js'
+import { toast, modal } from './layer.js'
 import config from '../config.js'
 
 /**
@@ -41,7 +41,7 @@ export function request({
   }).then(res => {
     // 判断响应状态码是否为200
     if (res.statusCode === 200) {
-      
+
       // 判断服务端 jsonapi 返回的 errorcode 是否正确
       if (res.data && res.data.errorcode === config.ERR_OK_CODE) {
         return Promise.resolve(res.data)
@@ -67,8 +67,8 @@ export function request({
      * (请求失败、返回状态码异常、data.errorcode 异常)
      * 并返回一个 rejected 状态的 Promise 实例
      */
-    const errormsg = err.errormsg || '网络请求失败'
-    toast.showError(errormsg)
+    const errormsg = err.errormsg || '请求失败，请检查网络'
+    modal.show(undefined, errormsg)
     return Promise.reject(err)
   })
 }

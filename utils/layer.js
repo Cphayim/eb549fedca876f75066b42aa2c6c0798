@@ -17,12 +17,12 @@ const showError = text => wx.showToast({
 })
 
 // 显示失败提示
-const showModel = (title, content) => {
+const showModel = (title = '提示', content = '提示内容') => {
   wx.hideToast();
 
   wx.showModal({
     title,
-    content: JSON.stringify(content),
+    content: content,
     showCancel: false
   })
 }
