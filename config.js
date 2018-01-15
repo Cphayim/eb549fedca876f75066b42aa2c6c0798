@@ -4,6 +4,8 @@
 
 
 export default {
+
+  appid: 'wxce8d2df41f6db25d',
   // 请求主机名
   host: 'https://ssl.api.vcar360.com',
 
