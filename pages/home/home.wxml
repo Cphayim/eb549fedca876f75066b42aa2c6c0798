@@ -32,13 +32,17 @@
   <!-- /热卖商城 -->
 
   <!-- 最新资讯 -->
-  <view class="section">
+  <!-- <view class="section">
     <hd-label 
       title="{{'最新资讯'}}" 
       more="{{true}}" 
       more-text="{{'更多'}}">
     </hd-label>
     
-  </view>
+  </view> -->
   <!-- /最新资讯 -->
+
+  <!-- 经销商 -->
+  <dealer-info></dealer-info>
+  <!-- /经销商 -->
 </view>

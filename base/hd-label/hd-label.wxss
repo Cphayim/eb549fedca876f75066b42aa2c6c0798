@@ -5,6 +5,7 @@
   display: flex;
   align-items: center;
   border-bottom: 1.5rpx solid #dfdfdf;
+  background-color: #fff;
 }
 
 .title {

@@ -1,0 +1,10 @@
+<!--components/dealer-info/dealer-info.wxml-->
+<!-- 
+ 经销商信息组件
+ @Category 业务组件
+ @Author Cphayim
+-->
+
+<view class="m-dealer-info">
+
+</view>

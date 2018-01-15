@@ -1,9 +1,10 @@
 /* components/goods-list/goods-list.wxss */
-@import '../common.wxss';
+@import '../../base/common.wxss';
 
 .m-goods-list {
   position: relative;
   overflow: hidden;
+  background-color: #fff;
 }
 
 .goods-item {

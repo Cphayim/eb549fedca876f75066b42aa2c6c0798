@@ -1,0 +1,2 @@
+/* components/dealer-info/dealer-info.wxss */
+@import '../../base/common.wxss';
