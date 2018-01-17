@@ -1,0 +1,24 @@
+<!--pages/hot-store/hot-store.wxml-->
+
+<!-- 
+  热卖商城列表页
+  @Category 业务页
+  @Author Cphayim
+-->
+
+<view class="p-hot-store">
+  <view class="top-banner">
+    <image src="/assets/images/hot-store.png"></image>
+  </view>
+  <view>
+    <view>
+      <tab-bar 
+        tab-names="{{tabNames}}"
+        animation
+        bindchange="selectTab">
+      </tab-bar>
+    </view>
+  </view>
+  <goods-list>
+  </goods-list>
+</view>

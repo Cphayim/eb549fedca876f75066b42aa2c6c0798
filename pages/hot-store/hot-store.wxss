@@ -1,0 +1,14 @@
+/* pages/hot-store/hot-store.wxss */
+
+.p-hot-store{
+  min-height: 
+}
+
+.top-banner{
+  width: 100%;
+  height: 200rpx;
+}
+.top-banner image{
+  width: 100%;
+  height: 100%;
+}
