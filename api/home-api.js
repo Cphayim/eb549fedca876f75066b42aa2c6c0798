@@ -1,5 +1,23 @@
+/**
+ * 首页请求API
+ * @Author Cphayim
+ */
+
 import config from '../config.js'
 import { request } from '../utils/request.js'
+
+/**
+ * 获取经销商信息
+ * @method getDealerInfo
+ * @return Promise.state
+ */
+export function getDealerInfo(){
+  const data = {}
+  return request({
+    url: `${config.host}/ApiCustomers/TenantDetail`,
+    data
+  })
+}
 
 /**
  * 获取首页轮播图数据
