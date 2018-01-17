@@ -56,9 +56,7 @@ Component({
    */
   methods: {
     jumpTo(e) {
-      wx.navigateTo({
-        url: this.routeUrl
-      })
+      wx.navigateTo({ url: this.data.routeUrl })
     }
   }
 })
