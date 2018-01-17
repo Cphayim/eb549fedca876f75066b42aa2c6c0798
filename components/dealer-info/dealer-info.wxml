@@ -6,5 +6,19 @@
 -->
 
 <view class="m-dealer-info">
-
+  <view class="wrapper">
+    <view class="dealer-l">
+      <view class="position">
+        <image class="position-icon" src="./icons/position.png"></image>
+        {{info.Address}}
+      </view>
+    </view>
+    <view class="dealer-r">
+      <view class="call"
+        catchtap="callPhone"
+        data-phone="{{info.HotlineTel || info.SellTel}}">
+        <image class="call-icon" src="./icons/call.png"></image>
+      </view>
+    </view>
+  </view>
 </view>
