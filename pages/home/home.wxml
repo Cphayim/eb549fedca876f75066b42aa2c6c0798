@@ -23,12 +23,13 @@
     <hd-label 
       title="{{'热门活动'}}" 
       more="{{true}}" 
-      more-text="{{'更多'}}">
+      more-text="{{'更多'}}"
+      route-url="{{'/pages/hot-store/hot-store'}}">
     </hd-label>
     <goods-list 
       list="{{topGoodsList}}">
     </goods-list>
-  </view>
+  </view>  
   <!-- /热卖商城 -->
 
   <!-- 最新资讯 -->
@@ -43,6 +44,6 @@
   <!-- /最新资讯 -->
 
   <!-- 经销商 -->
-  <dealer-info></dealer-info>
+  <dealer-info info="{{dealerInfo}}"></dealer-info>
   <!-- /经销商 -->
 </view>
