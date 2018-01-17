@@ -15,7 +15,7 @@ import config from '../config.js'
  * @param {object} opts.header 请求头 [default = {}]
  * @param {object} opts.data 请求数据 [default = {}]
  * @param {boolean} opts.hasSession 请求头是否携带 sessionId [default = true]
- * @return {Promise}
+ * @return Promise.state
  */
 export function request({
   url,
@@ -68,7 +68,7 @@ export function request({
      * 并返回一个 rejected 状态的 Promise 实例
      */
     const errormsg = err.errormsg || '请求失败，请检查网络'
-    modal.show(undefined, errormsg)
+    modal.alert({ content: errormsg })
     return Promise.reject(err)
   })
 }
