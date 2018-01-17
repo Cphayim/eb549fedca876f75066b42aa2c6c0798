@@ -58,7 +58,7 @@ export const modal = {
     content = '提示内容',
     confirmText = '确认'
     }) {
-    return showModal({
+    return _showModal({
       title,
       content,
       showCancel: false,
@@ -81,7 +81,7 @@ export const modal = {
     confirmText = '确认',
     cancelText = '取消'
   }) {
-    return showModal({
+    return _showModal({
       title,
       content,
       confirmText,
@@ -90,7 +90,7 @@ export const modal = {
   }
 }
 
-function showModal({
+function _showModal({
   title = '提示',
   content = '提示内容',
   showCancel = true,
@@ -111,8 +111,9 @@ function showModal({
       confirmText,
       confirmColor,
       success(confirm) {
-        console.log(arguments)
-        resolve()
+        // 用户点击确定按钮返回 Promise.resolve(true)
+        // 用户点击取消或点击遮罩层(安卓)返回 Promise.reject(false)
+        resolve(confirm)
       },
       fail(err) {
         reject(err)
