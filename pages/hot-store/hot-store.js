@@ -7,7 +7,8 @@
  */
 
 import {
-  getHotTabInfo
+  getHotTabInfo,
+  getGoodsList
 } from '../../api/hot-store-list-api.js'
 
 Page({
@@ -16,10 +17,36 @@ Page({
    * 页面的初始数据
    */
   data: {
+    tabInfo: [],
     tabNames: [],
-    tabInfo: []
+    tabKeys: [],
+    activeIndex: 0,
+    listsData: []
   },
 
+  _init() {
+    this._getHotTabInfo().then(_ => {
+      this._getAllListData()
+    })
+  },
+
+  /**
+   * 获取列表数据
+   * @private
+   * @method _getHotTabInfo
+   * @return Promise.state
+   */
+  _getGoodsList(keyStr) {
+    return getGoodsList(keyStr).then(res => res.data)
+  },
+  _getAllListData() {
+    const queue = this.data.tabKeys.map(key => this._getGoodsList({KeyStr:key}))
+    Promise.all(queue)
+      .then(resAll => {
+        // console.log(resAll)
+        this.setData({ listsData: resAll })
+      })
+  },
   /**
    * 获取 tab 数据
    * @private
@@ -33,11 +60,12 @@ Page({
           const { data: tabInfo } = res
           // 添加全部到第一项
           tabInfo.unshift({
-            Name: '全部',
-            Value: 'ShopAll'
+            Value: 'ShopAll',
+            Name: '全部'
           })
           const tabNames = tabInfo.map(item => item.Name)
-          this.setData({ tabInfo, tabNames })
+          const tabKeys = tabInfo.map(item => item.Value)
+          this.setData({ tabInfo, tabNames, tabKeys })
           resolve()
         })
     })
@@ -50,7 +78,7 @@ Page({
    * @param {object} e
    */
   selectTab(e) {
-    console.log(e)
+    this.setData({ activeIndex: e.detail.index })
   },
 
 
@@ -58,7 +86,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    this._getHotTabInfo()
+    this._init()
   },
 
   /**

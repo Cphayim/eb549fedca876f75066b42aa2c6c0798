@@ -18,7 +18,14 @@
         bindchange="selectTab">
       </tab-bar>
     </view>
+      <block wx:for="{{listsData}}" wx:key="index">
+      <view hidden="{{index !== activeIndex}}">
+        <goods-list 
+          list="{{item}}">
+        </goods-list>  
+        </view>
+      </block>
+    
   </view>
-  <goods-list>
-  </goods-list>
+  
 </view>
