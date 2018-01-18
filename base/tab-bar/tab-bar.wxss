@@ -1,0 +1,47 @@
+/* base/tab-bar/tab-bar.wxss */
+
+.m-tab-bar{
+  width: 100%;
+  overflow: hidden;
+  border-bottom: 1rpx solid #dedede;
+  background-color: #fff;
+}
+
+.wrapper{
+  display: flex;
+  position: relative;
+}
+
+.tab-item{
+  flex: 1 1 auto;
+  text-align: center;
+  line-height: 90rpx;
+  font-size: 32rpx;
+  color: #333;
+}
+
+.tab-item.active{
+  color: #54b4ef;
+}
+
+.tab-name{
+  display: inline-block;
+}
+
+.flag{
+  pointer-events: none;
+  position: absolute;
+  bottom: 0;
+  width: 1px;
+  height: 6rpx;
+  /* border-radius: 4rpx; */
+  background-color: #54b4ef;
+  transform-origin: left;
+}
+
+.animation .tab-item.active{
+  transition: color 0.4s;
+}
+.animation .flag{
+  transition: all 0.4s;
+}

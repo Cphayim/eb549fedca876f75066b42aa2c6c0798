@@ -11,3 +11,24 @@ export function getHotTabInfo(){
     url: `${config.host}/ApiArticles/ReadForSubKeys`
   })
 }
+
+/**
+ * 获取热卖商城列表数据
+ * @method getBannerList
+ * @return Promise.state
+ */
+export function getGoodsList({PageSize = 10, KeyStr = ''}) {
+  const data = {
+    PageSize,
+    PageNo: 1,
+    OrderBy: 'IsTop DESC,SortIndex ASC,IsEnd ASC,CreateTime DESC',
+    TenantId: 340,
+    CatalogKey: KeyStr,
+    KeyStr
+  }
+
+  return request({
+    url: `${config.host}/ApiArticles/ReadForShop`,
+    data
+  })
+}

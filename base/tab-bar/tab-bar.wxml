@@ -1,0 +1,23 @@
+<!--base/tab-bar/tab-bar.wxml-->
+<!-- 
+  tab-bar 组件
+  @Category 基础组件
+  @Author Cphayim
+-->
+<view class="m-tab-bar {{animation ? 'animation' : ''}}">
+  <view class="wrapper">
+    <view 
+      wx:for="{{tabNames}}" 
+      wx:for-item="tabName" 
+      wx:key="index"
+      catchtap="selectTab"
+      data-index="{{index}}"
+      class="tab-item {{index === activeIndex ? 'active' : ''}}">
+      <view class="tab-name">{{tabName}}</view>
+    </view>
+    <view 
+      class="flag" 
+      style="transform: translateX({{flagOffset}}px) scaleX({{flagScale}})">
+    </view>
+  </view>
+</view>
