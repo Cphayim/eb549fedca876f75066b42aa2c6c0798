@@ -6,6 +6,11 @@
 import config from '../config.js'
 import {request} from '../utils/request.js'
 
+/**
+ * 获取热卖商城列表 Tab 头 数据
+ * @function getBannerList
+ * @return Promise.state
+ */
 export function getHotTabInfo(){
   return request({
     url: `${config.host}/ApiArticles/ReadForSubKeys`
@@ -14,7 +19,10 @@ export function getHotTabInfo(){
 
 /**
  * 获取热卖商城列表数据
- * @method getBannerList
+ * @function getBannerList
+ * @param {object} opts
+ * @param {number} opts.PageSize
+ * @param {string} opts.KeyStr
  * @return Promise.state
  */
 export function getGoodsList({PageSize = 10, KeyStr = ''}) {

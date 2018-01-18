@@ -8,7 +8,7 @@ import { request } from '../utils/request.js'
 
 /**
  * 获取经销商信息
- * @method getDealerInfo
+ * @function getDealerInfo
  * @return Promise.state
  */
 export function getDealerInfo(){
@@ -21,7 +21,7 @@ export function getDealerInfo(){
 
 /**
  * 获取首页轮播图数据
- * @method getBannerList
+ * @function getBannerList
  * @return Promise.state
  */
 export function getBannerList() {
@@ -41,7 +41,7 @@ export function getBannerList() {
 
 /**
  * 获取首页热卖商城 TOP 数据
- * @method getBannerList
+ * @function getBannerList
  * @return Promise.state
  */
 export function getTopGoodsList(size = 3) {
