@@ -1,0 +1,16 @@
+<!--components/security/security.wxml-->
+<!--
+  商品保障说明组件
+  @Category 业务组件
+  @Author  Cphayim
+-->
+<view class="m-security pd">
+  <view
+    wx:for="{{securityList}}" 
+    wx:key="index"
+    class="item">
+    <image src="./icons/{{index+1}}.png" class="icon"></image>
+    <view class="title">{{item}}</view>    
+  </view>
+  
+</view>

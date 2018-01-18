@@ -1,0 +1,23 @@
+/* components/security/security.wxss */
+@import '../common.wxss';
+
+.m-security {
+  display: flex;
+  justify-content: space-between;
+}
+
+.m-security .item {
+
+}
+.m-security .item .icon{
+  display: block;
+  margin: auto;
+  width: 70rpx;
+  height: 70rpx;
+}
+
+.m-security .item .title{
+  margin-top: 10rpx;
+  color: #333;
+  font-size: 28rpx;
+}
