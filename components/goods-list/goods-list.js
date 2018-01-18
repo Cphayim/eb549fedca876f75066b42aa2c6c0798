@@ -13,7 +13,10 @@ Component({
   properties: {
     list: {
       type: Array,
-      value: []
+      value: [],
+      observer(newVal) {
+        // console.log(newVal)
+      }
     }
   },
 
@@ -21,13 +24,20 @@ Component({
    * 组件的初始数据
    */
   data: {
-    
+
   },
 
   /**
    * 组件的方法列表
    */
   methods: {
-
+    goDetail(e) {
+      // console.log(e.currentTarget.dataset.id)
+      const { id } = e.currentTarget.dataset
+      wx.navigateTo({
+        url: `/pages/store-detail/store-detail?id=${id}`,
+        fail: function (res) { console.log(res) }
+      })
+    }
   }
 })

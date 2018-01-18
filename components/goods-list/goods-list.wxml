@@ -16,6 +16,8 @@
     wx:for="{{list}}" 
     wx:key="Id" 
     class="goods-item pd"
+    catchtap="goDetail"
+    data-id="{{item.Id}}"
     hover-class="hover"
     hover-hover-start-time="0"
     hover-stay-time="200">
