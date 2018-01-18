@@ -23,8 +23,7 @@ export function getGoodsList({PageSize = 10, KeyStr = ''}) {
     PageNo: 1,
     OrderBy: 'IsTop DESC,SortIndex ASC,IsEnd ASC,CreateTime DESC',
     TenantId: 340,
-    CatalogKey: KeyStr,
-    KeyStr
+    CatalogKey: KeyStr
   }
 
   return request({
