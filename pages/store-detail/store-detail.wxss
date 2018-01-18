@@ -1,0 +1,101 @@
+/* pages/store-detail/store-detail.wxss */
+
+page {
+  min-height: 100%;
+}
+
+.p-store-detail {
+}
+
+.goods-banner {
+  height: 420rpx;
+}
+
+.goods-banner image {
+  width: 100%;
+  height: 100%;
+  background-color: #6c9;
+}
+
+.goods-info {
+}
+
+.goods-info .wrapper {
+  display: flex;
+  border-bottom: 1rpx solid #dedede;
+}
+
+.goods-info .wrapper:last-child {
+  border: none;
+}
+
+.goods-info .f-l, .goods-info .f-r {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 0;
+  /* align-items:  */
+}
+
+.goods-info .price-box {
+  display: flex;
+  align-items: baseline;
+  line-height: 1;
+}
+
+.goods-info .price-box .price {
+  font-size: 50rpx;
+  color: #f60;
+}
+
+.goods-info .price-box .price {
+  font-size: 50rpx;
+  color: #f60;
+   transform: translateX(-10rpx); 
+}
+
+.goods-info .price-box .original-price {
+  /* padding-left: 6rpx; */
+  font-size: 24rpx;
+  color: #999;
+  text-decoration: line-through;
+  /* transform: translateY(-20%); */
+}
+
+.goods-info .count-box {
+  margin-top: 3rpx;
+  font-size: 24rpx;
+  color: #666;
+}
+
+.goods-info .timer-box{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  font-size: 24rpx;
+  color: #666;
+}
+
+.goods-info .timer-box .timer{
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #666;
+}
+
+.goods-info .star-box{
+  display: flex;
+  /* flex: 1; */
+  justify-content: flex-end;
+  font-size: 24rpx;
+  color: #666;
+}
+
+.goods-info .title{
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  font-size: 28rpx;
+  color: #333;
+}

@@ -1,0 +1,68 @@
+<!--pages/store-detail/store-detail.wxml-->
+
+<!-- 
+  商品详情页
+  @Catagory 业务页
+  @Author   Cphayim
+-->
+<!-- 组件通用过滤器 -->
+<wxs src="../../components/filter.wxs" module="filter" />
+
+<view class="p-store-detail">
+
+  <view class="section">
+    <!-- 商品头图 -->
+    <view class="goods-banner">
+      <image src=""></image>
+    </view>
+    <!-- /商品头图 -->
+
+    <!-- 商品信息 -->
+    <view class="goods-info">
+      <view class="wrapper pd">
+        <view class="f-l">
+          <!-- 价格 -->
+          <view class="price-box">
+            <view class="price">{{filter.priceFormat(100, 1)}}</view>
+            <view class="original-price">{{filter.priceFormat(300, 1)}}</view>
+          </view>
+          <!-- 价格 -->
+          <!-- /数量 -->
+          <view class="count-box">
+            剩余 224
+          </view>
+          <!-- /数量 -->
+        </view>
+        <view class="f-r">
+          <!-- 倒计时 -->
+          <view class="timer-box">
+            <text>结束倒计时：</text>
+            <text class="timer">00:00:07</text>
+          </view>
+          <!-- /倒计时 -->
+          <!-- 关注 -->
+          <view class="star-box">
+            <text>2 人关注</text>
+          </view>
+          <!-- /关注 -->
+        </view>
+      </view>
+      <view class="wrapper pd">
+        <!-- 标题 -->
+        <view class="title">
+          新车10元购1000元购车抵用券新车10元购1000元购车 抵用券新车10元购1000元购车抵用券啊啊啊啊啊啊啊啊啊
+        </view>
+        <!-- /标题 -->
+      </view>
+    </view>
+    <!-- 商品信息 -->
+  </view>
+
+  <view class="section">
+    <!-- 商品保障说明 -->
+    <security bindtap='a'></security>
+    <!-- /商品保障说明 -->
+  </view>
+
+  
+</view>
