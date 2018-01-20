@@ -27,13 +27,13 @@ function getStatusClass(status) {
 function getStatusBtnName(status){
   var btnName = ''
   switch (status) {
-    case 0:
+    case 2:
       btnName = '已结束';
       break;
     case 1:
       btnName = '抢购';
       break;
-    case 2:
+    case 0:
       btnName = '即将开抢';
       break;
   }

@@ -78,10 +78,10 @@
   color: #fff;
 }
 
-.wrap.status-0 .price{
+.wrap.status-2 .price{
   color: #999;
 }
-.wrap.status-0 .btn{
+.wrap.status-2 .btn{
   background-color: #d2d2db;
 }
 
@@ -92,9 +92,9 @@
   background-color: #ff6633;
 }
 
-.wrap.status-2 .price{
+.wrap.status-0 .price{
   color: #ff3300;
 }
-.wrap.status-2 .btn{
+.wrap.status-0 .btn{
   background-color: #54b4ef;
 }
