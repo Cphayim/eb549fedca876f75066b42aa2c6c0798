@@ -1,0 +1,18 @@
+<!--base/bot-btn/bot-btn.wxml-->
+
+<!--  
+  底部按钮组件
+  @Catagory 基础组件
+  @Author Cphayim
+-->
+
+<view class="m-bot-btn">
+  <view class="wrapper {{fixed ? 'fixed' : ''}}">
+    <view 
+      bindtap='tap'
+      class="bot-btn" 
+      style="background-color: {{disabled ? '#d2d2db' : bgColor}};color:{{color}};">
+      {{text}}
+    </view>
+  </view>
+</view>

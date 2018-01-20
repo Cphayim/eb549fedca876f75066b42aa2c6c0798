@@ -1,0 +1,21 @@
+/* base/bot-btn/bot-btn.wxss */
+
+.m-bot-btn{
+  height: 90rpx;
+}
+
+.wrapper{
+  width: 100%;
+}
+
+.wrapper.fixed{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
+
+.wrapper .bot-btn{
+  line-height: 90rpx;
+  text-align: center;
+  font-size: 32rpx;
+}
