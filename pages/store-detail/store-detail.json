@@ -1,13 +1,11 @@
 {
-  "backgroundColor": "#F6F6F6",
-  "backgroundTextStyle": "light",
-  "navigationBarBackgroundColor": "#fff",
   "navigationBarTitleText": "商品详情",
-  "navigationBarTextStyle": "black",
   "usingComponents": {
     "hd-label": "/base/hd-label/hd-label",
     "carousel": "/base/carousel/carousel",
+    "bot-btn": "/base/bot-btn/bot-btn",
     "security": "/components/security/security",
     "goods-list": "/components/goods-list/goods-list"
-  }
+  },
+  "enablePullDownRefresh": true
 }

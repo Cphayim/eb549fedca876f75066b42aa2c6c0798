@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "提交订单",
+  "usingComponents": {
+    "bot-btn": "/base/bot-btn/bot-btn",
+    "form-box":""
+  }
+}
