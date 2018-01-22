@@ -1,0 +1,18 @@
+<!--base/form-control/form-item.wxml-->
+
+<!-- 
+  表单控件项组件
+  @Category 基础组件
+  @Author Cphayim
+-->
+
+<view class="u-form-item">
+  <view class="item-l">
+    {{label}}
+  </view>
+  <view class="item-r {{arrow ? 'arrow' : ''}}">
+    <view class="slot-wrap">
+      <slot></slot>
+    </view>
+  </view>
+</view>

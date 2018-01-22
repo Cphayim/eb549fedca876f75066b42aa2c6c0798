@@ -1,0 +1,35 @@
+/* base/form-control/form-item.wxss */
+@import '../common.wxss';
+.u-form-item {
+  display: flex;
+  align-items: center;
+  padding: 25rpx 64rpx;
+  border-bottom: 1rpx solid #dedede;
+}
+
+.item-l {
+  flex: 0 0 180rpx;
+  font-size: 28rpx;
+  color: #333;
+}
+
+.item-r {
+  flex: 1 1 auto;
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 20rpx;
+  position: relative;
+}
+
+.item-r.arrow::after {
+  display: block;
+  position: absolute;
+  top: 50%;
+  right: -32rpx;
+  content: '';
+  width: 22rpx;
+  height: 30rpx;
+  transform: translateY(-50%);
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAdCAYAAACjbey/AAABZUlEQVQ4jZ3VMSinYRwH8A8uLrqUTilSFnWLwcKgiJQMYiDTDYZ/qctgMDEaTBaZqbvhBl13uuI6F+rGK5NSdGQgJV1dEl1neB7Fn7////k/9fYO7/P9vL9+Pe/vLclkMi9xpchViu9YQlmxwDv04z1eFAPsoCteH1GeCsBuBNqxgopUAPbQiRZ8RmUqAPsRacZqIUg2AIcRacAaXqUCcCz05DXWUZ0KwElEqrCBmlQAztAd922gNhWAc/TgBpuoSwXgAr3xvon6VAD+oA+n2EZjKgB/he/mN7ZQlQoQGtmEI9ykAk1CDw5iJdcpQLNQ9i4GcEnhPXgT3/wLQ+5NsEKAlhj+iRFc33+YD2jFD2HsjQqH6cF6DmgTju8q3uLfU5tyAR34Joy4sVzhXECXMAeWMY7/z1T5COjFVyxiIl84G+jHF8xjKl8wGxjEJ8xiutAw4UcyjA+YwVxK+A4YxCQWUsNwC3vlRYMKOr7hAAAAAElFTkSuQmCC");
+  background-size: 100% 100%;
+}
