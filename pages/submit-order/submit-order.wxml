@@ -1,0 +1,39 @@
+<!--pages/submit-order/submit-order.wxml-->
+
+<!--  
+  提交订单页面
+  @Category 业务页
+  @Author Cphayim
+-->
+<wxs src="../../components/filter.wxs" module="filter" />
+
+<view class="p-sumit-order">
+  <!-- 计价区域
+    付费项目显示
+    注意限购
+   -->
+  <view class="m-valuation section">
+    <view class="pd">
+      <view class="title">
+        {{'新车10元购1000元购车抵用券新车10元购1000元购车抵用券新车10元购1000元购车抵用券'}}
+      </view>
+      <view class="price">
+        {{filter.priceFormat(300, 1)}}
+      </view>
+    </view>
+    <view>
+      <form-item label="数量：">
+        <view class="wrap">
+          <input></input>
+        </view>
+      </form-item>
+      <form-item label="小计：" arrow>
+        <text class="total-price">￥19.8</text>
+      </form-item>
+    </view>
+  </view>
+  <!-- /计价区域 -->
+  <!-- 信息表单 -->
+  
+  <!-- /信息表单 -->
+</view>
