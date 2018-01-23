@@ -1,1 +1,100 @@
-/* pages/mime/mine.wxss */
+/* pages/mine/mine.wxss */
+
+.p-mine{
+
+}
+
+.m-user-info{
+  display: flex;
+  align-items: center;
+  font-size: 24rpx;
+  color: #999;
+}
+
+.m-user-info .f-l{
+  flex: 0 0 auto;
+  width: 100rpx;
+  height: 100rpx;
+  padding-right: 30rpx;
+}
+
+.m-user-info .avatar{
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: #f4f4f4;
+}
+
+.m-user-info .real-name{
+  display: inline-block;
+  font-size: 28rpx;
+  color: #333;
+}
+.m-user-info .wx-name{
+  margin-left: 10rpx;
+  display: inline-block;
+  color: #666;
+}
+
+.m-my-activity{
+
+}
+
+.m-my-activity .item{
+  position: relative;
+  display: flex;
+}
+
+.m-my-activity .f-l{
+  flex: 0 0 auto;
+  position: relative;
+}
+
+.m-my-activity .f-r {
+  flex: 1 1 auto;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  padding: 0 20rpx;
+}
+
+.m-my-activity .cover{
+  display: block;
+  width: 270rpx;
+  height: 150rpx;
+  border: 1rpx solid #eaeaea;
+  background-color: #eaeaea;
+}
+
+.m-my-activity .category {
+  position: absolute;
+  top: 0;
+  left: 8rpx;
+  width: 66rpx;
+  height: 52rpx;
+}
+
+.m-my-activity .title {
+  flex: 0 0 auto;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  font-size: 28rpx;
+  color: #333;
+}
+
+.m-my-activity .time {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.m-my-activity .status{
+  position: absolute;
+  top:0;right: 0;
+}
+
+.m-my-activity .status-icon{
+  width: 90rpx;
+  height: 90rpx;
+}
