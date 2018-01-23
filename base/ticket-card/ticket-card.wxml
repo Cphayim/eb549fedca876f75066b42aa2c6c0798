@@ -1,0 +1,21 @@
+<!--base/ticket-card/ticket-card.wxml-->
+
+<!--  
+  卡券组件
+  @Catagory 基础组件
+  @Author Cphayim
+-->
+<view class="m-ticket-card-wrap">
+  <view class="m-ticket-card">
+    <view class="header-wrap">
+      <!-- 插槽 -->
+      <slot name="header" class="header"></slot>
+      <!-- /插槽 -->
+    </view>
+    <view class="footer-wrap">
+      <!-- 插槽 -->
+      <slot name="footer" class="footer"></slot>
+      <!-- /插槽 -->
+    </view>
+  </view>
+</view>

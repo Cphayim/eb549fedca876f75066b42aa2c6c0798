@@ -1,0 +1,71 @@
+/* base/ticket-card/ticket-card.wxss */
+@import '../common.wxss';
+
+.m-ticket-card-wrap{
+  padding: 40rpx 45rpx;
+  overflow: hidden;
+}
+.m-ticket-card {
+  background-color: #fff;
+  box-shadow: 2rpx 2rpx 10rpx #ccc;
+}
+
+.header-wrap, .footer-wrap {
+  box-sizing: border-box;
+}
+
+.header-wrap {
+  position: relative;
+  min-height: 300rpx;
+  padding: 35rpx;
+  border-bottom: 1rpx solid #dfdfdf;
+}
+
+.footer-wrap {
+  position: relative;
+  min-height: 220rpx;
+  padding: 80rpx 35rpx 60rpx;
+}
+
+/* 缺角 */
+.header-wrap::before, .header-wrap::after {
+  position: absolute;
+  bottom: -30rpx;
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+  box-shadow: inset 2rpx 2rpx 10rpx #ccc;
+  content: '';
+  pointer-events: none;
+  background-color: #f4f4f4;
+}
+
+.header-wrap::before{
+  left: -30rpx;
+}
+
+.header-wrap::after{
+  right: -30rpx;
+}
+
+/* 覆盖缺角阴影 */
+.footer-wrap::before, .footer-wrap::after {
+  position: absolute;
+  top: -30rpx;
+  width: 60rpx;
+  height: 60rpx;
+  /* border-radius: 50%; */
+  /* box-shadow: inset 2rpx 2rpx 10rpx #ccc; */
+  transform:translateY(-1rpx);
+  content: '';
+  pointer-events: none;
+  background-color: #f4f4f4;
+}
+
+.footer-wrap::before{
+  left: -60rpx;
+}
+
+.footer-wrap::after{
+  right: -60rpx;
+}
