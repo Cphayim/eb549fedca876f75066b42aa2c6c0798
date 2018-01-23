@@ -1,0 +1,21 @@
+<!--base/num-box/num-box.wxml-->
+
+<!--  
+  数字选择器组件
+  @Catagory 基础组件
+  @Author Cphayim
+-->
+
+<view class="u-num-box">
+  <view class="btn cell {{ value <= min ? 'disabled' : ''}}"
+    data-disabled="{{value <= max}}"
+    catchtap="decrease">
+    <view class='text'>-</view>
+  </view>
+  <view class="count cell">{{value}}</view>
+  <view class="btn cell {{ value >= max ? 'disabled' : ''}}" 
+    data-disabled="{{value >= max}}"
+    catchtap="increase">
+    <view class='text'>+</view>
+  </view>
+</view>

@@ -1,0 +1,37 @@
+/* base/num-box/num-box.wxss */
+@import '../common.wxss';
+
+:host{
+  flex: 1;
+}
+
+.u-num-box {
+  display: flex;
+  /* align-items: a; */
+  border: 1rpx solid #dedede;
+  border-radius: 8rpx;
+}
+
+.count, .btn {
+  flex: 1;
+  line-height: 60rpx;
+  text-align: center;
+  border-right: 1rpx solid #dedede;
+}
+
+.count:last-child, .btn:last-child {
+  border: none;
+}
+
+.btn {
+  color: #333;
+}
+
+.btn.disabled {
+  color: #ccc;
+}
+
+.btn .text {
+  font-size: 50rpx;
+  transform: translateY(-5rpx);
+}
