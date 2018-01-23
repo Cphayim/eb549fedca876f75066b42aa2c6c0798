@@ -1,0 +1,23 @@
+<!--pages/success/success.wxml-->
+
+<!--  
+  支付/报名成功页
+  @Catagory 业务页
+  @Author Cphayim
+-->
+
+<view class="p-success">
+  <ticket-card>
+    <!-- 头部插槽 -->
+    <view slot="header" class="card-header">
+      <image src="./icons/success.png" class="success-icon"></image>
+      <view class='tip-main'>支付成功!</view>
+      <view class='tip-sub'>请及时到店内使用~</view>
+    </view>
+    <!-- 尾部插槽 -->
+    <view slot="footer" class="card-footer">
+      <view class="btn">回到首页</view>
+      <view class="btn">查看订单</view>
+    </view>
+  </ticket-card>
+</view>

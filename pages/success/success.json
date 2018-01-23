@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "支付成功",
+  "usingComponents": {
+    "ticket-card": "/base/ticket-card/ticket-card"
+  }
+}

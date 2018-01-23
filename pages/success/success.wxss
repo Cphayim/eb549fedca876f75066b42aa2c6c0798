@@ -1,0 +1,41 @@
+/* pages/success/success.wxss */
+
+.p-success{
+  color: #333;
+}
+
+.card-header{
+  text-align: center;
+}
+
+.card-header .success-icon{
+  display: block;
+  width: 140rpx;
+  height: 140rpx;
+  margin: auto;
+}
+
+.card-header .tip-main{
+  margin-top: 20rpx;
+  font-size: 32rpx;
+  line-height: 50rpx;
+}
+
+.card-header .tip-sub{
+  font-size: 28rpx;
+  color: #999;
+}
+.card-footer{
+  display: flex;
+  justify-content: space-between;
+}
+.card-footer .btn{
+  flex: 0 0 280rpx;
+  padding: 20rpx 0;
+  border: 1rpx solid rgba(84, 180, 239, 0.7);
+  border-radius: 10rpx;
+  color: #54b4ef;
+  font-size: 28rpx;
+  text-align: center;
+  background-color: #f3faff;
+}
