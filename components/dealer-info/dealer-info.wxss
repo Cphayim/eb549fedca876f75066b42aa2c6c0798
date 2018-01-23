@@ -30,7 +30,7 @@
   display: flex;
   align-items: center;
   padding: 0 30rpx;
-  border-left: 1rpx solid #dedede;
+  border-left: 1rpx solid #dfdfdf;
 }
 
 .position{

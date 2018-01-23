@@ -8,7 +8,7 @@
 .u-num-box {
   display: flex;
   /* align-items: a; */
-  border: 1rpx solid #dedede;
+  border: 1rpx solid #dfdfdf;
   border-radius: 8rpx;
 }
 
@@ -16,7 +16,7 @@
   flex: 1;
   line-height: 60rpx;
   text-align: center;
-  border-right: 1rpx solid #dedede;
+  border-right: 1rpx solid #dfdfdf;
 }
 
 .count:last-child, .btn:last-child {

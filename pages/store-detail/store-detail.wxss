@@ -22,7 +22,7 @@ page {
 
 .goods-info .wrapper {
   display: flex;
-  border-bottom: 1rpx solid #dedede;
+  border-bottom: 1rpx solid #dfdfdf;
 }
 
 .goods-info .wrapper:last-child {

@@ -1,13 +1,13 @@
 /* pages/submit-order/submit-order.wxss */
 page{
-  border-top: 1rpx solid #dedede;
+  border-top: 1rpx solid #dfdfdf;
 }
 
 .p-submit-order {
 }
 
 .pd {
-  border-bottom: 1.5rpx solid #dedede;
+  border-bottom: 1.5rpx solid #dfdfdf;
 }
 
 .pd:last-child {
@@ -39,10 +39,10 @@ page{
 }
 
 .m-valuation .item,.m-order-form .item{
-  border-bottom: 1rpx solid #dedede;
+  border-bottom: 1rpx solid #dfdfdf;
 }
 .m-order-form .item:first-child{
-  border-top: 1rpx solid #dedede;
+  border-top: 1rpx solid #dfdfdf;
 }
 
 

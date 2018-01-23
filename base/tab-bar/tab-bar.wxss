@@ -3,7 +3,7 @@
 .m-tab-bar{
   width: 100%;
   overflow: hidden;
-  border-bottom: 1rpx solid #dedede;
+  border-bottom: 1rpx solid #dfdfdf;
   background-color: #fff;
 }
 

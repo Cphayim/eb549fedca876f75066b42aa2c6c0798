@@ -30,7 +30,7 @@
   padding: 20rpx 0;
   border-radius: 10rpx;
   box-sizing: border-box;
-  border: 1rpx solid #dedede;
+  border: 1rpx solid #dfdfdf;
   text-align: center;
   font-size: 28rpx;
   color: #333;
@@ -53,7 +53,7 @@
 }
 
 .m-goods-detail .hd, .m-goods-detail .bd {
-  border-bottom: 1rpx solid #dedede;
+  border-bottom: 1rpx solid #dfdfdf;
 }
 
 .m-goods-detail .hd .label {
