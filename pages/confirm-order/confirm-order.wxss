@@ -5,24 +5,24 @@ page{
 .p-confirm-order {
 }
 
-.order-info {
+.m-order-info {
   font-size: 28rpx;
   color: #333;
 }
 
-.order-info .item {
+.m-order-info .item {
   display: flex;
   border-bottom: 1rpx solid #dedede;
 }
 
-.order-info .item-l {
+.m-order-info .item-l {
   text-align: right;
   flex: 0 0 180rpx;
   box-sizing: border-box;
   padding-right: 30rpx;
 }
 
-.order-info .item-r {
+.m-order-info .item-r {
   flex: 1 1 auto;
   text-align: right;
 }
@@ -36,7 +36,7 @@ page{
   color: #ff6633;
 }
 
-.confirm-pay{
+.m-confirm-pay{
   position: fixed;
   display: flex;
   width: 100%;
@@ -46,11 +46,11 @@ page{
   background-color: #fff;
 }
 
-.confirm-pay .cell-l{
+.m-confirm-pay .cell-l{
   flex: 1 1 auto;
 }
 
-.confirm-pay .cell-r{
+.m-confirm-pay .cell-r{
   flex: 0 0 280rpx;
 }
 
