@@ -1,0 +1,11 @@
+<!--components/tab-btn/tab-btn.wxml-->
+<!--  
+  悬浮 Tab 切换按钮组件
+  @Catagory 业务组件
+  @Author Cphayim
+-->
+
+<view 
+  class="m-tab-btn {{typeRes}}"
+  catchtap='toggle'>
+</view>
