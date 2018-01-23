@@ -24,6 +24,13 @@ Component({
     arrow: {
       type: Boolean,
       value: false
+    },
+    /**
+     * 自定义 padding
+     */
+    padding: {
+      type: String,
+      value: ''
     }
   },
 

@@ -6,7 +6,8 @@
   @Author Cphayim
 -->
 
-<view class="u-form-item">
+<view class="u-form-item" 
+  style="{{padding?'padding:'+padding+';':''}}">
   <view class="item-l">
     {{label}}
   </view>
