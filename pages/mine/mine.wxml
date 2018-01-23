@@ -1,0 +1,11 @@
+<!--pages/mine/mine.wxml-->
+
+<!--  
+  我的
+  @Catagory 业务页
+  @Author Cphayim
+-->
+
+<view class="p-mine">
+  <tab-btn type="home"></tab-btn>
+</view>

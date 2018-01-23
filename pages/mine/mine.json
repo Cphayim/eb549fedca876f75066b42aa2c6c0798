@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "我",
+  "usingComponents": {
+    "tab-btn": "/components/tab-btn/tab-btn"
+  }
+}
