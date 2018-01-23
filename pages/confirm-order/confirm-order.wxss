@@ -1,0 +1,69 @@
+/* pages/confirm-order/confirm-order.wxss */
+page{
+  border-top: 1rpx solid #dedede;
+}
+.p-confirm-order {
+}
+
+.order-info {
+  font-size: 28rpx;
+  color: #333;
+}
+
+.order-info .item {
+  display: flex;
+  border-bottom: 1rpx solid #dedede;
+}
+
+.order-info .item-l {
+  text-align: right;
+  flex: 0 0 180rpx;
+  box-sizing: border-box;
+  padding-right: 30rpx;
+}
+
+.order-info .item-r {
+  flex: 1 1 auto;
+  text-align: right;
+}
+
+.title {
+  text-align: left;
+}
+
+.count, .total-price {
+  font-size: 32rpx;
+  color: #ff6633;
+}
+
+.confirm-pay{
+  position: fixed;
+  display: flex;
+  width: 100%;
+  bottom: 0;
+  font-size: 0;
+  color: #333;
+  background-color: #fff;
+}
+
+.confirm-pay .cell-l{
+  flex: 1 1 auto;
+}
+
+.confirm-pay .cell-r{
+  flex: 0 0 280rpx;
+}
+
+.wx-pay{
+  padding: 25rpx 0;
+  font-size: 32rpx;
+  background-color: #1fad19;
+  color: #fff;
+  text-align: center;
+}
+
+.price{
+  padding: 25rpx 50rpx;
+  text-align: right;
+  font-size: 32rpx;
+}

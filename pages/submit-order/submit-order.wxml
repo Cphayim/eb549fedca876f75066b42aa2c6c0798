@@ -13,6 +13,7 @@
     注意限购
    -->
   <view class="m-valuation section">
+
     <view class="pd">
       <view class="title">
         {{'新车10元购1000元购车抵用券新车10元购1000元购车抵用券新车10元购1000元购车抵用券'}}
@@ -21,19 +22,87 @@
         {{filter.priceFormat(300, 1)}}
       </view>
     </view>
+
     <view>
-      <form-item label="数量：">
+      <view class="item">
+        <form-item label="数量：" padding="25rpx 20rpx 25rpx 64rpx">
+          <view class="wrap">
+            <view class="tip">最多可买 2</view>
+            <num-box
+              max="{{10}}"
+              min="{{1}}"
+              value="{{buyNum}}"
+              bindchange="numBoxChange">
+            </num-box>
+          </view>
+        </form-item>
+      </view>
+      <view class="item">
+        <form-item label="小计：">
+          <text class="total-price">￥19.8</text>
+        </form-item>
+      </view>
+    </view>
+  </view>
+  <!-- /计价区域 -->
+  <!-- 订单表单 -->
+  <view class="m-order-form section">
+
+    <view class="item">
+      <form-item label="顾问：" arrow>
+        <view class="wrap">
+          <input 
+            disabled 
+            placeholder="请选择您的专属顾问"
+            placeholder-class="placeholder">
+          </input>
+        </view>
+      </form-item>
+    </view>
+    <view class="item">
+      <form-item label="姓名：">
+        <view class="wrap">
+          <input
+            placeholder="请输入姓名"
+            placeholder-class="placeholder">
+          </input>
+        </view>
+      </form-item>
+    </view>
+    <view class="item">
+      <form-item label="手机号：">
+        <view class="wrap">
+          <input 
+            placeholder="请输入手机号"
+            placeholder-class="placeholder">
+          </input>
+        </view>
+      </form-item>
+    </view>
+    <view class="item">
+      <form-item label="意向车型：" >
         <view class="wrap">
           <input></input>
         </view>
       </form-item>
-      <form-item label="小计：" arrow>
-        <text class="total-price">￥19.8</text>
+    </view>
+    <view class="item">
+      <form-item label="购车方式：" >
+        <view class="wrap">
+          <input></input>
+        </view>
       </form-item>
     </view>
+    <view class="item">
+      <form-item label="购车时间：" >
+        <view class="wrap">
+          <input></input>
+        </view>
+      </form-item>
+    </view>
+
   </view>
-  <!-- /计价区域 -->
-  <!-- 信息表单 -->
-  
-  <!-- /信息表单 -->
+  <!-- /订单表单 -->
+
+  <bot-btn text="提交订单" bgColor="#ff6633" fixed/>
 </view>

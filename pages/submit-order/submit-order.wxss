@@ -1,10 +1,13 @@
 /* pages/submit-order/submit-order.wxss */
+page{
+  border-top: 1rpx solid #dedede;
+}
 
 .p-submit-order {
 }
 
 .pd {
-  border-bottom: 2rpx solid #dedede;
+  border-bottom: 1.5rpx solid #dedede;
 }
 
 .pd:last-child {
@@ -24,21 +27,49 @@
   color: #333;
 }
 
-.m-valuation .price,.m-valuation .total-price {
+.m-valuation .price,.m-valuation .total-price{
   font-size: 32rpx;
   color: #f63;
 }
+.m-valuation .tip {
+  flex: 0 0 150rpx;
+  margin-right: 10rpx;
+  font-size: 24rpx;
+  color: #f63;
+}
+
+.m-valuation .item,.m-order-form .item{
+  border-bottom: 1rpx solid #dedede;
+}
+.m-order-form .item:first-child{
+  border-top: 1rpx solid #dedede;
+}
+
 
 .wrap{
-  width: 440rpx;
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 400rpx;
 }
+
 input {
+  /* 扩大可点击 focus 区域 */
+  position: absolute;
+  top: 50%;
   width: 100%;
-  height: 36rpx;
+  height: 90rpx;
   min-height: auto;
+  flex: 1;
   padding: 0;
   line-height: 1;
   font-size: 28rpx;
   text-align: right;
+  transform: translateY(-50%);
+  /* background-color: rgba(242, 242, 242, 0.3); */
 }
 
+.placeholder{
+  color: #ccc;
+}
