@@ -14,7 +14,7 @@ page {
 .goods-banner image {
   width: 100%;
   height: 100%;
-  background-color: #6c9;
+  background-color: #f2f2f2;
 }
 
 .goods-info {
@@ -52,7 +52,7 @@ page {
 .goods-info .price-box .price {
   font-size: 50rpx;
   color: #f60;
-   transform: translateX(-10rpx); 
+  transform: translateX(-10rpx);
 }
 
 .goods-info .price-box .original-price {
@@ -69,7 +69,7 @@ page {
   color: #666;
 }
 
-.goods-info .timer-box{
+.goods-info .timer-box {
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -77,13 +77,13 @@ page {
   color: #666;
 }
 
-.goods-info .timer-box .timer{
+.goods-info .timer-box .timer {
   font-size: 28rpx;
   font-weight: bold;
   color: #666;
 }
 
-.goods-info .star-box{
+.goods-info .star-box {
   display: flex;
   /* flex: 1; */
   justify-content: flex-end;
@@ -91,11 +91,28 @@ page {
   color: #666;
 }
 
-.goods-info .title{
+.goods-info .title {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
   overflow: hidden;
+  font-size: 28rpx;
+  color: #333;
+}
+
+.goods-introduce {
+}
+
+.goods-introduce .expiry {
+  font-size: 28rpx;
+  color: #333;
+}
+
+.goods-introduce .expiry text {
+  color: #999;
+}
+
+.goods-introduce rich-text {
   font-size: 28rpx;
   color: #333;
 }

@@ -13,7 +13,7 @@
   <view class="section">
     <!-- 商品头图 -->
     <view class="goods-banner">
-      <image src=""></image>
+      <image src="{{detail.model.TitleImage}}"></image>
     </view>
     <!-- /商品头图 -->
 
@@ -23,13 +23,21 @@
         <view class="f-l">
           <!-- 价格 -->
           <view class="price-box">
-            <view class="price">{{filter.priceFormat(100, 1)}}</view>
-            <view class="original-price">{{filter.priceFormat(300, 1)}}</view>
+            <!-- 促销价 -->
+            <view class="price">
+              {{filter.priceFormat(detail.product.ProductPrice)}}
+            </view>
+            <!-- 原价 -->
+            <view 
+              wx:if="{{detail.model.OriginalPrice}}" 
+              class="original-price">
+              {{filter.priceFormat(detail.model.OriginalPrice)}}
+            </view>
           </view>
           <!-- 价格 -->
           <!-- /数量 -->
           <view class="count-box">
-            剩余 224
+            剩余 {{detail.canBuyCount}}
           </view>
           <!-- /数量 -->
         </view>
@@ -37,12 +45,12 @@
           <!-- 倒计时 -->
           <view class="timer-box">
             <text>结束倒计时：</text>
-            <text class="timer">00:00:07</text>
+            <text class="timer">{{filter.countDownFormat(beginCountDown)}}</text>
           </view>
           <!-- /倒计时 -->
           <!-- 关注 -->
           <view class="star-box">
-            <text>2 人关注</text>
+            <text>{{detail.model.Interest}} 人关注</text>
           </view>
           <!-- /关注 -->
         </view>
@@ -50,7 +58,7 @@
       <view class="wrapper pd">
         <!-- 标题 -->
         <view class="title">
-          新车10元购1000元购车抵用券新车10元购1000元购车 抵用券新车10元购1000元购车抵用券啊啊啊啊啊啊啊啊啊
+          {{detail.model.Title || '-'}}
         </view>
         <!-- /标题 -->
       </view>
@@ -64,5 +72,42 @@
     <!-- /商品保障说明 -->
   </view>
 
-  
+  <view class="section">
+    <hd-label title="活动简介" />
+    <!-- 介绍 -->
+    <view class="goods-introduce pd">
+      <view class="expiry">
+        有效期: 
+        <text>{{detail.model.ValidBeginTime}} - {{detail.model.ValidEndTime}}</text>
+      </view>
+      <rich-text nodes="{{detail.model.Text}}"></rich-text>
+    </view>
+    <!-- /介绍 -->
+  </view>
+
+  <!-- 底部按钮 -->
+  <block wx:if="{{currentState === 0}}">
+    <bot-btn
+      text="倒计时: {{filter.countDownFormat(beginCountDown)}}"
+      bg-color="#54b4ef"
+      fixed>
+    </bot-btn>
+  </block>
+  <!--  -->
+  <block wx:elif="{{currentState === 1}}">
+    <bot-btn 
+      text="{{buyingStateStr}}"
+      bg-color="{{disabled ? '#d2d2db' : '#ff6633'}}"
+      catchtap="submit"
+      fixed>
+    </bot-btn>
+  </block>
+  <block wx:elif="{{currentState === 2}}">
+    <bot-btn 
+      text="已结束"
+      bg-color="#d2d2db"
+      fixed>
+    </bot-btn>
+  </block>
+  <!-- /底部按钮 -->
 </view>
