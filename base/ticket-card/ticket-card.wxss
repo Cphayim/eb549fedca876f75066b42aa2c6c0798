@@ -7,7 +7,7 @@
 }
 .m-ticket-card {
   background-color: #fff;
-  box-shadow: 2rpx 2rpx 10rpx #ccc;
+  box-shadow: 2rpx 2rpx 10rpx #ddd;
 }
 
 .header-wrap, .footer-wrap {
