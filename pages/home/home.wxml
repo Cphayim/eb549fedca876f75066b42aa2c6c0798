@@ -43,6 +43,10 @@
   </view> -->
   <!-- /最新资讯 -->
 
+  <!-- 悬浮 tab 切换按钮 -->
+  <tab-btn type="mine"></tab-btn>
+  <!-- /悬浮 tab 切换按钮 -->
+
   <!-- 经销商 -->
   <dealer-info info="{{dealerInfo}}"></dealer-info>
   <!-- /经销商 -->

@@ -3,6 +3,7 @@
     "hd-label": "/base/hd-label/hd-label",    
     "carousel": "/base/carousel/carousel",
     "goods-list": "/components/goods-list/goods-list",
-    "dealer-info": "/components/dealer-info/dealer-info"
+    "dealer-info": "/components/dealer-info/dealer-info",
+    "tab-btn":"/components/tab-btn/tab-btn"
   }
 }
