@@ -1,0 +1,113 @@
+/* pages/order-detail/order-detail.wxss */
+
+.p-order-detail {
+}
+
+.m-order-status {
+}
+
+.m-order-status .count-down-box {
+  margin: 20rpx 0;
+  text-align: center;
+  font-size: 28rpx;
+  color: #333;
+}
+
+.m-order-status .count-down-box .count-down {
+  font-size: 50rpx;
+  font-weight: bold;
+}
+
+.m-order-status .btn-group {
+  display: flex;
+  margin: 20rpx 0;
+  padding: 0 30rpx;
+  justify-content: space-around;
+}
+
+.m-order-status .btn-group .btn {
+  flex: 0 0 290rpx;
+  padding: 20rpx 0;
+  border-radius: 10rpx;
+  box-sizing: border-box;
+  border: 1rpx solid #dedede;
+  text-align: center;
+  font-size: 28rpx;
+  color: #333;
+}
+
+.m-order-status .btn-group .wx-pay {
+  border-color: #1fad19;
+  color: #fff;
+  background-color: #1fad19;
+}
+
+.m-goods-detail {
+  font-size: 28rpx;
+  color: #333;
+}
+
+.m-goods-detail .hd, .m-goods-detail .ft, .m-goods-detail .wrap {
+  display: flex;
+  align-items: center;
+}
+
+.m-goods-detail .hd, .m-goods-detail .bd {
+  border-bottom: 1rpx solid #dedede;
+}
+
+.m-goods-detail .hd .label {
+  flex: 0 0 auto;
+}
+
+.m-goods-detail .hd .label-count {
+  flex: 1 1 auto;
+  text-align: right;
+  font-size: 24rpx;
+  color: #999;
+}
+
+.m-goods-detail .bd .title {
+  margin: 10rpx 0;
+}
+
+.m-goods-detail .bd .price, .m-goods-detail .ft .total-price,
+.m-goods-detail .bd .count {
+  font-size: 32rpx;
+  color: #f63;
+}
+
+.m-goods-detail .bd .price, .m-goods-detail .bd .count {
+  flex: 1 1 auto;
+}
+
+.m-goods-detail .bd .count {
+  text-align: right;
+}
+
+.m-goods-detail .ft>view {
+  flex: 1;
+  text-align: right;
+}
+
+
+
+.m-order-detail{
+  font-size: 28rpx;
+  color: #333;
+}
+
+.m-order-detail .item{
+  display: flex;
+  line-height: 44rpx;
+}
+
+.m-order-detail .key{
+  flex: 0 0 200rpx;
+  padding-right: 30rpx;
+  text-align: right;
+  color: #999;
+}
+.m-order-detail .value{
+  word-break: break-all;
+}

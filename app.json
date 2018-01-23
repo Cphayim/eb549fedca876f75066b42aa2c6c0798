@@ -5,7 +5,9 @@
     "pages/hot-store/hot-store",
     "pages/store-detail/store-detail",
     "pages/submit-order/submit-order",
-    "pages/confirm-order/confirm-order"
+    "pages/confirm-order/confirm-order",
+    "pages/order-detail/order-detail",
+    "pages/success/success"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
