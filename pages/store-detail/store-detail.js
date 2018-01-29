@@ -6,9 +6,13 @@
  * @Author   Cphayim
  */
 import { toast, modal } from '../../utils/layer.js'
-import { getGoodsDetail } from '../../api/store-detail-api.js'
+import { getGoodsDetail } from '../../service/store-detail.js'
+import config from '../../config.js'
+import Auth from '../../service/auth.js'
 
 Page({
+  pageName: 'store-detail',
+
   /**
    * 页面的初始数据
    */
@@ -33,6 +37,10 @@ Page({
     buyingStateStr: '',
     // 是否禁用抢购按钮
     disabled: false
+  },
+
+  _init(){
+    this._getGoodsDetail()
   },
 
   /**
@@ -165,7 +173,7 @@ Page({
       }
       this.setData({ beginCountDown })
       beginCountDown--
-    },1000)
+    }, 1000)
   },
 
   /**
@@ -192,14 +200,20 @@ Page({
     this.data.id = id
     // 没有 id 返回上一级
     if (!id) {
-      modal
+      return modal
         .alert({ content: '参数错误\n1' })
         .then(_ => {
           wx.navigateBack({ delta: 1 })
         })
-      return
     }
-    this._getGoodsDetail()
+
+    if (config.pageOpt.getNeedAuth(this.pageName)) {
+      const auth = new Auth()
+      auth.validate()
+        .then(res => this._init())
+    } else {
+      this._init()
+    }
   },
 
   /**

@@ -6,13 +6,17 @@
  * @Author Cphayim
  */
 
+import config from '../../config.js'
+import Auth from '../../service/auth.js'
+import { toast } from '../../utils/layer.js'
 import {
   getHotTabInfo,
   getGoodsList
-} from '../../api/hot-store-list-api.js'
+} from '../../service/hot-store.js'
+
 
 Page({
-
+  pageName: 'hot-store',
   /**
    * 页面的初始数据
    */
@@ -37,14 +41,14 @@ Page({
    * @return Promise.state
    */
   _getGoodsList(keyStr) {
-    return getGoodsList(keyStr).then(res => res.data)
+    return getGoodsList(keyStr).then(res => res.data.model)
   },
   _getAllListData() {
-    const queue = this.data.tabKeys.map(key => this._getGoodsList({KeyStr:key}))
+    const queue = this.data.tabKeys.map(key => this._getGoodsList({ KeyStr: key }))
     Promise.all(queue)
       .then(resAll => {
-        // console.log(resAll)
         this.setData({ listsData: resAll })
+        toast.hide()
       })
   },
   /**
@@ -54,6 +58,7 @@ Page({
    * @return Promise.state
    */
   _getHotTabInfo() {
+    toast.loading()
     return new Promise((resolve, reject) => {
       getHotTabInfo()
         .then(res => {
@@ -86,7 +91,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    this._init()
+    if (config.pageOpt.getNeedAuth(this.pageName)) {
+      const auth = new Auth()
+      auth.validate()
+        .then(res => this._init())
+    } else {
+      this._init()
+    }
   },
 
   /**

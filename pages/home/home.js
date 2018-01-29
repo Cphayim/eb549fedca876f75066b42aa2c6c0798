@@ -5,15 +5,17 @@
  * @Category 业务页
  * @Author Cphayim
  */
-
+import config from '../../config.js'
+import Auth from '../../service/auth.js'
 import {
   getBannerList,
   getTopGoodsList,
   getDealerInfo
-} from '../../api/home-api.js'
+} from '../../service/home.js'
+
 
 Page({
-
+  pageName: 'home',
   /**
    * 页面的初始数据
    */
@@ -21,6 +23,17 @@ Page({
     bannerList: [],
     topGoodsList: [],
     dealerInfo: {}
+  },
+
+  /**
+   * 初始化页面
+   * @private
+   * @method _init
+   */
+  _init(){
+    this._getBannerList()
+    this._getTopGoodsList()
+    this._getDealerInfo()
   },
 
   /**
@@ -55,15 +68,15 @@ Page({
       .then(res => {
         const { data } = res
         this.setData({
-          topGoodsList: data
+          topGoodsList: data.model
         })
       })
   },
 
   /**
-   * 获取首页热卖商城 Top 数据
+   * 获取经销商信息
    * @private
-   * @method _getTopGoodsList
+   * @method _getDealerInfo
    */
   _getDealerInfo() {
     getDealerInfo()
@@ -80,9 +93,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    this._getBannerList()
-    this._getTopGoodsList()
-    this._getDealerInfo()
+    if (config.pageOpt.getNeedAuth(this.pageName)) {
+      const auth = new Auth()
+      auth.validate()
+        .then(res => this._init())
+    } else {
+      this._init()
+    }
   },
 
   /**

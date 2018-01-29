@@ -6,7 +6,11 @@
  * @Author Cphayim
  */
 
+import config from '../../config.js'
+import Auth from '../../service/auth.js'
+
 Page({
+  pageName: 'submit-order',
 
   /**
    * 页面的初始数据
@@ -20,11 +24,28 @@ Page({
       buyNum: value
     })
   },
+
+  /**
+   * 初始化页面
+   * @private
+   * @method _init
+   */
+  _init() {
+    console.log('开始处理页面逻辑')
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    if (config.pageOpt.getNeedAuth(this.pageName)) {
+      const auth = new Auth()
+      auth.validate()
+        .then(res => this._init())
+        .catch(err => console.log(err))
+    } else {
+      this._init()
+    }
   },
 
   /**

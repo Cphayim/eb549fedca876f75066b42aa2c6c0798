@@ -6,8 +6,12 @@
  * @Author Cphayim
  */
 
-Page({
+import config from '../../config.js'
+import Auth from '../../service/auth.js'
 
+Page({
+  pageName: 'order-detail',
+  
   /**
    * 页面的初始数据
    */
@@ -15,11 +19,21 @@ Page({
   
   },
 
+  _init() {
+
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    if (config.pageOpt.getNeedAuth(this.pageName)) {
+      const auth = new Auth()
+      auth.validate()
+        .then(res => this._init())
+    } else {
+      this._init()
+    }
   },
 
   /**
