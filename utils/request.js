@@ -24,6 +24,9 @@ export function request({
   data = {},
   hasSession = true
 }) {
+  if (hasSession) {
+    header['session-id'] = wx.getStorageSync('session_id') || ''
+  }
   return new Promise((resolve, reject) => {
     wx.request({
       url,
@@ -58,7 +61,7 @@ export function request({
     } else {
       return Promise.reject({
         status: res.statusCode,
-        errormsg: `服务器响应状态码: ${res.code}`
+        errormsg: `请求失败，HTTP状态码: ${res.statusCode}`
       })
     }
   }).catch(err => {
