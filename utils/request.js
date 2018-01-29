@@ -22,7 +22,7 @@ export function request({
   method = 'POST',
   header = {},
   data = {},
-  hasSession = true
+  hasSession = false
 }) {
   if (hasSession) {
     header['session-id'] = wx.getStorageSync('session_id') || ''
