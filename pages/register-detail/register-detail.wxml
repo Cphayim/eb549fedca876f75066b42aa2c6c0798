@@ -1,2 +1,4 @@
 <!--pages/register-detail/register-detail.wxml-->
-<text>pages/register-detail/register-detail.wxml</text>
+<view class="container-1">
+  <view class='box'>123</view>
+</view>

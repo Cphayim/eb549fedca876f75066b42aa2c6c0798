@@ -7,13 +7,15 @@
     "pages/submit-order/submit-order",
     "pages/confirm-order/confirm-order",
     "pages/order-detail/order-detail",
-    "pages/success/success"
+    "pages/success/success",
+    "pages/register-detail/register-detail"
   ],
   "window": {
-    "backgroundColor": "#F6F6F6",
+    "backgroundColor": "#f6f6f6",
     "backgroundTextStyle": "dark",
     "navigationBarBackgroundColor": "#FFF",
     "navigationBarTitleText": "云车商掌上店",
-    "navigationBarTextStyle": "black"
+    "navigationBarTextStyle": "black",
+    "navigationStyle": "default"
   }
 }
