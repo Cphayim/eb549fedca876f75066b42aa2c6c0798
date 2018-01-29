@@ -110,14 +110,10 @@ function _showModal({
       cancelColor,
       confirmText,
       confirmColor,
-      success(confirm) {
-        // 用户点击确定按钮返回 Promise.resolve(true)
-        // 用户点击取消或点击遮罩层(安卓)返回 Promise.reject(false)
-        resolve(confirm)
-      },
-      fail(err) {
-        reject(err)
-      }
+      // 用户点击确定按钮返回 Promise.resolve(true)
+      // 用户点击取消或点击遮罩层(安卓)返回 Promise.reject(false)
+      success: res => resolve(res.confirm),
+      fail: err => reject(err)
     })
   })
 }
