@@ -10,10 +10,11 @@ import { modal } from './utils/layer.js'
 
 App({
   onShow() {
+    // 基础库版本检测
     const systemInfo = wx.getSystemInfoSync()
-    if (systemInfo.SDKVersion < '1.9.0') {
+    if (systemInfo.SDKVersion < config.supportSDKVersion) {
       modal
-        .alert({ content: '小程序基础库版本过低，请更新微信版本至 v6.6.1 以上' })
+        .alert({ content: config.warning.WARN_VERSION })
         .then(flag => {
           wx.navigateBack({
             delta: 0
