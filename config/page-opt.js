@@ -18,7 +18,7 @@ const _pageOpt = {
     needAuth: false
   },
   'store-detail': { // 商品详情
-    needAuth: false
+    needAuth: true
   },
   'submit-order': { // 提交订单
     needAuth: true
