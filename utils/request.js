@@ -22,11 +22,14 @@ export function request({
   method = 'POST',
   header = {},
   data = {},
-  hasSession = false
+  hasSession = true
 }) {
+  header['appId'] = config.appid
+  header['tenantId'] = wx.getStorageSync('tenant_id') || ''
   if (hasSession) {
-    header['session-id'] = wx.getStorageSync('session_id') || ''
+    header['sessionId'] = wx.getStorageSync('session_id') || ''
   }
+  url += (url.indexOf('?') === -1 ? '?' : '&') + 'resultType=jsonapi'
   return new Promise((resolve, reject) => {
     wx.request({
       url,
