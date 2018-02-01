@@ -86,6 +86,9 @@ Page({
         this.setData({
           dealerInfo: data
         })
+        wx.setNavigationBarTitle({
+          title: data.Name
+        })
       })
   },
 
