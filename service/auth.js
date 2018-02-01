@@ -7,7 +7,10 @@ import config from '../config.js'
 import { toast, modal } from '../utils/layer.js'
 import { request } from '../utils/request.js'
 
-// const loginUrl = `${config.host}/login`
+// 线上
+// const loginUrl = `${config.host}/wx/uc/login`
+
+// 开发
 const loginUrl = `https://api.cphayim.me/user/login`
 
 const __instance = (function () {
@@ -265,7 +268,7 @@ export default class Auth {
         // 登录成功
         .then(res => {
           toast.hide()
-          const {data} = res
+          const { data } = res
           console.log(res)
           this._setSessionId(data.sessionId)
           resolve('login:ok')
