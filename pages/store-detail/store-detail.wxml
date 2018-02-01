@@ -37,7 +37,8 @@
           <!-- 价格 -->
           <!-- /数量 -->
           <view class="count-box">
-            剩余 {{detail.canBuyCount}}
+            <!-- -1 表示不限制数量 -->
+            剩余 {{(detail.canBuyCount > 999 || detail.canBuyCount === -1) ? '999+' : detail.canBuyCount}}
           </view>
           <!-- /数量 -->
         </view>
@@ -45,7 +46,7 @@
           <!-- 倒计时 -->
           <view class="timer-box">
             <text>结束倒计时：</text>
-            <text class="timer">{{filter.countDownFormat(beginCountDown)}}</text>
+            <text class="timer">{{filter.countDownFormat(endCountDown)}}</text>
           </view>
           <!-- /倒计时 -->
           <!-- 关注 -->
@@ -80,7 +81,7 @@
         有效期: 
         <text>{{detail.model.ValidBeginTime}} - {{detail.model.ValidEndTime}}</text>
       </view>
-      <rich-text nodes="{{detail.model.Text}}"></rich-text>
+      <rich-text nodes="{{detail.model.TextReplace}}"></rich-text>
     </view>
     <!-- /介绍 -->
   </view>

@@ -39,7 +39,7 @@ Page({
     disabled: false
   },
 
-  _init(){
+  _init() {
     this._getGoodsDetail()
   },
 
@@ -97,7 +97,7 @@ Page({
     // 当前是即将开抢状态
     if (this.data.currentState === 0) {
       // 设置抢购倒计时
-      this._setBeginCountDown()
+      this._setCountDown('begin')
     }
     // 当前是正在抢购状态
     else if (this.data.currentState === 1) {
@@ -110,7 +110,7 @@ Page({
         this._setSignBtnState()
       }
       // 设置结束倒计时
-      this._setEndCountDown()
+      this._setCountDown('end')
     }
   },
 
@@ -129,7 +129,7 @@ Page({
     }
     // 是否有剩余数量
     else if (detail.canBuyCount) {
-      this.setData({ buyingStateStr: '立即抢购' })
+      this.setData({ buyingStateStr: '立即抢购', disabled: false })
     }
     // 售罄 
     else {
@@ -150,7 +150,7 @@ Page({
     }
     // 是否有剩余数量
     else if (detail.canBuyCount) {
-      this.setData({ buyingStateStr: '立即抢购' })
+      this.setData({ buyingStateStr: '一键报名', disabled: false })
     }
     // 售罄 
     else {
@@ -159,36 +159,41 @@ Page({
   },
 
   /**
-   * 设置开始倒计时
+   * 设置开始/结束倒计时
+   * @private
+   * @method _setCountDown
+   * @param {string} key ['begin' | 'end']
    */
-  _setBeginCountDown() {
-    const beginTime = this.data.detail.model.BeginTime
-    const beginTimestamp = ~~(new Date(beginTime).getTime() / 1000)
-    let beginCountDown = beginTimestamp - ~~(Date.now() / 1000)
+  _setCountDown(key = 'begin') {
+    const time = (key === 'end') ?
+      this.data.detail.model.EndTime : this.data.detail.model.BeginTime
+
+    const timestamp = ~~(new Date(time).getTime() / 1000)
+    let countDown = timestamp - ~~(Date.now() / 1000)
 
     const t = setInterval(() => {
-      if (beginCountDown <= 0) {
+      if (countDown <= 0) {
         // 重新加载数据
+        this.init()
         return clearInterval(t)
       }
-      this.setData({ beginCountDown })
-      beginCountDown--
+      this.setData({ [key + 'CountDown']: countDown })
+      countDown--
     }, 1000)
-  },
-
-  /**
-   * 设置结束倒计时
-   */
-  _setEndCountDown() {
 
   },
-
 
   /**
    * 提交
+   * 进入下单页面
+   * @method submit
+   * @param {object} e
    */
   submit(e) {
-    console.log(123)
+    if (this.data.currentState !== 1 && this.data.disabled) return
+    wx.navigateTo({
+      url: `/pages/submit-order/submit-order?id=${this.data.id}&needPay=${this.data.needPay}`,
+    })
   },
 
   /**
