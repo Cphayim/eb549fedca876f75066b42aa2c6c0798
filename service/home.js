@@ -14,7 +14,7 @@ import { request } from '../utils/request.js'
 export function getDealerInfo(){
   const data = {}
   return request({
-    url: `${config.host}/ApiCustomers/TenantDetail`,
+    url: `${config.host}/Org/Tenants/Detail`,
     data
   })
 }
