@@ -13,7 +13,7 @@ export default {
   supportSDKVersion: '1.9.0',
 
   // 请求主机名
-  host: 'https://ssl.api.vcar360.com',
+  host: 'http://340.dev.vcar360.com',
 
   // 成功响应的 errorcode
   ERR_OK_CODE: 0,

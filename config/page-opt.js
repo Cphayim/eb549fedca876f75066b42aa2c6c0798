@@ -9,13 +9,13 @@
  */
 const _pageOpt = {
   'home': { // 首页
-    needAuth: false // 是否需要授权
+    needAuth: true // 是否需要授权
   },
   'mine': { // 我的
     needAuth: true
   },
   'hot-store': { // 热卖商城列表
-    needAuth: false
+    needAuth: true
   },
   'store-detail': { // 商品详情
     needAuth: true
