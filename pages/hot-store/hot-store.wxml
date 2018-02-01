@@ -11,21 +11,30 @@
     <image src="/assets/images/hot-store.png"></image>
   </view>
   <view>
-    <view>
+    <view class="tab-bar-wrap">
       <tab-bar 
         tab-names="{{tabNames}}"
         animation
         bindchange="selectTab">
       </tab-bar>
     </view>
+    <view class="tab-view-wrap">
       <block wx:for="{{listsData}}" wx:key="index">
-      <view hidden="{{index !== activeIndex}}">
-        <goods-list 
-          list="{{item}}">
-        </goods-list>  
-        </view>
+        <scroll-view 
+          scroll-y
+          scroll-with-animation
+          enable-back-to-top
+          bindscrolltolower="loadMore"
+          data-index="{{index}}"
+          hidden="{{index !== activeIndex}}"
+          style="height:{{scrollViewHeight}}px"
+          lower-threshold="30">
+          <goods-list 
+            list="{{item}}">
+          </goods-list>  
+        </scroll-view>
       </block>
-    
+    </view>
   </view>
   
 </view>

@@ -13,7 +13,7 @@ import {
   getHotTabInfo,
   getGoodsList
 } from '../../service/hot-store.js'
-
+import { $$ } from '../../utils/wxml-query.js'
 
 Page({
   pageName: 'hot-store',
@@ -25,7 +25,8 @@ Page({
     tabNames: [],
     tabKeys: [],
     activeIndex: 0,
-    listsData: []
+    listsData: [],
+    scrollViewHeight: 0,
   },
 
   _init() {
@@ -47,10 +48,11 @@ Page({
     const queue = this.data.tabKeys.map(key => this._getGoodsList({ KeyStr: key }))
     Promise.all(queue)
       .then(resAll => {
-        this.setData({ listsData: resAll })
+        this.setData({ listsData: resAll }, () => { this._setScrollViewHeight() })
         toast.hide()
       })
   },
+
   /**
    * 获取 tab 数据
    * @private
@@ -86,6 +88,14 @@ Page({
     this.setData({ activeIndex: e.detail.index })
   },
 
+  _setScrollViewHeight() {
+    $$('.tab-view-wrap')
+      .then(res => {
+        const { top: topDis } = res
+        const { windowHeight } = wx.getSystemInfoSync()
+        this.setData({ scrollViewHeight: windowHeight - topDis })
+      })
+  },
 
   /**
    * 生命周期函数--监听页面加载
