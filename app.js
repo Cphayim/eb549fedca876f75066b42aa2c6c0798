@@ -10,16 +10,14 @@ import { modal } from './utils/layer.js'
 
 App({
   onShow() {
-    // 基础库版本检测
     const systemInfo = wx.getSystemInfoSync()
+    // 基础库版本检测
     if (systemInfo.SDKVersion < config.supportSDKVersion) {
       modal
+        // 提示版本过低
         .alert({ content: config.warning.WARN_VERSION })
-        .then(flag => {
-          wx.navigateBack({
-            delta: 0
-          })
-        })
+        // 退出小程序
+        .then(flag => wx.navigateBack({ delta: 0 }))
     }
   }
 })
