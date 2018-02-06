@@ -15,7 +15,7 @@ App({
     if (systemInfo.SDKVersion < config.supportSDKVersion) {
       modal
         // 提示版本过低
-        .alert({ content: config.warning.WARN_VERSION })
+        .alert({ content: config.error.ERR_VERSION })
         // 退出小程序
         .then(flag => wx.navigateBack({ delta: 0 }))
     }
