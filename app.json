@@ -8,7 +8,8 @@
     "pages/confirm-order/confirm-order",
     "pages/order-detail/order-detail",
     "pages/register-detail/register-detail",
-    "pages/success/success"
+    "pages/success/success",
+    "pages/submit-register/submit-register"
   ],
   "window": {
     "backgroundColor": "#f6f6f6",
