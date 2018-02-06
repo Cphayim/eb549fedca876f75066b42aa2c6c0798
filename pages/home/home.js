@@ -68,7 +68,7 @@ Page({
       .then(res => {
         const { data } = res
         this.setData({
-          topGoodsList: data.model
+          topGoodsList: data
         })
       })
   },

@@ -21,6 +21,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    bannerUrl: '',
     tabInfo: [],
     tabNames: [],
     tabKeys: [],
@@ -42,7 +43,7 @@ Page({
    * @return Promise.state
    */
   _getGoodsList(keyStr) {
-    return getGoodsList(keyStr).then(res => res.data.model)
+    return getGoodsList(keyStr).then(res => res.data)
   },
   _getAllListData() {
     const queue = this.data.tabKeys.map(key => this._getGoodsList({ KeyStr: key }))
@@ -64,7 +65,7 @@ Page({
     return new Promise((resolve, reject) => {
       getHotTabInfo()
         .then(res => {
-          const { data: tabInfo } = res
+          const { subKeys: tabInfo, imageUrl: bannerUrl } = res.data
           // 添加全部到第一项
           tabInfo.unshift({
             Value: 'ShopAll',
@@ -72,7 +73,7 @@ Page({
           })
           const tabNames = tabInfo.map(item => item.Name)
           const tabKeys = tabInfo.map(item => item.Value)
-          this.setData({ tabInfo, tabNames, tabKeys })
+          this.setData({ tabInfo, tabNames, tabKeys, bannerUrl })
           resolve()
         })
     })
