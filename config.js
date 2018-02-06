@@ -3,7 +3,7 @@
  * @Author Cphayim
  */
 import * as pageOpt from './config/page-opt.js'
-import warning from './config/warnning.js'
+import error from './config/error.js'
 
 export default {
   
@@ -21,8 +21,8 @@ export default {
   // 页面配置项
   pageOpt: pageOpt,
 
-  // 警告信息
-  warning,
+  // 错误信息
+  error,
 }
 
 
