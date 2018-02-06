@@ -25,11 +25,19 @@ export function request({
   hasSession = true
 }) {
   header['appId'] = config.appid
-  header['tenantId'] = wx.getStorageSync('tenant_id') || ''
+
+  /****/
+  header['tenantId'] = wx.getExtConfigSync().tenantId || ''
+  /****/
+  
   if (hasSession) {
     header['sessionId'] = wx.getStorageSync('session_id') || ''
   }
+
+  /****/
   url += (url.indexOf('?') === -1 ? '?' : '&') + 'resultType=jsonapi'
+  /****/
+
   return new Promise((resolve, reject) => {
     wx.request({
       url,
