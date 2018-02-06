@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "提交报名",
+  "usingComponents": {
+    "bot-btn": "/base/bot-btn/bot-btn",
+    "form-item": "/base/form-item/form-item",
+    "num-box": "/base/num-box/num-box"
+  }
+}
