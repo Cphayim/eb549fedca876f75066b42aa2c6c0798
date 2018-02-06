@@ -7,8 +7,8 @@
     "pages/submit-order/submit-order",
     "pages/confirm-order/confirm-order",
     "pages/order-detail/order-detail",
-    "pages/success/success",
-    "pages/register-detail/register-detail"
+    "pages/register-detail/register-detail",
+    "pages/success/success"
   ],
   "window": {
     "backgroundColor": "#f6f6f6",
@@ -17,5 +17,8 @@
     "navigationBarTitleText": "云车商掌上店",
     "navigationBarTextStyle": "black",
     "navigationStyle": "default"
+  },
+  "ext": {
+    "tenantId": 340
   }
 }
