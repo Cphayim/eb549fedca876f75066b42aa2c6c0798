@@ -37,12 +37,8 @@ export function request({
       data,
       header,
       dataType: 'json',
-      success: function (res) {
-        resolve(res)
-      },
-      fail: function (err) {
-        reject(err)
-      }
+      success: res => resolve(res),
+      fail: err => reject(err)
     })
   }).then(res => {
     // 判断响应状态码是否为200
