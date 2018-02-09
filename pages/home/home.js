@@ -82,7 +82,6 @@ Page({
     getDealerInfo()
       .then(res => {
         const { data } = res
-        console.log(data)
         this.setData({
           dealerInfo: data
         })
