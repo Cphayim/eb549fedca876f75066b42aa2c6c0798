@@ -12,16 +12,16 @@
   <!-- 用户信息 -->
   <view class="m-user-info section pd">
     <view class="f-l">
-      <image class='avatar'></image>
+      <image class='avatar' src="{{customer.HeadImgUrl}}"></image>
     </view>
     <view class="f-r">
       <view>
         <view>
-          <view class="real-name">苏巧玲</view>
-          <view class="wx-name">[SQL]</view>
+          <view class="real-name">{{customer.Name}}</view>
+          <view class="wx-name">[{{customer.Nickname}}]</view>
         </view>
         <view>
-          手机号：110120119
+          手机号：{{customer.MobilePhone}}
         </view>
       </view>
     </view>
@@ -30,9 +30,14 @@
 
   <!-- 我的活动 -->
   <view class="section">
-    <hd-label title="我的活动" />
+    <hd-label title="我的报名券" />
     <view class="m-my-activity">
-      <view class="item pd">
+      <view 
+        wx:for="{{enrolls}}"
+        wx:key="Id" 
+        class="item pd"
+        bindtap="goDetail"
+        data-index="{{index}}">
         <view class='f-l'>
           <!-- 封面图 -->
           <image src="{{item.TitleImage}}" class="cover"></image>
@@ -43,13 +48,17 @@
         </view>
         <view class='f-r'>
           <!-- 标题 -->
-          <view class="title">[新车] 续保有礼用车无忧，续 保开放清凉来袭，让您更省...</view>
+          <view class="title">
+            [{{item.FromType}}] {{item.FromTitle}}
+          </view>
           <!-- /标题 -->
-          <view class="time">有效期：2014/10/15-2017/10/14</view>
+          <view class="time">有效期：{{item.ValidTimeStr}}</view>
         </view>
         <!-- 状态 -->
         <view class="status">
-          <image src="./icons/unuse.png" class="status-icon"></image>
+          <image wx:if="{{item.EnrollStatus === 0}}" src="./icons/unuse.png" class="status-icon"></image>
+           <image wx:elif="{{item.EnrollStatus === 1}}" src="./icons/used.png" class="status-icon"></image>
+          <image wx:elif="{{item.EnrollStatus === 2}}" src="./icons/overdue.png" class="status-icon"></image>
         </view>
         <!-- 状态 -->
       </view>

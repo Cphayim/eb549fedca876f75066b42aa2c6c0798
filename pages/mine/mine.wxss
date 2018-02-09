@@ -43,6 +43,7 @@
 .m-my-activity .item{
   position: relative;
   display: flex;
+  border-bottom: 1rpx solid #eaeaea;
 }
 
 .m-my-activity .f-l{
