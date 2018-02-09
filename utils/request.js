@@ -25,11 +25,12 @@ export function request({
   hasSession = true
 }) {
   header['appId'] = config.appid
+  header['X-Requested-With'] = 'XMLHttpRequest'
 
   /****/
   header['tenantId'] = wx.getExtConfigSync().tenantId || ''
   /****/
-  
+
   if (hasSession) {
     header['sessionId'] = wx.getStorageSync('session_id') || ''
   }
@@ -78,7 +79,17 @@ export function request({
      * 并返回一个 rejected 状态的 Promise 实例
      */
     const errormsg = err.errormsg || '请求失败，请检查网络'
-    modal.alert({ content: errormsg })
+
+    /****/
+    if (err.errorcode === 40003) { // 重新登录
+      const url = `/${getCurrentPages().pop().route}`
+      console.log(url)
+      wx.removeStorageSync('session_id')
+      wx.redirectTo({ url })
+    } else { // 弹框提示
+      modal.alert({ content: errormsg })
+    }
     return Promise.reject(err)
+    /****/
   })
 }
