@@ -24,8 +24,12 @@ const _pageOpt = {
     url: '/pages/store-detail/store-detail',
     needAuth: true
   },
-  'submit-order': { // 提交订单
+  'submit-order': { // 提交支付订单
     url: '/pages/submit-order/submit-order',
+    needAuth: true
+  },
+  'submit-register': { // 提交报名订单
+    url: '/pages/submit-register/submit-register',
     needAuth: true
   },
   'confirm-order': { // 确认订单
@@ -36,8 +40,8 @@ const _pageOpt = {
     url: '/pages/order-detail/order-detail',
     needAuth: true
   },
-  'register-detail': { // 报名详情
-    url: '/pages/register-detail/register-detail',
+  'enroll-detail': { // 报名详情
+    url: '/pages/enroll-detail/enroll-detail',
     needAuth: true
   },
   'success': { // 支付/报名成功

@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "报名券详情",
+  "usingComponents": {
+    "ticket-card": "/base/ticket-card/ticket-card"
+  }
+}

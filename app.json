@@ -4,12 +4,12 @@
     "pages/mine/mine",
     "pages/hot-store/hot-store",
     "pages/store-detail/store-detail",
+    "pages/submit-register/submit-register",
     "pages/submit-order/submit-order",
     "pages/confirm-order/confirm-order",
     "pages/order-detail/order-detail",
-    "pages/register-detail/register-detail",
-    "pages/success/success",
-    "pages/submit-register/submit-register"
+    "pages/enroll-detail/enroll-detail",
+    "pages/success/success"
   ],
   "window": {
     "backgroundColor": "#f6f6f6",

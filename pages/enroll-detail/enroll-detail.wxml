@@ -1,0 +1,36 @@
+<!--pages/register-detail/register-detail.wxml-->
+
+<!--  
+  报名详情
+  @Category 业务页
+  @Author Cphayim
+-->
+
+<view class="p-register-detail">
+  <ticket-card>
+    <!-- 头部插槽 -->
+    <view slot="header" class="card-header">
+      <view class="qrcode">
+        <image></image>
+      </view>
+      <view>
+        新车10元购1000元购车抵用券新车10元购1000元购车抵用券新车10元购1000元      
+      </view>
+    </view>
+    <!-- 尾部插槽 -->
+    <view slot="footer" class="card-footer">
+      <view class="item">
+        <view class="key">报名时间：</view>
+        <view class="val">123</view>
+      </view>
+      <view class="item">
+        <view class="key">有效期：</view>
+        <view class="val">123</view>
+      </view>
+      <view class="item">
+        <view class="key">状态：</view>
+        <view class="val">123</view>
+      </view>
+    </view>
+  </ticket-card>
+</view>
