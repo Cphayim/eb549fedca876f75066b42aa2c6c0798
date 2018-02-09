@@ -11,7 +11,8 @@ import { request } from '../utils/request.js'
 // const loginUrl = `${config.host}/wx/uc/login`
 
 // 开发
-const loginUrl = `https://api.cphayim.me/user/login`
+// const loginUrl = `https://api.cphayim.me/user/login`
+const loginUrl = `${config.host}/uc/customers/wxlogin`
 
 const __instance = (function () {
   let instance
