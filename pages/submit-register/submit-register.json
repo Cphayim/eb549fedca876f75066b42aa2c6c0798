@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "提交报名",
+  "navigationBarTitleText": "一键报名",
   "usingComponents": {
     "bot-btn": "/base/bot-btn/bot-btn",
     "form-item": "/base/form-item/form-item",

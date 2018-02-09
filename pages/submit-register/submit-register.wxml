@@ -6,43 +6,7 @@
   @Author Cphayim
 -->
 <wxs src="../../components/filter.wxs" module="filter" />
-
 <view class="p-sumit-order">
-  <view wx:if="{{needPay}}" class="m-valuation section">
-
-    <view class="pd">
-      <view class="title">
-        {{model.ProductName}}
-      </view>
-      <view class="price">
-        {{filter.priceFormat(model.Price)}}
-      </view>
-    </view>
-
-    <view>
-      <view class="item">
-        <form-item label="数量：" padding="25rpx 20rpx 25rpx 64rpx">
-          <view class="wrap">
-            <view class="tip">最多可买 {{maxBuyCount}}</view>
-            <num-box
-              max="{{maxBuyCount}}"
-              min="{{1}}"
-              value="{{model.Count}}"
-              bindchange="changeCount">
-            </num-box>
-          </view>
-        </form-item>
-      </view>
-      <view class="item">
-        <form-item label="小计：">
-          <view class="total-price">
-            {{filter.priceFormat(model.Price * model.Count)}}
-          </view>
-        </form-item>
-      </view>
-    </view>
-  </view>
-  <!-- /计价区域 -->
   <!-- 订单表单 -->
   <view class="m-order-form section">
     <!-- 通用 -->
@@ -168,9 +132,9 @@
       <form-item label="车牌号：">
         <view class="wrap">
           <input
-            value="{{model.License}}"
+            value="{{model.PlateNumber}}"
             bindinput="changeInput"
-            data-name="License"
+            data-name="PlateNumber"
             placeholder="请输入车牌号"
             placeholder-class="placeholder">
           </input>
@@ -184,5 +148,5 @@
   </view>
   <!-- /订单表单 -->
 
-  <bot-btn bindemittap="createOrder" text="提交订单" bgColor="#ff6633" fixed/>
+  <bot-btn bindemittap="createOrder" text="提交报名" bgColor="#ff6633" fixed/>
 </view>

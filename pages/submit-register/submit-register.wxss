@@ -1,6 +1,6 @@
 /* pages/submit-register/submit-register.wxss */
 page{
-  border-top: 1rpx solid #dfdfdf;
+  /* border-top: 1rpx solid #dfdfdf; */
 }
 
 .p-submit-order {

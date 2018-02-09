@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "支付成功",
+  "navigationBarTitleText": "",
   "usingComponents": {
     "ticket-card": "/base/ticket-card/ticket-card"
   }

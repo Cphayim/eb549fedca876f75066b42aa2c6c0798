@@ -9,16 +9,16 @@
 import config from '../../config.js'
 import Auth from '../../service/auth.js'
 import {
-  getInitOrderDetail,
   getInitRegisterDetail,
   getPres,
   getAfters,
   getInsurers,
   getCarCates,
   getOptions,
-  createForPay,
+  createRegPre,
+  createRegAfter,
 } from '../../service/submit-order.js'
-import { modal } from '../../utils/layer.js'
+import { toast, modal } from '../../utils/layer.js'
 
 Page({
   pageName: 'submit-order',
@@ -28,8 +28,6 @@ Page({
    */
   data: {
     id: 0,
-    // 是否需要支付
-    needPay: false,
     // 是否绑定了顾问
     bindEmployee: false,
     // 订单类型，1为售前，2为售后
@@ -119,7 +117,6 @@ Page({
   changeCarBrand(e) {
     const { column, value } = e.detail
     // colum 不为 0, 或当前车系为变动的车系
-    console.log(value)
     if (column || value === this.data.carBrandIndex) return
     // 更新车型 range
     const { carBrandsRange } = this.data
@@ -179,25 +176,30 @@ Page({
    * @param {object} e
    */
   createOrder(e) {
+    toast.loading('提交报名中')
     // 表单验证
     this._formValid().then(res => {
       const { model } = this.data
-      if (this.data.needPay) { // 支付类型
-        createForPay(model).then(res => {
-          const { data } = res
-          if (typeof data === 'number') { // 经销商未开通微信支付
-            modal.alert({ content: '商家尚未开通微信支付' })
-          } else { // 前往确认订单页面
-            wx.redirectTo({
-              url: `${config.pageOpt.getPageUrl('confirm-order')}?id=${data.Id}`
-            })
-          }
-        })
-      } else { // 报名类型
 
-      }
-
+      new Promise((resovle, reject) => {
+        if (this.data.orderType === 1) { // 售前报名
+          createRegPre(model).then(res => resovle(res))
+        } else { // 售后报名
+          createRegAfter(model).then(res => resovle(res))
+        }
+      }).then(res => {
+        toast.hide()
+        const { data } = res
+        if (typeof data === 'number') { // 经销商未开通微信支付
+          modal.alert({ content: '商家尚未开通微信支付' })
+        } else { // 前往确认订单页面
+          wx.redirectTo({
+            url: `${config.pageOpt.getPageUrl('success')}?id=${data.Id}&type=reg`
+          })
+        }
+      })
     }).catch(err => { // 捕获异常
+      toast.hide()
       console.warn(`createOrder Error: ${err}`)
     })
   },
@@ -250,15 +252,8 @@ Page({
    * @method _init
    */
   _init() {
-    new Promise((resolve, reject) => {
-      if (this.data.needPay) { // 支付类型
-        this._getInitOrderDetail()
-          .then(res => resolve())
-      } else { // 报名类型
-        this._getInitRegisterDetail()
-          .then(res => resolve())
-      }
-    }).then(() => this._initState())
+    this._getInitDetail()
+      .then(res => this._initState())
   },
 
   /**
@@ -269,12 +264,11 @@ Page({
   _initState() {
     // 是否已经绑定顾问
     const bindEmployee = !!this.data.model.EmployeeId,
-      { OrderType: orderType, OrderFrom: orderFrom } = this.data.model
+      { OrderType: orderType } = this.data.model
+    console.log(orderType)
     let employeeName
     if (orderType === 1) { // 售前
       employeeName = this.data.customer.PreEmployeeName
-    } else if (orderType === 2 && orderFrom === 10) { // 续保
-      employeeName = this.data.customer.InsurerEmployeeName
     } else { // 售后
       employeeName = this.data.customer.AfterEmployeeName
     }
@@ -290,47 +284,34 @@ Page({
   },
 
   /**
-   * 获取支付类型订单数据
+   * 获取订单数据
    * @private
    * @method _getInitOrderDetail
    * @return Promise.state
    */
-  _getInitOrderDetail() {
-    return getInitOrderDetail(this.data.id)
-      .then(res => {
-        const { article, model, customer, maxBuyCount } = res.data
-
-        /**默认值补充**/
-        model.IsLoan = true
-        model.BuyTimeRange = -1
-        /**默认值补充**/
-
-        this.setData({
-          article, model, customer, maxBuyCount
-        })
-        return Promise.resolve()
-      })
-  },
-
-  /**
-   * 获取报名类型订单数据
-   * @private
-   * @method _getInitRegisterDetail
-   * @return Promise.state
-   */
-  _getInitRegisterDetail() {
+  _getInitDetail() {
+    toast.loading('')
     return getInitRegisterDetail(this.data.id)
       .then(res => {
-        const { customer, Pre } = res.data
-
+        const { customer } = res.data
+        let model = null
+        if (res.data.type === 'Pre') { // 售前报名
+          model = res.data.pre
+          /**默认值补充**/
+          model.OrderType = 1
+        } else { // 售后报名
+          model = res.data.after
+          /**默认值补充**/
+          model.OrderType = 2
+        }
         /**默认值补充**/
         model.IsLoan = true
         model.BuyTimeRange = -1
         /**默认值补充**/
 
-        this.setData({
-          article, model, customer, maxBuyCount
-        })
+        setTimeout(_ => toast.hide(), 500)
+
+        this.setData({ model, customer })
         return Promise.resolve()
       })
   },
@@ -406,14 +387,13 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-    let { id, needPay } = options
-    needPay = needPay === 'false' ? false : true
+  onLoad(options) {
+    let { id } = options
     if (!id) {
       return modal.alert({ content: config.error.ERR_PARAM })
         .then(flag => wx.redirectTo({ url: config.pageOpt.getPageUrl('home') }))
     }
-    this.setData({ id, needPay })
+    this.setData({ id })
 
     if (config.pageOpt.getNeedAuth(this.pageName)) {
       const auth = new Auth()
@@ -428,49 +408,49 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow() {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage() {
 
   }
 })

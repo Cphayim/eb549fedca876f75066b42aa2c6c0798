@@ -1,7 +1,7 @@
 <!--pages/submit-order/submit-order.wxml-->
 
 <!--  
-  提交订单页面
+  提交支付订单页面
   @Category 业务页
   @Author Cphayim
 -->
@@ -9,17 +9,17 @@
 
 <view class="p-sumit-order">
   <!-- 计价区域
-    付费项目显示
+    支付类型显示
     注意限购
    -->
   <view class="m-valuation section">
 
     <view class="pd">
       <view class="title">
-        {{'新车10元购1000元购车抵用券新车10元购1000元购车抵用券新车10元购1000元购车抵用券'}}
+        {{model.ProductName}}
       </view>
       <view class="price">
-        {{filter.priceFormat(300, 1)}}
+        {{filter.priceFormat(model.Price)}}
       </view>
     </view>
 
@@ -27,19 +27,21 @@
       <view class="item">
         <form-item label="数量：" padding="25rpx 20rpx 25rpx 64rpx">
           <view class="wrap">
-            <view class="tip">最多可买 2</view>
+            <view class="tip">最多可买 {{maxBuyCount}}</view>
             <num-box
-              max="{{10}}"
+              max="{{maxBuyCount}}"
               min="{{1}}"
-              value="{{buyNum}}"
-              bindchange="numBoxChange">
+              value="{{model.Count}}"
+              bindchange="changeCount">
             </num-box>
           </view>
         </form-item>
       </view>
       <view class="item">
         <form-item label="小计：">
-          <text class="total-price">￥19.8</text>
+          <view class="total-price">
+            {{filter.priceFormat(model.Price * model.Count)}}
+          </view>
         </form-item>
       </view>
     </view>
@@ -47,15 +49,22 @@
   <!-- /计价区域 -->
   <!-- 订单表单 -->
   <view class="m-order-form section">
-
+    <!-- 通用 -->
+    <block>
     <view class="item">
       <form-item label="顾问：" arrow>
         <view class="wrap">
-          <input 
-            disabled 
-            placeholder="请选择您的专属顾问"
-            placeholder-class="placeholder">
-          </input>
+          <!-- 展示用 input -->
+          <picker value="{{employeeIndex}}" 
+            range="{{employeeList}}"
+            range-key="Name"
+            bindchange="changeEmployee"
+            disabled="{{bindEmployee}}"
+             >
+            <view class="picker">
+              {{ employeeName || '请选择专属顾问' }}
+            </view>
+          </picker>
         </view>
       </form-item>
     </view>
@@ -63,6 +72,9 @@
       <form-item label="姓名：">
         <view class="wrap">
           <input
+            value="{{model.Name}}"
+            bindinput="changeInput"
+            data-name="Name"
             placeholder="请输入姓名"
             placeholder-class="placeholder">
           </input>
@@ -73,36 +85,108 @@
       <form-item label="手机号：">
         <view class="wrap">
           <input 
+            value="{{model.MobilePhone}}"
+            bindinput="changeInput"
+            data-name="MobilePhone"
             placeholder="请输入手机号"
             placeholder-class="placeholder">
           </input>
         </view>
       </form-item>
     </view>
+    </block>
+    <!-- /通用 -->
+
+    <!-- 售前类型 -->
+    <block wx:if="{{orderType === 1}}">
     <view class="item">
       <form-item label="意向车型：" >
         <view class="wrap">
-          <input></input>
+          <picker 
+            mode="multiSelector"
+            range="{{carBrandsRange}}"
+            range-key="Name"
+            bindcolumnchange="changeCarBrand"
+            bindchange="changeCarModel"
+            >
+            <view class="picker">
+              {{ carModelStr || '请选择车型' }}
+            </view>
+          </picker>
         </view>
       </form-item>
     </view>
     <view class="item">
       <form-item label="购车方式：" >
         <view class="wrap">
-          <input></input>
+          <picker 
+            range="{{buyWayRange}}"
+            range-key="Name"
+            bindchange="changeBuyWayRange"
+            >
+            <view class="picker">
+              {{ buyWayRange[buyWayRangeIndex].Name || '请选择购车方式' }}
+            </view>
+          </picker>
         </view>
       </form-item>
     </view>
     <view class="item">
       <form-item label="购车时间：" >
         <view class="wrap">
-          <input></input>
+          <picker 
+            range="{{buyTimeRange}}"
+            range-key="Name"
+            bindchange="changeBuyTimeRange"
+            >
+            <view class="picker">
+              {{ buyTimeRange[buyTimeRangeIndex].Name || '请选择购车时间' }}
+            </view>
+          </picker>
         </view>
       </form-item>
     </view>
+    </block>
+    <!-- /售前类型 -->
+
+    <!-- 售后类型 -->
+    <block wx:elif="{{orderType === 2}}">
+    <view class="item">
+      <form-item label="爱车车型：" >
+        <view class="wrap">
+          <picker 
+            mode="multiSelector"
+            range="{{carBrandsRange}}"
+            range-key="Name"
+            bindcolumnchange="changeCarBrand"
+            bindchange="changeCarModel"
+            >
+            <view class="picker">
+              {{ carModelStr || '请选择车型' }}
+            </view>
+          </picker>
+        </view>
+      </form-item>
+    </view>
+    <view class="item">
+      <form-item label="车牌号：">
+        <view class="wrap">
+          <input
+            value="{{model.License}}"
+            bindinput="changeInput"
+            data-name="License"
+            placeholder="请输入车牌号"
+            placeholder-class="placeholder">
+          </input>
+        </view>
+      </form-item>
+    </view>
+    </block>
+    <!-- /售后类型 -->
+
 
   </view>
   <!-- /订单表单 -->
 
-  <bot-btn text="提交订单" bgColor="#ff6633" fixed/>
+  <bot-btn bindemittap="createOrder" text="提交订单" bgColor="#ff6633" fixed/>
 </view>
