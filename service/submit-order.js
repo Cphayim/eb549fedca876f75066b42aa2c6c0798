@@ -6,15 +6,29 @@ import { request } from '../utils/request.js'
 import config from '../config.js'
 
 /**
- * 获取 提交订单数据
- * @function getGoodsDetail
+ * 获取支付类型订单初始数据
+ * @function getInitOrderDetail
  * @param {number} id
  * @return Promise.state
  */
-export function getSubmitDetail(id = 0) {
+export function getInitOrderDetail(id = 0) {
   const data = { articleId: id }
   return request({
     url: `${config.host}/ApiOrders/SubmitDetail`,
+    data
+  })
+}
+
+/**
+ * 获取报名类型订单初始数据
+ * @function getInitRegisterDetail
+ * @param {number} id
+ * @return Promise.state
+ */
+export function getInitRegisterDetail(id = 0) {
+  const data = {id : id}
+  return request({
+    url: `${config.host}/ApiArticles/SubmitEnroll`,
     data
   })
 }
@@ -72,8 +86,50 @@ export function getCarCates(type = 'Pre') {
  * @function getOptions
  * @return Promise.state
  */
-export function getOptions(){
+export function getOptions() {
   return request({
     url: `${config.host}/ApiCustomers/GetOptions`
+  })
+}
+
+/**
+ * 创建支付订单
+ * @function createForPay
+ * @param {object} model
+ * @return Promise.state
+ */
+export function createForPay(model) {
+  const data = model
+  return request({
+    url: `${config.host}/Biz/Orders/CreateForPay?isXCX=true`,
+    data
+  })
+}
+
+/**
+ * 创建报名订单（售前）
+ * @function createRegPre
+ * @param {object} model
+ * @return Promise.state
+ */
+export function createRegPre(model) {
+  const data = model
+  return request({
+    url: `${config.host}/Biz/OpportunityPres/Create?isXCX=true`,
+    data
+  })
+}
+
+/**
+ * 创建报名订单（售后）
+ * @function createRegAfter
+ * @param {object} model
+ * @return Promise.state
+ */
+export function createRegAfter(model) {
+  const data = model
+  return request({
+    url: `${config.host}/Biz/OpportunityAfters/Create?isXCX=true`,
+    data
   })
 }
