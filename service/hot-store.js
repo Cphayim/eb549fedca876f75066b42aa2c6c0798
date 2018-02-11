@@ -4,14 +4,14 @@
  */
 
 import config from '../config.js'
-import {request} from '../utils/request.js'
+import { request } from '../utils/request.js'
 
 /**
  * 获取热卖商城列表 Tab 头 数据
  * @function getBannerList
  * @return Promise.state
  */
-export function getHotTabInfo(){
+export function getHotTabInfo() {
   return request({
     url: `${config.host}/ApiArticles/ReadForSubKeys`
   })
@@ -25,7 +25,7 @@ export function getHotTabInfo(){
  * @param {string} opts.KeyStr
  * @return Promise.state
  */
-export function getGoodsList({PageSize = 10, KeyStr = ''}) {
+export function getGoodsList({ PageSize = 10, KeyStr = '' }) {
   const data = {
     PageSize,
     PageNo: 1,
@@ -37,5 +37,16 @@ export function getGoodsList({PageSize = 10, KeyStr = ''}) {
   return request({
     url: `${config.host}/ApiArticles/ReadForShop`,
     data
+  })
+}
+
+/**
+ * 获取是否有未完成订单
+ * @function getHasOrder
+ * @return Promise.state
+ */
+export function getHasOrder() {
+  return request({
+    url: `${config.host}/ApiOrders/HasOrder`
   })
 }

@@ -3,5 +3,6 @@
   "usingComponents": {
     "hd-label": "/base/hd-label/hd-label",
     "tab-btn": "/components/tab-btn/tab-btn"
-  }
+  },
+  "enablePullDownRefresh": true
 }

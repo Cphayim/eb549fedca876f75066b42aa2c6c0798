@@ -11,7 +11,7 @@ import { request } from '../utils/request.js'
  * @function getDealerInfo
  * @return Promise.state
  */
-export function getDealerInfo(){
+export function getDealerInfo() {
   const data = {}
   return request({
     url: `${config.host}/Org/Tenants/Detail`,
@@ -30,11 +30,13 @@ export function getBannerList() {
     RecommendType: 1,
     Status: 1,
     OrderBy: 'Status asc, SortIndex asc, Id DESC, PublishTime DESC',
-    TenantId: 340
+    TenantId: 340,
+    Source: 1
   }
 
   return request({
-    url: `${config.host}/Car/HotRecommends/Read`,
+    url: `${config.host}/Car/HotRecommends/Read?isXCX=true
+    `,
     data
   })
 }
@@ -50,10 +52,9 @@ export function getTopGoodsList(size = 3) {
     PageNo: 1,
     OrderBy: 'IsTop DESC,SortIndex ASC,IsEnd ASC,CreateTime DESC',
     TenantId: 340,
-    CatalogKey: 'ShopAll',
-    KeyStr: 'Shop_NewCar,Shop_UsedCar,Shop_Product,Shop_Service,Shop_Insurance'
+    CatalogKey: 'ShopAll'
   }
-  
+
   return request({
     url: `${config.host}/ApiArticles/ReadForShop`,
     data

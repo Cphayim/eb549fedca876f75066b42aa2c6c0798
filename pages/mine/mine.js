@@ -30,7 +30,7 @@ Page({
     const item = this.data.enrolls[index]
     const jsonData = JSON.stringify({
       Id: item.Id,
-      QRCodeType: item.QrCodeType,
+      Type: item.QRCodeType,
       OrderItemId: item.OrderItemId
     })
     wx.navigateTo({
@@ -43,7 +43,7 @@ Page({
    * @method _init
    */
   _init() {
-    this._getMyInfo()
+    return this._getMyInfo()
   },
 
   /**
@@ -52,7 +52,7 @@ Page({
    */
   _getMyInfo() {
     toast.loading()
-    getMyInfo()
+    return getMyInfo()
       .then(({ data }) => {
         toast.hide()
         const { customer, enrolls } = data
@@ -105,7 +105,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh() {
-
+    this._init().then(res => wx.stopPullDownRefresh())
   },
 
   /**

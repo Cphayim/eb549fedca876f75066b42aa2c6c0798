@@ -12,7 +12,7 @@ import {
   getTopGoodsList,
   getDealerInfo
 } from '../../service/home.js'
-
+import { toast, modal } from '../../utils/layer.js'
 
 Page({
   pageName: 'home',
@@ -30,10 +30,11 @@ Page({
    * @private
    * @method _init
    */
-  _init(){
-    this._getBannerList()
-    this._getTopGoodsList()
-    this._getDealerInfo()
+  _init() {
+    toast.loading()
+    const arr = [this._getBannerList(), this._getTopGoodsList(), this._getDealerInfo()]
+    return Promise.all(res => toast.hide())
+      .catch(err => toast.hide())
   },
 
   /**
@@ -42,7 +43,7 @@ Page({
    * @method _getBannerList
    */
   _getBannerList() {
-    getBannerList()
+    return getBannerList()
       .then(res => {
         const { data } = res
         const bannerList = data.map((item, index) => {
@@ -51,7 +52,7 @@ Page({
             title: item.Title,
             imgUrl: item.TitleImg,
             // 路由跳转
-            route: ''
+            route: `${config.pageOpt.getPageUrl('store-detail')}?id=${item.FromId}`
           }
         })
         this.setData({ bannerList })
@@ -64,7 +65,7 @@ Page({
    * @method _getTopGoodsList
    */
   _getTopGoodsList() {
-    getTopGoodsList()
+    return getTopGoodsList()
       .then(res => {
         const { data } = res
         this.setData({
@@ -79,7 +80,7 @@ Page({
    * @method _getDealerInfo
    */
   _getDealerInfo() {
-    getDealerInfo()
+    return getDealerInfo()
       .then(res => {
         const { data } = res
         this.setData({
@@ -136,7 +137,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh() {
-
+    this._init().then(res => wx.stopPullDownRefresh())
   },
 
   /**

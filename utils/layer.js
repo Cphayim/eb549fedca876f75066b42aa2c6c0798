@@ -97,7 +97,7 @@ function _showModal({
   cancelText = '取消',
   cancelColor = '#333',
   confirmText = '确认',
-  confirmColor = '#3CC51F'
+  confirmColor = '#54b4ef'
 }) {
   // 隐藏 toast 层
   toast.hide()

@@ -10,7 +10,7 @@
 	"compileType": "miniprogram",
 	"appid": "wxce8d2df41f6db25d",
 	"projectname": "%E4%BA%91%E8%BD%A6%E5%95%86%E6%8E%8C%E4%B8%8A%E5%BA%97",
-	"libVersion": "1.7.2",
+	"libVersion": "1.9.1",
 	"condition": {
 		"search": {
 			"current": -1,
@@ -20,9 +20,121 @@
 			"current": -1,
 			"list": []
 		},
+		"game": {
+			"list": []
+		},
 		"miniprogram": {
 			"current": -1,
-			"list": []
+			"list": [
+				{
+					"id": -1,
+					"name": "热卖商城",
+					"pathName": "pages/hot-store/hot-store",
+					"query": ""
+				},
+				{
+					"id": 1,
+					"name": "热卖商城-详情",
+					"pathName": "pages/store-detail/store-detail",
+					"query": "id=108556"
+				},
+				{
+					"id": 2,
+					"name": "提交订单-支付售前",
+					"pathName": "pages/submit-order/submit-order",
+					"query": "id=108529"
+				},
+				{
+					"id": 3,
+					"name": "确认订单",
+					"pathName": "pages/confirm-order/confirm-order",
+					"query": "id=41425"
+				},
+				{
+					"id": -1,
+					"name": "订单详情",
+					"pathName": "pages/order-detail/order-detail",
+					"query": "id=108529"
+				},
+				{
+					"id": -1,
+					"name": "支付/报名成功",
+					"pathName": "pages/success/success",
+					"query": "id=108529"
+				},
+				{
+					"id": -1,
+					"name": "我的",
+					"pathName": "pages/mine/mine",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "报名详情",
+					"pathName": "pages/register-detail/register-detail",
+					"query": ""
+				},
+				{
+					"id": 8,
+					"name": "提交订单-报名售前",
+					"pathName": "pages/submit-register/submit-register",
+					"query": "id=108559"
+				},
+				{
+					"id": 9,
+					"name": "提交订单-支付售后",
+					"pathName": "pages/submit-order/submit-order",
+					"query": "id=108553"
+				},
+				{
+					"id": 10,
+					"name": "提交订单-支付续保",
+					"pathName": "pages/submit-order/submit-order",
+					"query": "id=108562"
+				},
+				{
+					"id": 11,
+					"name": "提交订单-报名售后",
+					"pathName": "pages/submit-register/submit-register",
+					"query": "id=108550"
+				},
+				{
+					"id": 12,
+					"name": "报名成功",
+					"pathName": "pages/success/success",
+					"query": "id=98804&from=reg&orderType=1"
+				},
+				{
+					"id": 13,
+					"name": "报名券详情-免费",
+					"pathName": "pages/enroll-detail/enroll-detail",
+					"query": "jsonData={\"Id\":82736,\"Type\":2,\"OrderItemId\":null}"
+				},
+				{
+					"id": -1,
+					"name": "网页",
+					"pathName": "pages/web-view/web-view",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "报名券详情-付费",
+					"pathName": "pages/enroll-detail/enroll-detail",
+					"query": "jsonData={\"Id\":41425,\"Type\":4,\"OrderItemId\":46321}"
+				},
+				{
+					"id": 16,
+					"name": "订单详情",
+					"pathName": "pages/order-detail/order-detail",
+					"query": "id=41430"
+				},
+				{
+					"id": 17,
+					"name": "支付成功",
+					"pathName": "pages/success/success",
+					"query": "id=41429&type=order&orderType=4"
+				}
+			]
 		}
 	}
 }

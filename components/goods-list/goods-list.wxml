@@ -35,7 +35,7 @@
       <!-- /标题 -->
       <view class="wrap {{m1.getStatusClass(item.ArticleStatus)}}">
         <!-- 价格 -->
-        <view class="price">{{filter.priceFormat(item.ArticlePrice)}}</view>
+        <view class="price">{{filter.priceFormat(item.NeedPay ? item.ArticlePrice : 0)}}</view>
         <!-- /价格 -->
         <!-- 按钮 -->
         <view class="btn">{{m1.getStatusBtnName(item.ArticleStatus)}}</view>

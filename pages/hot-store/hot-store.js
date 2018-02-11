@@ -8,10 +8,11 @@
 
 import config from '../../config.js'
 import Auth from '../../service/auth.js'
-import { toast } from '../../utils/layer.js'
+import { toast, modal } from '../../utils/layer.js'
 import {
   getHotTabInfo,
-  getGoodsList
+  getGoodsList,
+  getHasOrder,
 } from '../../service/hot-store.js'
 import { $$ } from '../../utils/wxml-query.js'
 
@@ -31,9 +32,14 @@ Page({
   },
 
   _init() {
-    this._getHotTabInfo().then(_ => {
-      this._getAllListData()
-    })
+    toast.loading()
+    return this._getHotTabInfo()
+      .then(_ => {
+        this._getHasOrder()
+        return this._getAllListData()
+      })
+      .then(_ => toast.hide())
+      .catch(err => toast.hide())
   },
 
   /**
@@ -47,10 +53,9 @@ Page({
   },
   _getAllListData() {
     const queue = this.data.tabKeys.map(key => this._getGoodsList({ KeyStr: key }))
-    Promise.all(queue)
+    return Promise.all(queue)
       .then(resAll => {
         this.setData({ listsData: resAll }, () => { this._setScrollViewHeight() })
-        toast.hide()
       })
   },
 
@@ -61,7 +66,6 @@ Page({
    * @return Promise.state
    */
   _getHotTabInfo() {
-    toast.loading()
     return new Promise((resolve, reject) => {
       getHotTabInfo()
         .then(res => {
@@ -80,6 +84,29 @@ Page({
   },
 
   /**
+   * 获取是否有未完成订单
+   * @private
+   * @method _getHasOrder
+   */
+  _getHasOrder() {
+    return getHasOrder()
+      .then(({ data }) => {
+        if (data && typeof data === 'number') {
+          modal.confirm({
+            content: '您有一笔未完成订单，是否进入',
+            cancelText: '不进入',
+            confirmText: '进入'
+          }).then(flag => {
+            if (!flag) return
+            wx.navigateTo({
+              url: `${config.pageOpt.getPageUrl('order-detail')}?id=${data}`,
+            })
+          })
+        }
+      })
+  },
+
+  /**
    * 选择 Tab
    * 来自 tab-bar 组件触发
    * @method selectTab
@@ -89,6 +116,9 @@ Page({
     this.setData({ activeIndex: e.detail.index })
   },
 
+  /**
+   * 设置滚动容器高度
+   */
   _setScrollViewHeight() {
     $$('.tab-view-wrap')
       .then(res => {
@@ -143,7 +173,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh() {
-
+    this._init().then(res => wx.stopPullDownRefresh())
   },
 
   /**

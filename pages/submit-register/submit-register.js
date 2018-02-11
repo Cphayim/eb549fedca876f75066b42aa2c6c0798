@@ -180,9 +180,9 @@ Page({
     // 表单验证
     this._formValid().then(res => {
       const { model } = this.data
-
+      const orderType = this.data.orderType
       new Promise((resovle, reject) => {
-        if (this.data.orderType === 1) { // 售前报名
+        if (orderType === 1) { // 售前报名
           createRegPre(model).then(res => resovle(res))
         } else { // 售后报名
           createRegAfter(model).then(res => resovle(res))
@@ -190,13 +190,10 @@ Page({
       }).then(res => {
         toast.hide()
         const { data } = res
-        if (typeof data === 'number') { // 经销商未开通微信支付
-          modal.alert({ content: '商家尚未开通微信支付' })
-        } else { // 前往确认订单页面
-          wx.redirectTo({
-            url: `${config.pageOpt.getPageUrl('success')}?id=${data.Id}&type=reg`
-          })
-        }
+        console.log(data)
+        wx.redirectTo({
+          url: `${config.pageOpt.getPageUrl('success')}?id=${data.model.Id}&from=reg&orderType=${orderType}`
+        })
       })
     }).catch(err => { // 捕获异常
       toast.hide()

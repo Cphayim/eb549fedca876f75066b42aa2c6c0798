@@ -20,7 +20,9 @@
     bindchange='_currentChange'
     >
     <block wx:for='{{list}}' wx:key='id'>
-      <swiper-item>
+      <swiper-item
+        catchtap="link"
+        data-route="{{item.route}}">
         <image src='{{item.imgUrl}}' class='image' data-title='{{item.title}}' />
       </swiper-item>
     </block>

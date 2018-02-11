@@ -50,6 +50,12 @@ Component({
     _currentChange(e) {
       const { current, source } = e.detail
       // console.log(current, source)
+    },
+    link(e) {
+      const { route } = e.currentTarget.dataset
+      wx.navigateTo({
+        url: route,
+      })
     }
   }
 })

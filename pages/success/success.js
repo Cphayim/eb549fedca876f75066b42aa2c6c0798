@@ -28,18 +28,18 @@ Page({
   },
 
   /**
-   * 前往订单详情
+   * 前往详情
    * @method goDetail
    */
   goDetail() {
-    let url = ''
-    if (this.data.type === 'reg') { // 报名详情
-      url = config.pageOpt.getPageUrl('register-detail')
-    } else { // 订单详情
-      url = config.pageOpt.getPageUrl('order-detail')
-    }
-    url += `?id=${this.data.id}`
-    wx.redirectTo({ url })
+    const { id, orderType } = this.data
+    const jsonData = JSON.stringify({
+      Id: id,
+      Type: orderType
+    })
+    wx.redirectTo({
+      url: `${config.pageOpt.getPageUrl('enroll-detail')}?jsonData=${jsonData}`
+    })
   },
 
   /**
@@ -48,17 +48,17 @@ Page({
    * @method _init
    */
   _init() {
-    console.log('开始处理页面逻辑')
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    const { id, type } = options
-    this.setData({ id, type })
+    const { id, from, orderType } = options
+    this.setData({ id, from, orderType })
     let title
-    if (type === 'reg') {
+    if (from === 'reg') {
       title = '报名成功'
     } else {
       title = '支付成功'

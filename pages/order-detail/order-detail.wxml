@@ -8,35 +8,73 @@
 
 <view class="p-order-detail">
   <!-- 状态: 未支付时显示 -->
-  <view class="m-order-status section pd">
+  <view wx:if="{{order.Status === 0}}" class="m-order-status section pd">
     <view class="count-down-box">
-      <view>支付剩余时间</view>
-      <view class="count-down">14:55</view>
+      <!-- <view>支付剩余时间</view> -->
+      <!-- <view class="count-down">14:55</view> -->
+      <view class="bold">等待支付...</view>
     </view>
     <view class="btn-group">
-      <view class="cancel-order btn" hover-class='hover'>取消订单</view>
-      <view class="wx-pay btn" hover-class='hover'>微信支付</view>
+      <view class="btn" 
+        hover-class='hover'
+        bindtap="closeOrder">
+        取消订单
+      </view>
+      <view class="green btn" 
+        hover-class='hover'
+        bindtap="wxPay">
+        微信支付
+      </view>
     </view>
   </view>
-  <!-- 状态 -->
+  <!-- 状态: 未支付时显示 -->
+
+  <!-- 状态：订单取消时 -->
+  <view wx:if="{{order.Status === 99}}" class="m-order-status section pd">
+    <view class="count-down-box">
+      <view class="bold">订单已取消</view>
+    </view>
+    <view class="btn-group">
+      <view class="btn" 
+        hover-class='hover'
+        bindtap="goHome">返回首页</view>
+    </view>
+  </view>
+  <!-- 状态：订单取消时 -->
+
+  <!-- 状态：订单已支付 -->
+  <view wx:if="{{order.Status === 1}}" class="m-order-status section pd">
+    <view class="count-down-box">
+      <view class="bold">支付成功</view>
+    </view>
+    <view class="btn-group">
+      <view class="btn" 
+        hover-class='hover'
+        bindtap="goHome" >返回首页</view>
+      <view class="green btn" hover-class='hover' bindtap="goDetail">查看详情</view>
+    </view>
+  </view>
+  <!-- 状态：订单已支付 -->
 
   <!-- 商品详情 -->
   <view class="m-goods-detail section">
     <view class="hd pd">
       <view class="label">商品详情</view>
-      <view class="label-count">共计2件商品</view>
+      <view class="label-count">共计 {{order.Count? order.Count: '1'}} 件商品</view>
     </view>
     <view class="bd pd">
       <view class="title">
-        新车10元购1000元购车抵用券新车10元购1000元购车抵用券新车10元购1000元购车抵用券      
+        {{order.ProductName}}
       </view>
       <view class="wrap">
-        <view class="price">￥9.9</view>
-        <view class="count">x2</view>
+        <view class="price">{{order.Price? '￥'+ order.Price: ''}}</view>
+        <view class="count">{{order.Count? 'x'+ order.Count: ''}}</view>
       </view>
     </view>
     <view class="ft pd">
-      <view>合计金额：<text class="total-price">￥19.8</text></view>
+      <view>合计金额：
+        <text class="total-price">{{order.Amount? '￥'+ order.Amount: ''}}</text>
+      </view>
     </view>
   </view>
   <!-- /商品详情 -->
@@ -45,19 +83,19 @@
   <view class="m-order-detail section pd">
     <view class="item">
       <view class="key">商户订单号：</view>
-      <view class="value">123456789987</view>
+      <view class="value">{{order.No}}</view>
     </view>
-    <view class="item">
+    <view wx:if="{{order.TradeNo}}" class="item">
       <view class="key">微信支付单号：</view>
-      <view class="value">123456789987123456</view>
+      <view class="value">{{order.TradeNo}}</view>
     </view>
     <view class="item">
       <view class="key">下单时间：</view>
-      <view class="value">2015/11/18 09:00</view>
+      <view class="value">{{order.CreateTime}}</view>
     </view>
     <view class="item">
       <view class="key">支付时间：</view>
-      <view class="value">2015/11/18 09:00</view>
+      <view class="value">{{PayTime || '未支付'}}</view>
     </view>
   </view>
   <!-- /订单详情 -->

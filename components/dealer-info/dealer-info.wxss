@@ -38,9 +38,9 @@
 }
 .position .position-icon{
   position: absolute;
-  left: -30rpx;top: 0;
+  left: -36rpx;top: 2rpx;
   width: 24rpx;
-  height: 30rpx;
+  height: 28rpx;
 }
 
 .call{

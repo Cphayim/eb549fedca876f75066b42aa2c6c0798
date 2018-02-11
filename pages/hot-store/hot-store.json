@@ -3,5 +3,6 @@
   "usingComponents": {
     "tab-bar": "/base/tab-bar/tab-bar",
     "goods-list": "/components/goods-list/goods-list"
-  }
+  },
+  "enablePullDownRefresh": true
 }

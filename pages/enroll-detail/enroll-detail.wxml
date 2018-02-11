@@ -11,26 +11,62 @@
     <!-- 头部插槽 -->
     <view slot="header" class="card-header">
       <view class="qrcode">
-        <image></image>
+        <image src="{{enrollDetail.QRCode}}"></image>
       </view>
       <view>
-        新车10元购1000元购车抵用券新车10元购1000元购车抵用券新车10元购1000元      
+        {{enrollDetail.FromTitle}}   
       </view>
     </view>
     <!-- 尾部插槽 -->
     <view slot="footer" class="card-footer">
-      <view class="item">
-        <view class="key">报名时间：</view>
-        <view class="val">123</view>
-      </view>
-      <view class="item">
-        <view class="key">有效期：</view>
-        <view class="val">123</view>
-      </view>
-      <view class="item">
-        <view class="key">状态：</view>
-        <view class="val">123</view>
-      </view>
+      <!-- 支付 -->
+      <block wx:if="{{needPay}}">
+        <view class="item">
+          <view class="key">订单号：</view>
+          <view class="val">{{enrollDetail.OrderNo}}</view>
+        </view>
+        <view class="item">
+          <view class="key">单价：</view>
+          <view class="val">{{enrollDetail.Price}}</view>
+        </view>
+        <view class="item">
+          <view class="key">数量：</view>
+          <view class="val">{{enrollDetail.Count}}</view>
+        </view>
+        <view class="item">
+          <view class="key">总价：</view>
+          <view class="val">{{enrollDetail.Amount}}</view>
+        </view>
+        <view class="item">
+          <view class="key">下单时间：</view>
+          <view class="val">{{enrollDetail.CreateTime}}</view>
+        </view>
+      </block>
+      <!-- /支付 -->
+
+      <!-- 报名 -->
+      <block wx:else>
+        <view class="item">
+          <view class="key">报名时间：</view>
+          <view class="val">{{enrollDetail.CreateTime}}</view>
+        </view>
+      </block>
+      <!-- /报名 -->
+
+      <!-- 通用 -->
+      <block>
+        <view class="item">
+          <view class="key">有效期：</view>
+          <view class="val">{{enrollDetail.ValidTimeStr}}</view>
+        </view>
+        <view class="item">
+          <view class="key">状态：</view>
+          <view wx:if="{{enrollDetail.EnrollStatus === 0}}" class="val">未使用</view>
+          <view wx:elif="{{enrollDetail.EnrollStatus === 1}}" class="val">已使用</view>
+          <view wx:else="{{enrollDetail.EnrollStatus === 2}}" class="val">已过期</view>
+        </view>
+      </block>
+      <!-- /通用 -->
     </view>
   </ticket-card>
 </view>

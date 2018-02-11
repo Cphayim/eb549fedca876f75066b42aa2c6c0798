@@ -9,7 +9,8 @@
     "pages/confirm-order/confirm-order",
     "pages/order-detail/order-detail",
     "pages/enroll-detail/enroll-detail",
-    "pages/success/success"
+    "pages/success/success",
+    "pages/web-view/web-view"
   ],
   "window": {
     "backgroundColor": "#f6f6f6",

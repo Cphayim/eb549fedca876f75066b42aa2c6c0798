@@ -18,6 +18,11 @@
   font-weight: bold;
 }
 
+.m-order-status .count-down-box .bold {
+  font-size: 36rpx;
+  font-weight: bold;
+}
+
 .m-order-status .btn-group {
   display: flex;
   margin: 20rpx 0;
@@ -36,7 +41,7 @@
   color: #333;
 }
 
-.m-order-status .btn-group .wx-pay {
+.m-order-status .btn-group .green {
   border-color: #1fad19;
   color: #fff;
   background-color: #1fad19;

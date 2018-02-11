@@ -89,7 +89,7 @@
   <!-- 底部按钮 -->
   <block wx:if="{{currentState === 0}}">
     <bot-btn
-      text="倒计时: {{filter.countDownFormat(beginCountDown)}}"
+      text="开抢倒计时: {{filter.countDownFormat(beginCountDown)}}"
       bg-color="#54b4ef"
       fixed>
     </bot-btn>
