@@ -23,9 +23,11 @@ function priceFormat(price, dec) {
  * @return {string}
  */
 function countDownFormat(ts) {
-  if (ts >= 100 * 60 * 60) {
-    return '99:99:99';
+  // 大于1天显示天
+  if (ts >= 24 * 60 * 60) {
+    return ~~(25 * 60 * 60 / 86400) + ' 天'
   }
+  // 小于 0
   else if (ts <= 0) {
     return '00:00:00';
   }
@@ -36,13 +38,25 @@ function countDownFormat(ts) {
   return nf(h) + ':' + nf(m) + ':' + nf(s);
 }
 
+/**
+ * 数字格式化
+ */
 function nf(n) {
   n = n.toString()
   return n[1] ? '' + n : '0' + n
 }
 
+function substr(str, startIndex, length){
+  console.log(str)
+  if(!str || typeof str !== 'string'){
+    return ''
+  }
+  return str.slice(startIndex, length)
+}
+
 module.exports = {
   numberFormat: nf,
   priceFormat: priceFormat,
-  countDownFormat: countDownFormat
+  countDownFormat: countDownFormat,
+  substr: substr
 }
