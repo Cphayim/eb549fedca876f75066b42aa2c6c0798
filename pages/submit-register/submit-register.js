@@ -320,12 +320,12 @@ Page({
    */
   _getEmployees() {
     new Promise((resolve, reject) => {
-      const { OrderType: orderType, OrderFrom: orderFrom } = this.data.model
+      const { OrderType: orderType, AfterFrom: afterFrom } = this.data.model
       if (orderType === 1) {
         // 售前业务
         getPres().then(res => resolve(res))
       }
-      else if (orderType === 2 && orderFrom === 10) {
+      else if (orderType === 2 && afterFrom === 6) {
         // 续保业务
         getInsurers().then(res => resolve(res))
       }
