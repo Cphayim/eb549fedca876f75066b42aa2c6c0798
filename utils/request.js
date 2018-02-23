@@ -83,8 +83,9 @@ export function request({
     /****/
     if (err.errorcode === 40003) { // 重新登录
       const url = `/${getCurrentPages().pop().route}`
-      console.log(url)
+      // 清除 session
       wx.removeStorageSync('session_id')
+      // 重定向到当前页面
       wx.redirectTo({ url })
     } else { // 弹框提示
       modal.alert({ content: errormsg })
