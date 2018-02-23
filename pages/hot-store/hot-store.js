@@ -38,7 +38,7 @@ Page({
         this._getHasOrder()
         return this._getAllListData()
       })
-      .then(_ => toast.hide())
+      .then(_ => setTimeout(() => toast.hide(), 1000))
       .catch(err => toast.hide())
   },
 
