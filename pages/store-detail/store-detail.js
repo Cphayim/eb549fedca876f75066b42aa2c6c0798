@@ -190,15 +190,14 @@ Page({
    * @param {object} e
    */
   submit(e) {
-    if (this.data.currentState !== 1 && this.data.disabled) return
+    if (this.data.currentState !== 1 || this.data.disabled) return
     // 判断是支付类型还是报名类型
     let url = ''
     if (this.data.needPay) {
-      url = `${config.pageOpt.getPageUrl('submit-order') }?id=${this.data.id }`
-    }else{
+      url = `${config.pageOpt.getPageUrl('submit-order')}?id=${this.data.id}`
+    } else {
       url = `${config.pageOpt.getPageUrl('submit-register')}?id=${this.data.id}`
     }
-
     wx.navigateTo({ url })
   },
 
