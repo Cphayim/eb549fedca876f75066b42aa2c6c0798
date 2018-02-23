@@ -79,7 +79,7 @@
     <view class="goods-introduce pd">
       <view class="expiry">
         有效期: 
-        <text>{{detail.model.ValidBeginTime}} - {{detail.model.ValidEndTime}}</text>
+        <text>{{filter.substr(detail.model.ValidBeginTime,0,10)}} - {{filter.substr(detail.model.ValidEndTime,0,10)}}</text>
       </view>
       <rich-text nodes="{{detail.model.TextReplace}}"></rich-text>
     </view>
