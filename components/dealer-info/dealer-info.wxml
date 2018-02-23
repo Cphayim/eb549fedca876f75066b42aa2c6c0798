@@ -8,7 +8,8 @@
 <view class="m-dealer-info">
   <view class="wrapper">
     <view class="dealer-l">
-      <view class="position">
+      <view class="position"
+        bindtap="openMap">
         <image class="position-icon" src="./icons/position.png"></image>
         {{info.Address}}
       </view>
