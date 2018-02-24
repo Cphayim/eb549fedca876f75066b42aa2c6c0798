@@ -35,8 +35,7 @@ export function getBannerList() {
   }
 
   return request({
-    url: `${config.host}/Car/HotRecommends/Read?isXCX=true
-    `,
+    url: `${config.host}/Car/HotRecommends/Read?isXCX=true`,
     data
   })
 }
