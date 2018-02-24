@@ -6,7 +6,7 @@
  * @Author   Cphayim
  */
 import { toast, modal } from '../../utils/layer.js'
-import { getGoodsDetail } from '../../service/store-detail.js'
+import { getGoodsDetail, getHasOrder } from '../../service/store-detail.js'
 import config from '../../config.js'
 import Auth from '../../service/auth.js'
 
@@ -39,20 +39,28 @@ Page({
     disabled: false
   },
 
+  /**
+   * 初始化
+   * @private
+   * @method _init
+   * @return Promise.state
+   */
   _init() {
-    this._getGoodsDetail()
+    return this._getGoodsDetail()
   },
 
   /**
    * 获取商品详情数据
    * @private
    * @method _getGoodsDetail
+   * @return Promise.state
    */
   _getGoodsDetail() {
     const { id } = this.data
     toast.loading()
-    getGoodsDetail(id)
+    return getGoodsDetail(id)
       .then(res => {
+        this._getHasOrder()
         const { data } = res
         this.setData({ detail: data }, () => {
           this._initState()
@@ -65,9 +73,10 @@ Page({
    * 初始化状态
    * @private
    * @method _initState
+   * @return Promise.state
    */
   _initState() {
-    this._setBaseState()
+    return this._setBaseState()
       .then(_ => this._setSubmitBtn())
   },
 
@@ -75,6 +84,7 @@ Page({
    * 设置基本状态
    * @private
    * @method _setBaseState
+   * @return Promise.state
    */
   _setBaseState() {
     const { detail } = this.data
@@ -168,6 +178,7 @@ Page({
     const time = (key === 'end') ?
       this.data.detail.model.EndTime : this.data.detail.model.BeginTime
 
+    clearInterval(this.data.t)
     const timestamp = ~~(new Date(time).getTime() / 1000)
     let countDown = timestamp - ~~(Date.now() / 1000)
 
@@ -181,6 +192,32 @@ Page({
       countDown--
     }, 1000)
 
+    this.setData({
+      timer: t
+    })
+  },
+
+  /**
+   * 获取是否有未完成订单
+   * @private
+   * @method _getHasOrder
+   */
+  _getHasOrder() {
+    return getHasOrder(this.data.id)
+      .then(({ data }) => {
+        if (data && typeof data === 'number') {
+          modal.confirm({
+            content: '您有一笔未完成订单，是否进入',
+            cancelText: '不进入',
+            confirmText: '进入'
+          }).then(flag => {
+            if (!flag) return
+            wx.navigateTo({
+              url: `${config.pageOpt.getPageUrl('order-detail')}?id=${data}`,
+            })
+          })
+        }
+      })
   },
 
   /**
@@ -211,7 +248,7 @@ Page({
     // 没有 id 返回上一级
     if (!id) {
       return modal
-        .alert({ content: '参数错误\n1' })
+        .alert({ content: '参数错误' })
         .then(_ => {
           wx.navigateBack({ delta: 1 })
         })
@@ -258,7 +295,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh() {
-
+    this._init().then(_ => wx.stopPullDownRefresh())
   },
 
   /**

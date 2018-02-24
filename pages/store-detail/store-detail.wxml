@@ -67,9 +67,9 @@
     <!-- 商品信息 -->
   </view>
 
-  <view class="section">
+  <view class="section" wx:if="{{detail.articleLabels && detail.articleLabels.length}}">
     <!-- 商品保障说明 -->
-    <security bindtap='a'></security>
+    <security security-list="{{detail.articleLabels}}"></security>
     <!-- /商品保障说明 -->
   </view>
 

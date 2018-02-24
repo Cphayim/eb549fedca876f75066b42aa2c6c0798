@@ -18,3 +18,18 @@ export function getGoodsDetail(id = 0) {
     data
   })
 }
+
+/**
+ * 获取是否有未完成订单
+ * @function getHasOrder
+ * @return Promise.state
+ */
+export function getHasOrder(id) {
+  const data = {
+    fromId: id
+  }
+  return request({
+    url: `${config.host}/ApiOrders/HasOrder`,
+    data
+  })
+}

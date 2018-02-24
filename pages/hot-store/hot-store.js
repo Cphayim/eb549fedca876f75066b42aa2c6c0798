@@ -35,7 +35,7 @@ Page({
     toast.loading()
     return this._getHotTabInfo()
       .then(_ => {
-        this._getHasOrder()
+        // this._getHasOrder()
         return this._getAllListData()
       })
       .then(_ => setTimeout(() => toast.hide(), 1000))
@@ -88,23 +88,23 @@ Page({
    * @private
    * @method _getHasOrder
    */
-  _getHasOrder() {
-    return getHasOrder()
-      .then(({ data }) => {
-        if (data && typeof data === 'number') {
-          modal.confirm({
-            content: '您有一笔未完成订单，是否进入',
-            cancelText: '不进入',
-            confirmText: '进入'
-          }).then(flag => {
-            if (!flag) return
-            wx.navigateTo({
-              url: `${config.pageOpt.getPageUrl('order-detail')}?id=${data}`,
-            })
-          })
-        }
-      })
-  },
+  // _getHasOrder() {
+  //   return getHasOrder()
+  //     .then(({ data }) => {
+  //       if (data && typeof data === 'number') {
+  //         modal.confirm({
+  //           content: '您有一笔未完成订单，是否进入',
+  //           cancelText: '不进入',
+  //           confirmText: '进入'
+  //         }).then(flag => {
+  //           if (!flag) return
+  //           wx.navigateTo({
+  //             url: `${config.pageOpt.getPageUrl('order-detail')}?id=${data}`,
+  //           })
+  //         })
+  //       }
+  //     })
+  // },
 
   /**
    * 选择 Tab
