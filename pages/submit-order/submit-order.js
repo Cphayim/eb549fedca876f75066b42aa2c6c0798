@@ -27,11 +27,11 @@ Page({
    */
   data: {
     id: 0,
-    // 是否绑定了顾问
-    bindEmployee: false,
     // 订单类型，1为售前，2为售后
     orderType: 0,
 
+    // 是否绑定了顾问, 若绑定了顾问则禁用选择顾问 picker
+    bindEmployee: false,
     // 顾问列表 picker
     employeeList: [],
     employeeIndex: 0,
@@ -206,7 +206,8 @@ Page({
     const { model } = this.data
     const reg = {
       name: /^[\w\u4e00-\u9fa5]{2,}$/, // 两位以上中英文数字
-      phone: /^0?1[345789]\d{9}$/
+      phone: /^0?1[345789]\d{9}$/,
+      card: /^(京|津|冀|晋|蒙|辽|吉|黑|沪|苏|浙|皖|闽|赣|鲁|豫|鄂|湘|粤|桂|琼|渝|川|贵|云|藏|陕|甘|青|宁|新|港|澳|台|军|北|南|广|沈|成|兰|济|空|海){1}[A-Z_a-z]{1}[A-Z_a-z_0-9]{5}$/,
     }
     return new Promise((resolve, reject) => {
       if (!model.EmployeeId) {
@@ -231,6 +232,11 @@ Page({
         if (!model.MyCarBrandId || !model.MyCarModelId) {
           modal.alert({ content: '请选择车型' })
           return reject('未选择车型')
+        }
+        console.log(model.License)
+        if (!reg.card.test(model.License)) {
+          modal.alert({ content: '请输入有效车牌号' })
+          return reject('车牌号无效')
         }
       }
 

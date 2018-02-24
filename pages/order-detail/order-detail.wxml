@@ -94,8 +94,8 @@
       <view class="value">{{order.CreateTime}}</view>
     </view>
     <view class="item">
-      <view class="key">支付时间：</view>
-      <view class="value">{{PayTime || '未支付'}}</view>
+      <view class="key">支付状态：</view>
+      <view class="value">{{order.Status === 1 ? '已支付' : '未支付'}}</view>
     </view>
   </view>
   <!-- /订单详情 -->

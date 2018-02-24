@@ -26,6 +26,10 @@
           <view class="val">{{enrollDetail.OrderNo}}</view>
         </view>
         <view class="item">
+          <view class="key">电子券号：</view>
+          <view class="val">{{enrollDetail.OrderItemNo}}</view>
+        </view>
+        <view class="item">
           <view class="key">单价：</view>
           <view class="val">{{enrollDetail.Price}}</view>
         </view>
@@ -41,6 +45,11 @@
           <view class="key">下单时间：</view>
           <view class="val">{{enrollDetail.CreateTime}}</view>
         </view>
+        <view class="item">
+          <view class="key">支付时间：</view>
+          <view class="val">{{enrollDetail.PayTime}}</view>
+        </view>
+        
       </block>
       <!-- /支付 -->
 
