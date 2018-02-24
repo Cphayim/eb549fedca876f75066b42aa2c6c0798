@@ -22,10 +22,12 @@ function priceFormat(price, dec) {
  * @param ts totalSecond
  * @return {string}
  */
+var daySeconds = 24 * 60 * 60
 function countDownFormat(ts) {
+
   // 大于1天显示天
-  if (ts >= 24 * 60 * 60) {
-    return ~~(25 * 60 * 60 / 86400) + ' 天'
+  if (ts >= daySeconds) {
+    return ~~(ts / daySeconds) + ' 天'
   }
   // 小于 0
   else if (ts <= 0) {
@@ -46,9 +48,9 @@ function nf(n) {
   return n[1] ? '' + n : '0' + n
 }
 
-function substr(str, startIndex, length){
+function substr(str, startIndex, length) {
   console.log(str)
-  if(!str || typeof str !== 'string'){
+  if (!str || typeof str !== 'string') {
     return ''
   }
   return str.slice(startIndex, length)
