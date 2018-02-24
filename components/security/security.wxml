@@ -6,11 +6,10 @@
 -->
 <view class="m-security pd">
   <view
-    wx:for="{{securityList}}" 
+    wx:for="{{resultList}}" 
     wx:key="index"
     class="item">
-    <image src="./icons/{{index+1}}.png" class="icon"></image>
-    <view class="title">{{item}}</view>    
+    <image src="{{item.imgUrl}}" class="icon"></image>
+    <view class="title">{{item.name}}</view>    
   </view>
-  
 </view>

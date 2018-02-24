@@ -7,7 +7,7 @@
 }
 
 .m-security .item {
-
+  flex: 1 1 auto;
 }
 .m-security .item .icon{
   display: block;
@@ -20,4 +20,5 @@
   margin-top: 10rpx;
   color: #333;
   font-size: 28rpx;
+  text-align: center;
 }
