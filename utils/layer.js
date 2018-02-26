@@ -24,11 +24,23 @@ export const toast = {
    * @method success
    * @param {string} text 显示文字 [default='']
    */
-  success(text = '') {
+  success(text = '', duration = 3000) {
     wx.showToast({
       title: text,
       icon: 'success',
-      duration: 3000
+      duration
+    })
+  },
+  /**
+   * 显示无图标
+   * @method show
+   * @param {string} text 显示文字 [default='']
+   */
+  show(text = '', duration = 3000) {
+    wx.showToast({
+      title: text,
+      icon: 'none',
+      duration
     })
   },
   /**
