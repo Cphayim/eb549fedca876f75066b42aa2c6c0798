@@ -34,6 +34,7 @@ Page({
     bindEmployee: false,
     // 顾问列表 picker
     employeeList: [],
+    employeeObj: {},
     employeeIndex: 0,
 
     // 车系|车型列表 picker
@@ -72,10 +73,9 @@ Page({
   changeEmployee(e) {
     const index = ~~e.detail.value
     // 修改显示的顾问名
-    const { Name: name, Id: id } = this.data.employeeList[index]
+    const { Id: id } = this.data.employeeList[index]
     this.setData({
       'model.EmployeeId': id,
-      employeeName: name,
       employeeIndex: index
     })
   },
@@ -263,16 +263,8 @@ Page({
     // 是否已经绑定顾问
     const bindEmployee = !!this.data.model.EmployeeId,
       { OrderType: orderType, OrderFrom: orderFrom } = this.data.model
-    let employeeName
-    if (orderType === 1) { // 售前
-      employeeName = this.data.customer.PreEmployeeName
-    } else if (orderType === 2 && orderFrom === 10) { // 续保
-      employeeName = this.data.customer.InsurerEmployeeName
-    } else { // 售后
-      employeeName = this.data.customer.AfterEmployeeName
-    }
 
-    this.setData({ bindEmployee, orderType, employeeName })
+    this.setData({ bindEmployee, orderType})
 
     // 获取顾问列表
     this._getEmployees()
@@ -327,9 +319,23 @@ Page({
         getAfters().then().then(res => resolve(res))
       }
     }).then(res => {
-      this.setData({
-        employeeList: res.data
+      const employeeObj = {}
+      employeeList.forEach(item => {
+        employeeObj[item.Id] = item.Name
       })
+      this.setData({
+        // 顾问列表
+        employeeList,
+        employeeObj
+      })
+
+      /**
+       * 判断以绑定的顾问是否在顾问列表中(判断有效性)
+       * 若不在列表中可重新选择顾问
+       */
+      if (!employeeObj[this.data.model.EmployeeId]) {
+        this.setData({ bindEmployee: false })
+      }
     })
   },
 

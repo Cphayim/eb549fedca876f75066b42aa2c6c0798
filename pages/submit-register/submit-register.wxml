@@ -22,7 +22,7 @@
             disabled="{{bindEmployee}}"
              >
             <view class="picker">
-              {{ employeeName || '请选择专属顾问' }}
+              {{ employeeObj[model.EmployeeId] || '请选择专属顾问' }}
             </view>
           </picker>
         </view>
