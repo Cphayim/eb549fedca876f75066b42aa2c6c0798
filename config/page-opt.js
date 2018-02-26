@@ -18,7 +18,7 @@ const _pageOpt = {
   },
   'hot-store': { // 热卖商城列表
     url: '/pages/hot-store/hot-store',
-    needAuth: true
+    needAuth: false
   },
   'store-detail': { // 商品详情
     url: '/pages/store-detail/store-detail',
