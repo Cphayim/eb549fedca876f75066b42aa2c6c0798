@@ -38,8 +38,8 @@ Page({
    * @method _init
    * @return Promise.state
    */
-  _init() {
-    toast.loading()
+  _init(isRefresh = false) {
+    isRefresh || toast.loading()
     return this._getHotTabInfo()
       .then(_ => {
         return this._getAllListData()
@@ -213,7 +213,10 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh() {
-    this._init().then(res => wx.stopPullDownRefresh())
+    setTimeout(() => {
+      this._init(true).then(res => wx.stopPullDownRefresh())
+    }, config.refreshDelay)
+
   },
 
   /**

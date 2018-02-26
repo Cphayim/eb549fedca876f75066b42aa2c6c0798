@@ -30,8 +30,8 @@ Page({
    * @private
    * @method _init
    */
-  _init() {
-    toast.loading()
+  _init(isRefresh = false) {
+    isRefresh || toast.loading()
     const arr = [this._getBannerList(), this._getTopGoodsList(), this._getDealerInfo()]
     return Promise.all(res => toast.hide())
       .catch(err => toast.hide())
@@ -137,7 +137,9 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh() {
-    this._init().then(res => wx.stopPullDownRefresh())
+    setTimeout(() => {
+      this._init(true).then(res => wx.stopPullDownRefresh())
+    }, config.refreshDelay)
   },
 
   /**

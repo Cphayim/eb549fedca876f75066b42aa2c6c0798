@@ -47,8 +47,13 @@ Page({
    * @method _init
    * @return Promise.state
    */
-  _init() {
-    return this._getGoodsDetail()
+  _init(isRefresh = false) {
+    isRefresh || toast.loading()
+    return this._getGoodsDetail().then(() => toast.hide())
+      .catch(err => {
+        console.warn(err)
+        toast.hide()
+      })
   },
 
   /**
@@ -59,14 +64,12 @@ Page({
    */
   _getGoodsDetail() {
     const { id } = this.data
-    toast.loading()
     return getGoodsDetail(id)
       .then(res => {
         this._getHasOrder()
         const { data } = res
         this.setData({ detail: data }, () => {
           this._initState()
-          toast.hide()
         })
       })
   },
@@ -299,7 +302,10 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh() {
-    this._init().then(_ => wx.stopPullDownRefresh())
+    setTimeout(() => {
+      this._init(true).then(_ => wx.stopPullDownRefresh())
+    }, config.refreshDelay)
+
   },
 
   /**
