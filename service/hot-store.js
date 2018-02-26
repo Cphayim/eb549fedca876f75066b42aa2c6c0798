@@ -25,12 +25,12 @@ export function getHotTabInfo() {
  * @param {string} opts.KeyStr
  * @return Promise.state
  */
-export function getGoodsList({ PageSize = 10, KeyStr = '' }) {
+export function getGoodsList({ PageSize = 10, PageNo = 1, KeyStr = '', }) {
   const data = {
     PageSize,
-    PageNo: 1,
+    PageNo,
     OrderBy: 'IsTop DESC,SortIndex ASC,IsEnd ASC,CreateTime DESC',
-    TenantId: 340,
+    TenantId: wx.getExtConfigSync().tenantId,
     CatalogKey: KeyStr
   }
 
