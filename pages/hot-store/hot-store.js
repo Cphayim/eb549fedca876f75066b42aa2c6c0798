@@ -22,41 +22,59 @@ Page({
    * 页面的初始数据
    */
   data: {
-    bannerUrl: '',
-    tabInfo: [],
-    tabNames: [],
-    tabKeys: [],
-    activeIndex: 0,
-    listsData: [],
+    bannerUrl: '', // 顶部 banner url
+    tabNames: [], // tab 名
+    tabKeys: [], // tab 键值
+
+    activeIndex: 0, // 当前 active 的 tab 索引
+    listsData: [], // 全部列表数据
+    listsPageNo: [], // 列表的页数
     scrollViewHeight: 0,
   },
 
+  /**
+   * 初始化
+   * @private 
+   * @method _init
+   * @return Promise.state
+   */
   _init() {
     toast.loading()
     return this._getHotTabInfo()
       .then(_ => {
-        // this._getHasOrder()
         return this._getAllListData()
       })
       .then(_ => setTimeout(() => toast.hide(), 1000))
-      .catch(err => toast.hide())
+      .catch(err => {
+        console.warn(err)
+        toast.hide()
+      })
   },
 
   /**
    * 获取列表数据
    * @private
    * @method _getHotTabInfo
+   * @param {number} PageNo 当前页数
+   * @param {string} KeyStr 当前 tab 键值 
    * @return Promise.state
    */
-  _getGoodsList(keyStr) {
-    return getGoodsList(keyStr).then(res => res.data)
+  _getGoodsList({ PageNo = 1, KeyStr }) {
+    console.log(PageNo, KeyStr)
+    return getGoodsList({ PageNo, KeyStr }).then(res => res.data)
   },
+
+  /**
+   * 获取所有数据
+   */
   _getAllListData() {
+    // 请求队列
     const queue = this.data.tabKeys.map(key => this._getGoodsList({ KeyStr: key }))
     return Promise.all(queue)
       .then(resAll => {
         this.setData({ listsData: resAll }, () => { this._setScrollViewHeight() })
       })
+    console.log(123)
   },
 
   /**
@@ -77,34 +95,68 @@ Page({
           })
           const tabNames = tabInfo.map(item => item.Name)
           const tabKeys = tabInfo.map(item => item.Value)
-          this.setData({ tabInfo, tabNames, tabKeys, bannerUrl })
+          this.setData({ tabNames, tabKeys, bannerUrl })
+          // 重置列表页数
+          this._resetListsPageNo(tabKeys.length)
           resolve()
         })
     })
   },
 
   /**
-   * 获取是否有未完成订单
-   * @private
-   * @method _getHasOrder
+   * 重置列表页数
+   * @private 
+   * @method _resetListsPageNo
+   * @param length tab 数量
    */
-  // _getHasOrder() {
-  //   return getHasOrder()
-  //     .then(({ data }) => {
-  //       if (data && typeof data === 'number') {
-  //         modal.confirm({
-  //           content: '您有一笔未完成订单，是否进入',
-  //           cancelText: '不进入',
-  //           confirmText: '进入'
-  //         }).then(flag => {
-  //           if (!flag) return
-  //           wx.navigateTo({
-  //             url: `${config.pageOpt.getPageUrl('order-detail')}?id=${data}`,
-  //           })
-  //         })
-  //       }
-  //     })
-  // },
+  _resetListsPageNo(length) {
+    this.data.listsPageNo = []
+    for (let i = 0; i < length; i++) {
+      // 初始化为第一页
+      this.data.listsPageNo.push(1)
+    }
+  },
+
+
+  /**
+   * 设置滚动容器高度
+   * @private _setScrollViewHeight
+   */
+  _setScrollViewHeight() {
+    $$('.tab-view-wrap')
+      .then(res => {
+        const { top: topDis } = res
+        const { windowHeight } = wx.getSystemInfoSync()
+        this.setData({ scrollViewHeight: windowHeight - topDis })
+      })
+  },
+
+
+
+  /**
+   * 滚动加载
+   * @loadMore
+   */
+  loadMore(e) {
+    const { index } = e.currentTarget.dataset
+    // 当前 tab 的列表数据
+    let listData = this.data.listsData[index]
+    // 加载下一页数据
+    // console.log(this.data.listsPageNo[index])
+    toast.loading()
+    this._getGoodsList({
+      PageNo: ++this.data.listsPageNo[index],
+      KeyStr: this.data.tabKeys[index]
+    }).then(data => {
+      if (!(data instanceof Array) || !data.length) {
+        toast.show('没有更多数据了', 1000)
+        return
+      }
+      toast.hide()
+      listData = [...listData, ...data]
+      this.setData({ [`listsData[${index}]`]: listData })
+    })
+  },
 
   /**
    * 选择 Tab
@@ -114,18 +166,6 @@ Page({
    */
   selectTab(e) {
     this.setData({ activeIndex: e.detail.index })
-  },
-
-  /**
-   * 设置滚动容器高度
-   */
-  _setScrollViewHeight() {
-    $$('.tab-view-wrap')
-      .then(res => {
-        const { top: topDis } = res
-        const { windowHeight } = wx.getSystemInfoSync()
-        this.setData({ scrollViewHeight: windowHeight - topDis })
-      })
   },
 
   /**
