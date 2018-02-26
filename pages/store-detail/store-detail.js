@@ -36,7 +36,9 @@ Page({
     // 抢购按钮文字
     buyingStateStr: '',
     // 是否禁用抢购按钮
-    disabled: false
+    disabled: false,
+    // 是否显示底部按钮
+    isShowBotBtn: false
   },
 
   /**
@@ -122,6 +124,8 @@ Page({
       // 设置结束倒计时
       this._setCountDown('end')
     }
+
+    setTimeout(() => this.setData({ isShowBotBtn: true }), 400)
   },
 
   /**

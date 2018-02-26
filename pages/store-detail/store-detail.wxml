@@ -44,7 +44,7 @@
         </view>
         <view class="f-r">
           <!-- 倒计时 -->
-          <view class="timer-box">
+          <view wx:if="{{currentState === 1}}" class="timer-box">
             <text>结束倒计时：</text>
             <text class="timer">{{filter.countDownFormat(endCountDown)}}</text>
           </view>
@@ -87,6 +87,7 @@
   </view>
 
   <!-- 底部按钮 -->
+  <view hidden="{{!isShowBotBtn}}">
   <block wx:if="{{currentState === 0}}">
     <bot-btn
       text="开抢倒计时: {{filter.countDownFormat(beginCountDown)}}"
@@ -110,5 +111,7 @@
       fixed>
     </bot-btn>
   </block>
+  </view>
   <!-- /底部按钮 -->
+  
 </view>
