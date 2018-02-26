@@ -20,6 +20,9 @@ export default {
   // 成功响应的 errorcode
   ERR_OK_CODE: 0,
 
+  // 下拉刷新动画时间(毫秒)
+  refreshDelay: 1000,
+
   // 页面配置项
   pageOpt: pageOpt,
 
