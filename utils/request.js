@@ -4,6 +4,7 @@
  */
 
 import { toast, modal } from './layer.js'
+import { queryString } from '../utils/url.js'
 import config from '../config.js'
 
 /**
@@ -26,7 +27,6 @@ export function request({
 }) {
   header['appId'] = config.appid
   header['X-Requested-With'] = 'XMLHttpRequest'
-
   /****/
   header['tenantId'] = wx.getExtConfigSync().tenantId || ''
   /****/
@@ -82,11 +82,17 @@ export function request({
 
     /****/
     if (err.errorcode === 40003) { // 重新登录
-      const url = `/${getCurrentPages().pop().route}`
-      // 清除 session
-      wx.removeStorageSync('session_id')
-      // 重定向到当前页面
-      wx.redirectTo({ url })
+      modal.alert({
+        content: '登录状态过期'
+      }).then(() => {
+        const currentPages = getCurrentPages()
+        const currentPage = currentPages[currentPages.length - 1]
+        const url = '/' + currentPage.route + queryString(currentPage.options)
+        // 清除 session
+        wx.removeStorageSync('session_id')
+        // 重定向到当前页面
+        wx.redirectTo({ url })
+      })
     } else { // 弹框提示
       modal.alert({ content: errormsg })
     }
