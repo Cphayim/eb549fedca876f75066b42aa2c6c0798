@@ -34,37 +34,59 @@ export function getInitRegisterDetail(id = 0) {
 }
 
 /**
+ * 获取顾问列表
+ * @function getEmployees
+ * @params employeeType 顾问类型 ['sale': 销售, 'service': 售后, 'insurer': 续保]
+ * @return Promise.state
+ */
+export function getEmployees(employeeType){
+  const data = {
+    NotStatus: 0
+  }
+  switch (employeeType){
+    case 'sale': data.role = ['WX_Sales', 'WX_SalesSupervisor'];break;
+    case 'service': data.role = ['WX_Service'];break;
+    case 'insurer': data.role = ['WX_Insurer'];break;
+  }
+  return request({
+    url: `${config.host}/Org/Employees/Read`,
+    data
+  })
+}
+
+
+/**
  * 获取销售顾问列表
  * @function getPres
  * @return Promise.state
  */
-export function getPres() {
-  return request({
-    url: `${config.host}/Org/Employees/ReadForPre`
-  })
-}
+// export function getPres() {
+//   return request({
+//     url: `${config.host}/Org/Employees/ReadForPre`
+//   })
+// }
 
 /**
  * 获取售后顾问列表
  * @function getAfters
  * @return Promise.state
  */
-export function getAfters() {
-  return request({
-    url: `${config.host}/Org/Employees/ReadForAfter`
-  })
-}
+// export function getAfters() {
+//   return request({
+//     url: `${config.host}/Org/Employees/ReadForAfter`
+//   })
+// }
 
 /**
  * 获取保险专员列表
  * @function getInsurers
  * @return Promise.state
  */
-export function getInsurers() {
-  return request({
-    url: `${config.host}/Org/Employees/ReadForInsurer`
-  })
-}
+// export function getInsurers() {
+//   return request({
+//     url: `${config.host}/Org/Employees/ReadForInsurer`
+//   })
+// }
 
 /**
  * 获取意向车型列表
