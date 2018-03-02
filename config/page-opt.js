@@ -2,6 +2,7 @@
  * 页面选项配置
  * @Author Cphayim
  */
+import { queryString } from '../utils/url.js'
 
 /**
  * 配置项
@@ -10,7 +11,7 @@
 const _pageOpt = {
   'home': { // 首页
     url: '/pages/home/home',
-    needAuth: false // 是否需要授权
+    needAuth: false, // 是否需要授权
   },
   'mine': { // 我的
     url: '/pages/mine/mine',
@@ -26,27 +27,33 @@ const _pageOpt = {
   },
   'submit-order': { // 提交支付订单
     url: '/pages/submit-order/submit-order',
-    needAuth: true
+    needAuth: true,
+    shareType: 'home'
   },
   'submit-register': { // 提交报名订单
     url: '/pages/submit-register/submit-register',
-    needAuth: true
+    needAuth: true,
+    shareType: 'home'
   },
   'confirm-order': { // 确认订单
     url: '/pages/confirm-order/confirm-order',
-    needAuth: true
+    needAuth: true,
+    shareType: 'home',
   },
   'order-detail': { // 订单详情
     url: '/pages/order-detail/order-detail',
-    needAuth: true
+    needAuth: true,
+    shareType: 'home'
   },
   'enroll-detail': { // 报名详情
     url: '/pages/enroll-detail/enroll-detail',
-    needAuth: true
+    needAuth: true,
+    shareType: 'home'
   },
   'success': { // 支付/报名成功
     url: '/pages/success/success',
-    needAuth: true
+    needAuth: true,
+    shareType: 'home'
   }
 }
 
@@ -72,4 +79,30 @@ export const getNeedAuth = function (pageName) {
 export const getPageUrl = function (pageName) {
   const page = this[pageName] || this['home']
   return page.url
+}.bind(_pageOpt)
+
+/**
+ * 获取分享路径
+ * @function getShareUrl
+ * @return string
+ */
+export const getShareUrl = function (pageName) {
+  const page = this[pageName] || this['home']
+  let shareUrl = ''
+
+  // 配置为返回首页
+  if (page.shareType === 'home') {
+    shareUrl = this['home'].url
+  }
+  // 配置为自定义
+  else if (page.shareType === 'custom') {
+    shareUrl = page.shareUrl ? page.shareUrl : this['home'].url
+  }
+  // 未配置 shareType 或配置为 'current' 或无效配置, 跳转到当前页
+  else {
+    const currentPages = getCurrentPages()
+    const currentPage = currentPages[currentPages.length - 1]
+    shareUrl = currentPage.route + queryString(currentPage.options)
+  }
+  return shareUrl
 }.bind(_pageOpt)
