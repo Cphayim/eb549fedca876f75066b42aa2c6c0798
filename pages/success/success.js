@@ -121,6 +121,9 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage() {
-
+    return {
+      title: wx.getExtConfigSync().tanantName,
+      path: config.pageOpt.getShareUrl(this.pageName)
+    }
   }
 })

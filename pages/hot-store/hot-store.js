@@ -74,7 +74,6 @@ Page({
       .then(resAll => {
         this.setData({ listsData: resAll }, () => { this._setScrollViewHeight() })
       })
-    console.log(123)
   },
 
   /**
@@ -123,6 +122,7 @@ Page({
    * @private _setScrollViewHeight
    */
   _setScrollViewHeight() {
+    if (this.data.scrollViewHeight) return
     $$('.tab-view-wrap')
       .then(res => {
         const { top: topDis } = res
@@ -216,7 +216,6 @@ Page({
     setTimeout(() => {
       this._init(true).then(res => wx.stopPullDownRefresh())
     }, config.refreshDelay)
-
   },
 
   /**
@@ -230,6 +229,9 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage() {
-
+    return {
+      title: wx.getExtConfigSync().tanantName,
+      path: config.pageOpt.getShareUrl(this.pageName)
+    }
   }
 })

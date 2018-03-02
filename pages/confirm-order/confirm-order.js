@@ -67,7 +67,7 @@ Page({
         const { order, payConfig } = data
         this.setData({ model: order, payConfig })
         // 判断是否是已支付的订单
-        if (order.Status === 1){
+        if (order.Status === 1) {
           wx.redirectTo({
             url: `${config.pageOpt.getPageUrl('success')}?id=${order.Id}&type=order`,
           })
@@ -142,6 +142,9 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage() {
-
+    return {
+      title: wx.getExtConfigSync().tanantName,
+      path: config.pageOpt.getShareUrl(this.pageName)
+    }
   }
 })
