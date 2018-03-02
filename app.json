@@ -19,8 +19,5 @@
     "navigationBarTitleText": "云车商掌上店",
     "navigationBarTextStyle": "black",
     "navigationStyle": "default"
-  },
-  "ext": {
-    "tenantId": 340
   }
 }
