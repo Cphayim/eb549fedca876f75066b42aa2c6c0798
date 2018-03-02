@@ -199,7 +199,7 @@ export default class Auth {
   _secondAuthorize(scopeStr = 'scope.userInfo') {
     return new Promise((resolve, reject) => {
       modal.confirm({
-        content: '你必须设置呀，不然 bula bula...',
+        content: '动动手指，一键授权，更多精彩等着您！',
         confirmText: '去设置',
         cancel: '拒绝'
       }).then(flag => {
