@@ -24,7 +24,7 @@ export default {
   refreshDelay: 1000,
 
   // 页面配置项
-  pageOpt: pageOpt,
+  pageOpt,
 
   // 错误信息
   error,
