@@ -62,6 +62,7 @@
         </view>
         <!-- 状态 -->
       </view>
+      <view hidden="{{enrolls&&enrolls.length}}" class="none none-activity"></view>
     </view>
   </view>
   <!-- /我的活动 -->

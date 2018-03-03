@@ -8,7 +8,7 @@
 <!-- 组件通用过滤器 -->
 <wxs src="../../components/filter.wxs" module="filter" />
 
-<view class="p-store-detail">
+<view hidden="{{isLoaded && !detail.model}}" class="p-store-detail">
 
   <view class="section">
     <!-- 商品头图 -->
@@ -81,7 +81,9 @@
         有效期: 
         <text>{{filter.substr(detail.model.ValidBeginTime,0,10)}} - {{filter.substr(detail.model.ValidEndTime,0,10)}}</text>
       </view>
-      <rich-text nodes="{{detail.model.TextReplace}}"></rich-text>
+      <view class="rich-wrap">
+        <rich-text nodes="{{detail.model.TextReplace}}"></rich-text>
+      </view>
     </view>
     <!-- /介绍 -->
   </view>
@@ -114,4 +116,7 @@
   </view>
   <!-- /底部按钮 -->
   
+</view>
+
+<view wx:if="{{isLoaded && !detail.model}}" class="none none-detail">
 </view>

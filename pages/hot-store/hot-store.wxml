@@ -32,6 +32,7 @@
           <goods-list 
             list="{{item}}">
           </goods-list>  
+          <view wx:if="{{!item || !item.length }}" class="none none-list"></view>
         </scroll-view>
       </block>
     </view>

@@ -10,9 +10,7 @@ import config from '../../config.js'
 import Auth from '../../service/auth.js'
 import {
   getInitRegisterDetail,
-  getPres,
-  getAfters,
-  getInsurers,
+  getEmployees,
   getCarCates,
   getOptions,
   createRegPre,
@@ -31,6 +29,8 @@ Page({
 
     // 订单类型，1为售前，2为售后
     orderType: 0,
+    // 是否是续保
+    isInsurer: false,
 
     // 是否绑定了顾问, 若绑定了顾问则禁用选择顾问 picker
     bindEmployee: false,
@@ -140,19 +140,16 @@ Page({
       modelName = carBrands[carBrandIndex].Children[carModelIndex].Name,
       modelId = carBrands[carBrandIndex].Children[carModelIndex].Id
 
-    const carModelStr = `${brandName} - ${modelName}`
+    let carModelStr = `${brandName}`
 
-    if (this.data.orderType === 1) { // 售前
-      this.setData({
-        'model.CarBrandId': brandId,
-        'model.CarModelId': modelId
-      })
-    } else if (this.data.orderType === 2) { // 售后
-      this.setData({
-        'model.MyCarBrandId': brandId,
-        'model.MyCarModelId': modelId
-      })
+    if(modelId !== "0"){
+      carModelStr += ` - ${modelName}`
     }
+
+    this.setData({
+      'model.CarBrandId': brandId,
+      'model.CarModelId': modelId
+    })
 
     this.setData({ carModelStr })
   },
@@ -216,29 +213,40 @@ Page({
       card: /^(京|津|冀|晋|蒙|辽|吉|黑|沪|苏|浙|皖|闽|赣|鲁|豫|鄂|湘|粤|桂|琼|渝|川|贵|云|藏|陕|甘|青|宁|新|港|澳|台|军|北|南|广|沈|成|兰|济|空|海){1}[A-Z_a-z]{1}[A-Z_a-z_0-9]{5}$/,
     }
     return new Promise((resolve, reject) => {
-      if (!model.EmployeeId) {
-        modal.alert({ content: '请选择顾问' })
-        return reject('未选择顾问')
+      // 判断是否是续保业务
+      if (this.data.isInsurer) {
+        // 如果续保业务顾问列表长度为0，不检测
+        if (this.data.employeeList.length){
+          if (!model.EmployeeId) {
+            modal.alert({ content: '请选择专员' })
+            return reject('未选择专员')
+          }  
+        }
+      } else {
+        if (!model.EmployeeId){
+          modal.alert({ content: '请选择顾问' })
+          return reject('未选择顾问')
+        }
       }
+
       if (!reg.name.test(model.Name)) {
         modal.alert({ content: '请输入有效姓名' })
         return reject('姓名无效')
       }
+
       if (!reg.phone.test(model.MobilePhone)) {
         modal.alert({ content: '请输入有效手机号' })
         return reject('手机号无效')
       }
 
+      if (!model.CarBrandId || !model.CarModelId) {
+        modal.alert({ content: '请选择车型' })
+        return reject('未选择车型')
+      }
+
       if (this.data.orderType === 1) { // 售前
-        if (!model.CarBrandId || !model.CarModelId) {
-          modal.alert({ content: '请选择车型' })
-          return reject('未选择车型')
-        }
+
       } else if (this.data.orderType === 2) { // 售后
-        if (!model.MyCarBrandId || !model.MyCarModelId) {
-          modal.alert({ content: '请选择车型' })
-          return reject('未选择车型')
-        }
         if (!reg.card.test(model.PlateNumber)) {
           modal.alert({ content: '请输入有效车牌号' })
           return reject('车牌号无效')
@@ -322,15 +330,16 @@ Page({
       const { OrderType: orderType, AfterFrom: afterFrom } = this.data.model
       if (orderType === 1) {
         // 售前业务
-        getPres().then(res => resolve(res))
+        getEmployees('sale').then(res => resolve(res))
       }
       else if (orderType === 2 && afterFrom === 6) {
         // 续保业务
-        getInsurers().then(res => resolve(res))
+        this.setData({ isInsurer: true })
+        getEmployees('insurer').then(res => resolve(res))
       }
       else {
         // 售后业务
-        getAfters().then().then(res => resolve(res))
+        getEmployees('service').then().then(res => resolve(res))
       }
     }).then(({ data: employeeList }) => {
       // console.log(employeeList)
@@ -345,11 +354,14 @@ Page({
       })
 
       /**
-       * 判断以绑定的顾问是否在顾问列表中(判断有效性)
-       * 若不在列表中可重新选择顾问
+       * 判断已绑定的顾问是否在顾问列表中(判断是否离职)
+       * 若已绑定的顾问离职可重新选择顾问
        */
       if (!employeeObj[this.data.model.EmployeeId]) {
-        this.setData({ bindEmployee: false })
+        // 过滤掉休假状态的员工
+        employeeList = employeeList.filter(item => item.Status === 1)
+        // 打开选择器
+        this.setData({ bindEmployee: false, employeeList})
       }
     })
   },
@@ -368,6 +380,10 @@ Page({
     getCarCates(type)
       .then(res => {
         const carBrands = res.data.CarBrands
+        /**
+         * 添加默认值
+         */
+        carBrands.forEach(item => item.Children.unshift({ Name: "未选择", Id: "0" }))
         /****/
         const carBrandsRange = []
         carBrandsRange.push(carBrands)
@@ -377,6 +393,40 @@ Page({
           carBrands,
           carBrandsRange
         })
+
+        // 设置默认值
+        const carBrandId = this.data.model.CarBrandId
+        const carModelId = this.data.model.CarModelId
+        console.log(carBrandId, carModelId)
+        if (carBrandId) {
+          let carModelStr = ''
+          let carBrandsIndexArr = [0,0]
+          let carModels = null
+          // 记录车系
+
+          for (let i = 0, length = carBrands.length; i < length; i++) {
+            if (carBrands[i].Id === carBrandId) {
+              carModelStr += carBrands[i].Name
+              carBrandsIndexArr[0] = i
+              carModels = carBrands[i].Children
+              break
+            }
+          }
+          
+          // 记录车型
+          if (carModels) {
+            for (let j = 0, length = carModels.length; j < length; j++) {
+              if (carModels[j].Id === carModelId) {
+                carModelStr += ' - ' + carModels[j].Name
+                carBrandsIndexArr[1] = j
+                carBrandsRange[1] = carModels
+                break
+              }
+            }
+          }
+          this.setData({ carBrandsIndexArr, carModelStr, carBrandsRange })
+        }
+
       })
   },
 
@@ -462,6 +512,9 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage() {
-
+    return {
+      title: wx.getExtConfigSync().tanantName,
+      path: config.pageOpt.getShareUrl(this.pageName)
+    }
   }
 })

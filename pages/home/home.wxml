@@ -9,6 +9,7 @@
 <view class="p-home">
   <!-- 轮播图 -->
   <carousel 
+    wx:if="{{bannerList&&bannerList.length}}"
     list="{{bannerList}}" 
     autoplay="{{true}}" 
     interval="{{5000}}"

@@ -11,8 +11,8 @@
   <view class="m-order-form section">
     <!-- 通用 -->
     <block>
-    <view class="item">
-      <form-item label="顾问：" arrow>
+    <view hidden="{{!employeeList.length}}" class="item">
+      <form-item label="{{isInsurer ? '专员' : '顾问'}}：" arrow>
         <view class="wrap">
           <!-- 展示用 input -->
           <picker value="{{employeeIndex}}" 
@@ -22,7 +22,7 @@
             disabled="{{bindEmployee}}"
              >
             <view class="picker">
-              {{ employeeObj[model.EmployeeId] || '请选择专属顾问' }}
+              {{ employeeObj[model.EmployeeId] || ('请选择专属' + (isInsurer ? '专员' : '顾问')) }}
             </view>
           </picker>
         </view>
@@ -68,6 +68,7 @@
             range-key="Name"
             bindcolumnchange="changeCarBrand"
             bindchange="changeCarModel"
+            value="{{carBrandsIndexArr}}"
             >
             <view class="picker">
               {{ carModelStr || '请选择车型' }}
@@ -120,6 +121,7 @@
             range-key="Name"
             bindcolumnchange="changeCarBrand"
             bindchange="changeCarModel"
+            value="{{carBrandsIndexArr}}"
             >
             <view class="picker">
               {{ carModelStr || '请选择车型' }}

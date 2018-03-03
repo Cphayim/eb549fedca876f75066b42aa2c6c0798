@@ -17,6 +17,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    isLoaded: false,
     id: 0,
     detail: {},
     /**
@@ -49,7 +50,11 @@ Page({
    */
   _init(isRefresh = false) {
     isRefresh || toast.loading()
-    return this._getGoodsDetail().then(() => toast.hide())
+    return this._getGoodsDetail()
+      .then(() => {
+        toast.hide()
+        this.setData({ isLoaded: true })
+      })
       .catch(err => {
         console.warn(err)
         toast.hide()
@@ -69,7 +74,9 @@ Page({
         this._getHasOrder()
         const { data } = res
         this.setData({ detail: data }, () => {
-          this._initState()
+          if (data.model) {
+            this._initState()
+          }
         })
       })
   },
@@ -185,7 +192,7 @@ Page({
     const time = (key === 'end') ?
       this.data.detail.model.EndTime : this.data.detail.model.BeginTime
 
-    clearInterval(this.data.t)
+    clearInterval(this.data.timer)
     const timestamp = ~~(new Date(time).getTime() / 1000)
     let countDown = timestamp - ~~(Date.now() / 1000)
 
@@ -255,7 +262,7 @@ Page({
     // 没有 id 返回上一级
     if (!id) {
       return modal
-        .alert({ content: '参数错误' })
+        .alert({ content: config.error.ERR_PARAM })
         .then(_ => {
           wx.navigateBack({ delta: 1 })
         })
@@ -281,7 +288,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow() {
-
+    if (!this.data.isLoaded) return
+    wx.startPullDownRefresh({})
   },
 
   /**
@@ -295,7 +303,10 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload() {
-
+    // 清空定时器
+    if (this.data.timer) {
+      clearInterval(this.data.timer)
+    }
   },
 
   /**
@@ -319,6 +330,9 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage() {
-
+    return {
+      title: wx.getExtConfigSync().tanantName,
+      path: config.pageOpt.getShareUrl(this.pageName)
+    }
   }
 })
