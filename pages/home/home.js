@@ -96,6 +96,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
+    // 判断是否是从 web-view 跳转而来
+    if (options.wxopenid) {
+      wx.setStorageSync('wxopenid', options.wxopenid)
+    }
     if (config.pageOpt.getNeedAuth(this.pageName)) {
       const auth = new Auth()
       auth.validate()

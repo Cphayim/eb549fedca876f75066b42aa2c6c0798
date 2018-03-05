@@ -54,6 +54,11 @@ const _pageOpt = {
     url: '/pages/success/success',
     needAuth: true,
     shareType: 'home'
+  },
+  'web-view': { // web-view 容器
+    url: '/pages/web-view/web-view',
+    needAuth: false,
+    shareType: 'home'
   }
 }
 

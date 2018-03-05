@@ -1,6 +1,8 @@
 {
+  "extEnable": false,
   "extAppid": "wxce8d2df41f6db25d",
   "ext": {
+    "tenantName": "云程科技",
     "tenantId": 340
   },
   "directCommit": true

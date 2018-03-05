@@ -1,7 +1,7 @@
 {
 	"description": "项目配置文件",
 	"setting": {
-		"urlCheck": true,
+		"urlCheck": false,
 		"es6": true,
 		"postcss": true,
 		"minified": true,
@@ -36,7 +36,7 @@
 					"id": 1,
 					"name": "热卖商城-详情",
 					"pathName": "pages/store-detail/store-detail",
-					"query": "id=108556"
+					"query": "id=108602"
 				},
 				{
 					"id": 2,
@@ -96,7 +96,7 @@
 					"id": 11,
 					"name": "提交订单-报名售后",
 					"pathName": "pages/submit-register/submit-register",
-					"query": "id=108550"
+					"query": "id=108588"
 				},
 				{
 					"id": 12,
@@ -133,6 +133,12 @@
 					"name": "支付成功",
 					"pathName": "pages/success/success",
 					"query": "id=41429&type=order&orderType=4"
+				},
+				{
+					"id": -1,
+					"name": "提价订单-报名续保",
+					"pathName": "pages/submit-register/submit-register",
+					"query": "id=108599"
 				}
 			]
 		}

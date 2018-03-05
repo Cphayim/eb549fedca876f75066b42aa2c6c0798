@@ -261,6 +261,7 @@ export default class Auth {
         .then(data => {
           data.code = codeStr
           data.appId = config.appid
+          data.wxopenid = wx.getStorageSync('wxoppenid') || ''
           return request({
             url: loginUrl,
             data

@@ -1,2 +1,2 @@
 <!--pages/web-view/web-view.wxml-->
-<web-view src="http://340.dev.vcar360.com"></web-view>
+<web-view src="{{url}}"></web-view>
