@@ -40,6 +40,8 @@ page{
 
 .m-valuation .item,.m-order-form .item{
   border-bottom: 1rpx solid #dfdfdf;
+  width: 100%;
+  overflow: hidden;
 }
 .m-order-form .item:first-child{
   border-top: 1rpx solid #dfdfdf;
@@ -56,8 +58,9 @@ page{
 
 input {
   /* 扩大可点击 focus 区域 */
-  position: absolute;
+   position: absolute; 
   top: 50%;
+  right: 0;
   width: 100%;
   height: 90rpx;
   min-height: auto;
