@@ -100,23 +100,39 @@
     <!-- 售前类型 -->
     <block wx:if="{{orderType === 1}}">
     <view class="item">
-      <form-item label="意向车型：" >
+      <form-item label="意向车系：" >
         <view class="wrap">
           <picker 
-            mode="multiSelector"
-            range="{{carBrandsRange}}"
+            range="{{carBrandList}}"
             range-key="Name"
-            bindcolumnchange="changeCarBrand"
-            bindchange="changeCarModel"
-            value="{{carBrandsIndexArr}}"
+            bindchange="changeCarBrand"
+            value="{{carBrandIndex}}"
             >
             <view class="picker">
-              {{ carModelStr || '请选择车型' }}
+              {{ carBrandList[carBrandIndex].Name || '未选择' }}
             </view>
           </picker>
         </view>
       </form-item>
     </view>
+
+    <view hidden="{{!carBrandList[carBrandIndex].Children.length}}" class="item">
+      <form-item label="意向车型：" >
+        <view class="wrap">
+          <picker 
+            range="{{carBrandList[carBrandIndex].Children}}"
+            range-key="Name"
+            bindchange="changeCarModel"
+            value="{{carModelIndex}}"
+            >
+            <view class="picker">
+              {{ carBrandList[carBrandIndex].Children[carModelIndex].Name || '未选择' }}
+            </view>
+          </picker>
+        </view>
+      </form-item>
+    </view>
+    
     <view class="item">
       <form-item label="购车方式：" >
         <view class="wrap">
@@ -153,18 +169,33 @@
     <!-- 售后类型 -->
     <block wx:elif="{{orderType === 2}}">
     <view class="item">
+      <form-item label="爱车车系：" >
+        <view class="wrap">
+          <picker 
+            range="{{carBrandList}}"
+            range-key="Name"
+            bindchange="changeCarBrand"
+            value="{{carBrandIndex}}"
+            >
+            <view class="picker">
+              {{ carBrandList[carBrandIndex].Name || '未选择' }}
+            </view>
+          </picker>
+        </view>
+      </form-item>
+    </view>
+
+    <view hidden="{{!carBrandList[carBrandIndex].Children.length}}" class="item">
       <form-item label="爱车车型：" >
         <view class="wrap">
           <picker 
-            mode="multiSelector"
-            range="{{carBrandsRange}}"
+            range="{{carBrandList[carBrandIndex].Children}}"
             range-key="Name"
-            bindcolumnchange="changeCarBrand"
             bindchange="changeCarModel"
-            value="{{carBrandsIndexArr}}"
+            value="{{carModelIndex}}"
             >
             <view class="picker">
-              {{ carModelStr || '请选择车型' }}
+              {{ carBrandList[carBrandIndex].Children[carModelIndex].Name || '未选择' }}
             </view>
           </picker>
         </view>

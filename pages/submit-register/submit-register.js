@@ -39,12 +39,10 @@ Page({
     employeeObj: {},
     employeeIndex: 0,
 
-    // 车系|车型列表 picker
-    carBrands: [], // 原数据
-    carBrandsRange: [], // format 后用于 picker 的数据
+    // 车系/车型
+    carBrandList: [],
     carBrandIndex: 0,
     carModelIndex: 0,
-    carModelStr: '', // 显示用字符串
 
     // 购车方式 picker
     buyWayRange: [{ Name: '贷款', Value: true }, { Name: '全款', Value: false }],
@@ -111,47 +109,32 @@ Page({
   },
 
   /**
-   * 车系变化(第一列)
+   * 车系变化
    * @method changeCarBrand
    * @param {object} e
    */
   changeCarBrand(e) {
-    const { column, value } = e.detail
-    // colum 不为 0, 或当前车系为变动的车系
-    if (column || value === this.data.carBrandIndex) return
-    // 更新车型 range
-    const { carBrandsRange } = this.data
-    carBrandsRange.pop()
-    carBrandsRange.push(this.data.carBrands[value].Children)
-    this.setData({ carBrandsRange, carBrandIndex: value })
+    const { value } = e.detail
+    this.setData({
+      carBrandIndex: value,
+      carModelIndex: 0, // 重置车型
+      'model.CarBrandId': this.data.carBrandList[value].Id,
+      'model.CarModelId': null
+    })
   },
 
   /**
-   * 车型变化(第二列)
+   * 车型变化
    * @method changeCarModel
    * @param {object} e
    */
   changeCarModel(e) {
-    const [carBrandIndex, carModelIndex] = e.detail.value
-    const { carBrands } = this.data
-
-    const brandName = carBrands[carBrandIndex].Name,
-      brandId = carBrands[carBrandIndex].Id,
-      modelName = carBrands[carBrandIndex].Children[carModelIndex].Name,
-      modelId = carBrands[carBrandIndex].Children[carModelIndex].Id
-
-    let carModelStr = `${brandName}`
-
-    if(modelId !== "0"){
-      carModelStr += ` - ${modelName}`
-    }
-
+    const { value } = e.detail
+    console.log(value)
     this.setData({
-      'model.CarBrandId': brandId,
-      'model.CarModelId': modelId
+      carModelIndex: value,
+      'model.CarModelId': this.data.carBrandList[this.data.carBrandIndex].Children[value].Id
     })
-
-    this.setData({ carModelStr })
   },
 
   /**
@@ -216,14 +199,14 @@ Page({
       // 判断是否是续保业务
       if (this.data.isInsurer) {
         // 如果续保业务顾问列表长度为0，不检测
-        if (this.data.employeeList.length){
+        if (this.data.employeeList.length) {
           if (!model.EmployeeId) {
             modal.alert({ content: '请选择专员' })
             return reject('未选择专员')
-          }  
+          }
         }
       } else {
-        if (!model.EmployeeId){
+        if (!model.EmployeeId) {
           modal.alert({ content: '请选择顾问' })
           return reject('未选择顾问')
         }
@@ -239,9 +222,10 @@ Page({
         return reject('手机号无效')
       }
 
-      if (!model.CarBrandId || !model.CarModelId) {
-        modal.alert({ content: '请选择车型' })
-        return reject('未选择车型')
+      // 车系必选，车型非必须选
+      if (!model.CarBrandId) {
+        modal.alert({ content: '请选择车系' })
+        return reject('未选择车系')
       }
 
       if (this.data.orderType === 1) { // 售前
@@ -309,6 +293,8 @@ Page({
           model.OrderType = 2
         }
         /**默认值补充**/
+        model.Name = model.Name || ''
+        model.MobilePhone = model.MobilePhone || ''
         model.IsLoan = true
         model.BuyTimeRange = -1
         /**默认值补充**/
@@ -361,7 +347,7 @@ Page({
         // 过滤掉休假状态的员工
         employeeList = employeeList.filter(item => item.Status === 1)
         // 打开选择器
-        this.setData({ bindEmployee: false, employeeList})
+        this.setData({ bindEmployee: false, employeeList, 'model.EmployeeId': null })
       }
     })
   },
@@ -373,60 +359,62 @@ Page({
    */
   _getCarCates() {
     const { orderType } = this.data
+    // 售前/售后车型
     let type = 'Pre'
     if (orderType === 2) {
       type = 'After'
     }
     getCarCates(type)
       .then(res => {
-        const carBrands = res.data.CarBrands
+        // 车系列表
+        const carBrandList = res.data.CarBrands
+
+        carBrandList.unshift({
+          Name: '请选择车系',
+          Id: null,
+          Children: []
+        })
+
         /**
          * 添加默认值
          */
-        carBrands.forEach(item => item.Children.unshift({ Name: "未选择", Id: "0" }))
-        /****/
-        const carBrandsRange = []
-        carBrandsRange.push(carBrands)
-        carBrandsRange.push(carBrands[0].Children)
-        /****/
-        this.setData({
-          carBrands,
-          carBrandsRange
-        })
+        carBrandList.forEach(item => item.Children.unshift({ Name: '暂不选择车型', Id: null }))
+
+        this.setData({ carBrandList })
+        console.log(carBrandList)
 
         // 设置默认值
         const carBrandId = this.data.model.CarBrandId
         const carModelId = this.data.model.CarModelId
-        console.log(carBrandId, carModelId)
-        if (carBrandId) {
-          let carModelStr = ''
-          let carBrandsIndexArr = [0,0]
-          let carModels = null
-          // 记录车系
 
-          for (let i = 0, length = carBrands.length; i < length; i++) {
-            if (carBrands[i].Id === carBrandId) {
-              carModelStr += carBrands[i].Name
-              carBrandsIndexArr[0] = i
-              carModels = carBrands[i].Children
+        console.log(carBrandId, carModelId)
+
+        // 绑定默认值
+        if (carBrandId) {
+          // 车系
+          let i;
+          for (i = 0; i < carBrandList.length; i++) {
+            if (carBrandList[i].Id === carBrandId) {
+              this.setData({
+                carBrandIndex: i
+              })
               break
             }
           }
-          
-          // 记录车型
-          if (carModels) {
-            for (let j = 0, length = carModels.length; j < length; j++) {
-              if (carModels[j].Id === carModelId) {
-                carModelStr += ' - ' + carModels[j].Name
-                carBrandsIndexArr[1] = j
-                carBrandsRange[1] = carModels
+
+          // 车型
+          if (i) {
+            const carModelList = carBrandList[i].Children
+            for (let j = 0; j < carModelList.length; j++) {
+              if (carModelList[j].Id === carModelId) {
+                this.setData({
+                  carModelIndex: j
+                })
                 break
               }
             }
           }
-          this.setData({ carBrandsIndexArr, carModelStr, carBrandsRange })
         }
-
       })
   },
 
