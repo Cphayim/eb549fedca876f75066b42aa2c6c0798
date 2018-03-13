@@ -17,11 +17,11 @@
     <view class="f-r">
       <view>
         <view>
-          <view class="real-name">{{customer.Name}}</view>
-          <view class="wx-name">[{{customer.Nickname}}]</view>
+          <view class="real-name">{{customer.Name || customer.Nickname}}</view>
+          <view wx:if="{{customer.Name}}" class="wx-name">[{{customer.Nickname}}]</view>
         </view>
         <view>
-          手机号：{{customer.MobilePhone}}
+          手机号：{{customer.MobilePhone || '未知'}}
         </view>
       </view>
     </view>
