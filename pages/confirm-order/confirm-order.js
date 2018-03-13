@@ -33,16 +33,14 @@ Page({
         package: payConfig.Package,
         signType: payConfig.SignType,
         paySign: payConfig.PaySign,
-        success: res => resolve(res),
-        fail: err => reject(err)
+        success: resolve,
+        fail: reject
       })
     }).then(res => {
       wx.redirectTo({
         url: `${config.pageOpt.getPageUrl('success')}?id=${this.data.model.Id}&from=order&orderType=4`,
       })
-    }).catch(err => {
-      console.warn(err)
-    })
+    }).catch(err => console.warn(err))
   },
 
   /**
