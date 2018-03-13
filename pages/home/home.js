@@ -31,6 +31,9 @@ Page({
    * @method _init
    */
   _init(isRefresh = false) {
+    wx.setNavigationBarTitle({
+      title: wx.getExtConfigSync().tenantName || ''
+    })
     isRefresh || toast.loading()
     const arr = [this._getBannerList(), this._getTopGoodsList(), this._getDealerInfo()]
     return Promise.all(res => toast.hide())
@@ -85,9 +88,6 @@ Page({
         const { data } = res
         this.setData({
           dealerInfo: data
-        })
-        wx.setNavigationBarTitle({
-          title: data.Name
         })
       })
   },
