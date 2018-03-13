@@ -12,7 +12,7 @@ import config from '../config.js'
  * @return Promise.state
  */
 export function getOrderDetail(id = 0) {
-  const data = { id: id }
+  const data = { id: id, openid: wx.getStorageSync('openid') }
   return request({
     url: `${config.host}/ApiOrders/SubmitPay`,
     data

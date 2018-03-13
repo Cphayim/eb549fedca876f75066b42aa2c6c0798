@@ -26,7 +26,7 @@ export function getInitOrderDetail(id = 0) {
  * @return Promise.state
  */
 export function getInitRegisterDetail(id = 0) {
-  const data = {id : id}
+  const data = { id: id }
   return request({
     url: `${config.host}/ApiArticles/SubmitEnroll`,
     data
@@ -39,14 +39,14 @@ export function getInitRegisterDetail(id = 0) {
  * @params employeeType 顾问类型 ['sale': 销售, 'service': 售后, 'insurer': 续保]
  * @return Promise.state
  */
-export function getEmployees(employeeType){
+export function getEmployees(employeeType) {
   const data = {
     NotStatus: 0
   }
-  switch (employeeType){
-    case 'sale': data.role = ['WX_Sales', 'WX_SalesSupervisor'];break;
-    case 'service': data.role = ['WX_Service'];break;
-    case 'insurer': data.role = ['WX_Insurer'];break;
+  switch (employeeType) {
+    case 'sale': data.role = ['WX_Sales', 'WX_SalesSupervisor']; break;
+    case 'service': data.role = ['WX_Service']; break;
+    case 'insurer': data.role = ['WX_Insurer']; break;
   }
   return request({
     url: `${config.host}/Org/Employees/Read`,

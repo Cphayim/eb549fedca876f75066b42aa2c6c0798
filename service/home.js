@@ -30,7 +30,6 @@ export function getBannerList() {
     RecommendType: 1,
     Status: 1,
     OrderBy: 'Status asc, SortIndex asc, Id DESC, PublishTime DESC',
-    TenantId: 340,
     Source: 1
   }
 
