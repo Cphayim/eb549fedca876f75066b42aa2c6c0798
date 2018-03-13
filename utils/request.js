@@ -25,7 +25,7 @@ export function request({
   data = {},
   hasSession = true
 }) {
-  header['appId'] = config.appid
+  header['appId'] = wx.getExtConfigSync().appid || ''
   header['X-Requested-With'] = 'XMLHttpRequest'
   /****/
   header['tenantId'] = wx.getExtConfigSync().tenantId || ''

@@ -260,8 +260,8 @@ export default class Auth {
         })
         .then(data => {
           data.code = codeStr
-          data.appId = config.appid
-          data.wxopenid = wx.getStorageSync('wxoppenid') || ''
+          data.appId = wx.getExtConfigSync().appid || ''
+          data.wxopenid = wx.getStorageSync('wxopenid') || ''
           return request({
             url: loginUrl,
             data
@@ -269,6 +269,7 @@ export default class Auth {
         })
         // 登录成功
         .then(res => {
+          wx.setStorageSync('openid', res.data.openId)
           toast.hide()
           const { data } = res
           console.log(res)
@@ -291,7 +292,9 @@ export default class Auth {
     return new Promise((resolve, reject) => {
       wx.login({
         // {errMsg: "login:ok", code: "071sqFiS0qLqG92rtyjS0mVkiS0sqFib"}
-        success: res => resolve(res.code),
+        success: res => {
+          resolve(res.code)
+        },
         fail: err => reject(err)
       })
     })
