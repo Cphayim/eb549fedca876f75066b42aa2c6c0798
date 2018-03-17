@@ -63,6 +63,9 @@ export default class Auth {
     const currentSessionId = this._getSessionId()
 
     return new Promise((resolve, reject) => {
+      if (!wx.getStorageSync('wxopenid')) {
+        return reject()
+      }
       // 判断缓存是否存在 sessionId
       if (currentSessionId) {
         /**
